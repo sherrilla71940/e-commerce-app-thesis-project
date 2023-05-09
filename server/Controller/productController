@@ -1,0 +1,10 @@
+module.exports = {
+  
+  getProducts: async (req, res) => {
+    console.log('get all products')
+  },
+
+  getItem: async (req, res) => {
+    console.log('get one item')
+  }
+}

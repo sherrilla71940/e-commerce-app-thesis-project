@@ -18,3 +18,8 @@ export type CartItemType = {
   image: string,
   quantity?: number
 }
+
+export type User = {
+  username: string
+  password: string
+}
