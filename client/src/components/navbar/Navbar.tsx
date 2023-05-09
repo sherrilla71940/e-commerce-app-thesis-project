@@ -1,7 +1,7 @@
 import styles from './Navbar.module.css'
 import BagIcon from '../../assets/bag-icon.svg'
 import { useNavigate } from 'react-router-dom'
-import { useCartSlice } from '../../zustand/ShoppingCartStore'
+import { useCartSlice } from '../../zustand/ShoppingCartSlice'
 
 export default function Navbar() {
 

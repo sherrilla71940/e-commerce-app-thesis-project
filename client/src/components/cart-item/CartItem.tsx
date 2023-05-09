@@ -1,6 +1,6 @@
 import styles from './CartItem.module.css'
 import { CartItemType } from '../../models/models'
-import { useCartSlice } from '../../zustand/ShoppingCartStore'
+import { useCartSlice } from '../../zustand/ShoppingCartSlice'
 
 export default function CartItem ({cartItem}: {cartItem: CartItemType}) {
   const increaseQuantity = useCartSlice((state) => state.increaseQuantity)

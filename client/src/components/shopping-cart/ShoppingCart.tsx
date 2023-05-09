@@ -1,6 +1,6 @@
 import styles from './ShoppingCart.module.css'
 
-import { useCartSlice } from '../../zustand/ShoppingCartStore'
+import { useCartSlice } from '../../zustand/ShoppingCartSlice'
 import { CartItemType } from '../../models/models'
 import CartItem from '../cart-item/CartItem'
 
@@ -29,6 +29,23 @@ export default function ShoppingCart() {
               </li>
             ))}
           </ul>
+
+          <div className={styles.cartFooter}>
+            <div className={styles.total}>
+              <h3>Total</h3>
+              <h3
+                className={styles.totalValue}
+              >
+                {cartItems.reduce((total, cartItem) => {
+                  return total + (cartItem.price * cartItem.quantity)
+                }, 0)}
+              </h3>
+            </div>
+
+            <div className={styles.checkout}>
+              <h3>Checkout</h3>
+            </div>
+          </div>
 
         </div>
       }
