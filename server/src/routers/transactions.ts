@@ -10,6 +10,7 @@ export default function transactionsRouter(router: express.Router) {
     res.json("get a specific transaction here");
   });
   router.put("transactions/:id", (req, res) => {
+    // probably shouldnt change
     res.json("update a transaction by id here");
   });
   router.post("/transaction", (req, res) => {
