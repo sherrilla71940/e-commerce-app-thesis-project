@@ -1,13 +1,14 @@
 import styles from './Navbar.module.css'
 import BagIcon from '../../assets/bag-icon.svg'
 import { useNavigate } from 'react-router-dom'
-import { useCartSlice } from '../../zustand/ShoppingCartStore'
+import { useCartSlice } from '../../zustand/ShoppingCartSlice'
 
 export default function Navbar() {
 
   const navigate = useNavigate()
 
   const openCart = useCartSlice((state) => state.openCart)
+  const cartItems = useCartSlice((state) => state.cartItems)
 
   return (
     <div className={styles.navbarContainerSticky}>
@@ -25,7 +26,11 @@ export default function Navbar() {
           <div
             className={styles.cartItems}
             onClick={() => openCart()}
-          >1</div>
+          >
+            {cartItems.reduce((total, cartItem) => {
+              return total + cartItem.quantity
+            }, 0)}
+          </div>
           <img
             src={BagIcon}
             className={styles.cartItemsIcon}
