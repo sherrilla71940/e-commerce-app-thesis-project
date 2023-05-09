@@ -1,11 +1,16 @@
 import {useState, useEffect} from 'react'
 import styles from './login.module.css'
-import { User } from '../../models/models'
 import * as Tabs from '@radix-ui/react-tabs'
+import { User } from '../../models/models'
+import { userStore } from './../../zustand/UserStore'
 
 const log = console.log.bind(console)
 log('ok')
 
+// const state = userStore();
+
+// const { username, email, password } = userStore((state: User) =>
+// ({ username: state.username, email: state.email, password: state.password }))
 // const username = 'a';
 // const email = 'a@a.com';
 // const password = 'password';
@@ -57,7 +62,8 @@ function passHandler(e: React.ChangeEvent<HTMLInputElement>) {
     </Tabs.List>
         
     <Tabs.Content value="tab1">
-      <p >Create an account.</p>    
+    <p >Create an account.</p>    
+      <form>
       <fieldset>
         <label className="">
           username
@@ -82,24 +88,30 @@ function passHandler(e: React.ChangeEvent<HTMLInputElement>) {
       <div>
         <button className={styles.button} onClick={register}>register</button>
       </div>
+      </form>
+      
     </Tabs.Content>
     <Tabs.Content  value="tab2">
-      <p className="pb-5">Welcome back!</p>
+    <p className="pb-5">Welcome back!</p>
+    <form>
       <fieldset className="">
         <label className="" placeholder="ecommerce@shop.com" >
           email
         </label> <br/>
-            <input size={30} value={email} className={styles.input} type="email" />
+            <input size={30} value={email} className={styles.input} type="email" placeholder="shop@online.net"
+             onChange={emailHandler} required/>
       </fieldset>
       <fieldset className="">
         <label className="" >
         password      
         </label> <br/>
-            <input size={30} value={password} className={styles.input} type="password" />
+            <input size={30} value={password} className={styles.input} type="password"
+            onChange={passHandler} required/>
       </fieldset>
       <div>
             <button className={styles.button} onClick={login}>login</button>
       </div>
+    </form>  
     </Tabs.Content>
   </Tabs.Root>
     </div>

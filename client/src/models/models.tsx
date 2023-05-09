@@ -20,6 +20,8 @@ export type CartItemType = {
 }
 
 export type User = {
-  username: string
+  isLoggedIn: boolean
+  username?: string
+  email: string
   password: string
 }
