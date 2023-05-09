@@ -3,8 +3,11 @@ import styles from './login.module.css'
 import * as Tabs from '@radix-ui/react-tabs'
 import { User } from '../../models/models'
 import { userStore } from './../../zustand/UserStore'
-import { saveUser, authUser} from './../../service'
-
+import { saveUser, authUser } from './../../service'
+//Firebase auth
+import { initializeApp } from 'firebase/app'
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
+import { connectAuthEmulator } from 'firebase/auth' //NOTE ONLY FOR TESTING
 const log = console.log.bind(console)
 log('ok')
 
@@ -18,28 +21,64 @@ log('ok')
 
 export default function Login() {
 
+  
+  //Ref: https://youtu.be/rQvOAnNvcNQ
+const firebaseConfig = {
+  apiKey: "AIzaSyB-S_yjhrbbMBmLHJtI5PdIqHKA1KhKsTE",
+  authDomain: "test-ba3ab.firebaseapp.com",
+  projectId: "test-ba3ab",
+  storageBucket: "test-ba3ab.appspot.com",
+  messagingSenderId: "209300872871",
+  appId: "1:209300872871:web:bb37dac326ca36a11cc582"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+  const auth = getAuth(firebaseApp);
+  // connectAuthEmulator(auth, 'http://localhost:9099');
+// const db = getFirestore(firebaseApp);
+
+  //Detect auth state
+//   onAuthStateChanged(auth, user => {
+//     if (user != null) {
+//       console.log('logged in');
+//     } else {
+//       console.log('no user')
+//     }
+// })
+
+  const [loggedIn, setLogIn] = useState(false);
   const [username, setUser] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
-log(username, email, password)
+
+// log(username, email, password)
 
   useEffect(() => { 
-    setUser('');
-    setEmail('');
-    setPass('');
+    // setLogIn(false);
+    // setUser('');
+    // setEmail('');
+    // setPass('');
   }, []);
   
-function login(e: React.FormEvent<HTMLButtonElement>) {
-  console.log(e)
-  authUser({email, password})
+  async function login(e: React.FormEvent<HTMLButtonElement>) {
+  e.preventDefault()
+  // log(email, password)
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password)
+    log(userCredential.user)
+  } catch (err) {
+    log(err)
+  }
 }
 
-function register(e: React.FormEvent<HTMLButtonElement>) {
-  console.log(e)
+  function register(e: React.FormEvent<HTMLButtonElement>) {
+  e.preventDefault()
+  log(e)
   saveUser({username, email, password})
 }  
 //Ref:https://freshman.tech/snippets/typescript/fix-value-not-exist-eventtarget/
 function userHandler(e: React.ChangeEvent<HTMLInputElement>) {
+  e.preventDefault()
   const target = e.target as HTMLInputElement;
   setUser(target.value);
 } 
