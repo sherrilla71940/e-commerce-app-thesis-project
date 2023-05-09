@@ -7,7 +7,7 @@ import { useState } from 'react'
 
 export default function ItemDetails() {
 
-  const increaseQuantity = useCartSlice((state) => state.increaseQuantity)
+  const addItem = useCartSlice((state) => state.addItem)
   const openCart = useCartSlice((state) => state.openCart)
 
   // URL param
@@ -69,7 +69,7 @@ export default function ItemDetails() {
           className={styles.addToCart}
           onClick={() => {
             if(item) {
-              increaseQuantity(item);
+              addItem(item);
               openCart();
             }
           }}

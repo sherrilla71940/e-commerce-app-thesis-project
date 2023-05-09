@@ -12,5 +12,5 @@ export interface Product {
 }
 
 export interface CartItemType extends Product {
-  quantity?: number
+  quantity: number
 }
