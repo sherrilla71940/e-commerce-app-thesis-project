@@ -3,6 +3,7 @@ import styles from './login.module.css'
 import * as Tabs from '@radix-ui/react-tabs'
 import { User } from '../../models/models'
 import { userStore } from './../../zustand/UserStore'
+import { saveUser, authUser} from './../../service'
 
 const log = console.log.bind(console)
 log('ok')
@@ -30,10 +31,12 @@ log(username, email, password)
   
 function login(e: React.FormEvent<HTMLButtonElement>) {
   console.log(e)
+  authUser({email, password})
 }
 
 function register(e: React.FormEvent<HTMLButtonElement>) {
   console.log(e)
+  saveUser({username, email, password})
 }  
 //Ref:https://freshman.tech/snippets/typescript/fix-value-not-exist-eventtarget/
 function userHandler(e: React.ChangeEvent<HTMLInputElement>) {
