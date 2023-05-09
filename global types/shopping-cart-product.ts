@@ -1,4 +1,4 @@
-export type AllProductsInCart = {
+export type ShoppingCartProduct = {
   id: number;
   shoppingCartId: number;
   productId: number;
