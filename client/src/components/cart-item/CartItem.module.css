@@ -34,7 +34,12 @@
   width: 70px;
 }
 
+.increase, .decrease {
+  cursor: pointer;
+}
+
 .delete {
   rotate: 45deg;
   align-self: flex-start;
+  cursor: pointer;
 }

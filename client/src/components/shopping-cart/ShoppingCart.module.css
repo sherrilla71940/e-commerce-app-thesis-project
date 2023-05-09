@@ -24,6 +24,7 @@
 
 .closeCart {
   rotate: 45deg;
+  cursor: pointer;
 }
 
 .container > ul {
@@ -32,6 +33,7 @@
   width: inherit;
   width: 100%;
   box-sizing: border-box;
+  overflow: scroll;
 }
 
 .container > ul > li {

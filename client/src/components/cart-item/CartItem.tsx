@@ -4,6 +4,8 @@ import { useCartSlice } from '../../zustand/ShoppingCartStore'
 
 export default function CartItem ({cartItem}: {cartItem: CartItemType}) {
   const increaseQuantity = useCartSlice((state) => state.increaseQuantity)
+  const decreaseQuantity = useCartSlice((state) => state.decreaseQuantity)
+  const removeFromCart = useCartSlice((state) => state.removeFromCart)
 
   return (
     <div className={styles.container}>
@@ -17,18 +19,22 @@ export default function CartItem ({cartItem}: {cartItem: CartItemType}) {
         </div>
 
         <div className={styles.right}>
-          <p className={styles.decrease}>-</p>
+          <p
+            className={styles.decrease}
+            onClick={() => decreaseQuantity(cartItem)}
+          >-</p>
           <p className={styles.size}>{cartItem.quantity}</p>
           <p
             className={styles.increase}
             onClick={() => increaseQuantity(cartItem)
             }
-          >
-            +
-          </p>
+          >+</p>
         </div>
 
-        <p className={styles.delete}>+</p>
+        <p
+          className={styles.delete}
+          onClick={() => removeFromCart(cartItem.id)}
+        >+</p>
 
       </div>
     </div>
