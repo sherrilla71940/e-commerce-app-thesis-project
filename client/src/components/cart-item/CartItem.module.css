@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  align-items: center;
+  color: #118259;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.itemInfo {
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 20px;
+
+  width: 100%;
+}
+
+.img {
+  height: 100px;
+  width: 100px;
+  min-width: 100px;
+
+  border-radius: 4px;
+
+  background-color: #7daf9d;
+}
+
+.right {
+  display: flex;
+  justify-content: space-between;
+  width: 70px;
+}
+
+.increase, .decrease {
+  cursor: pointer;
+}
+
+.delete {
+  rotate: 45deg;
+  align-self: flex-start;
+  cursor: pointer;
+}
