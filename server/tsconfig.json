@@ -6,6 +6,8 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
+    // "rootDirs": ["src"]
+    // "rootDir": "src"
     "rootDirs": ["src", "../global-types"]
   },
   "lib": ["es2015"]
