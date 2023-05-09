@@ -18,11 +18,13 @@ function App() {
         <Routes>
         <Route path='/' element={<Login />}/>
         <Route path='/products' element={
-          <><Navbar />
+          <>
+            <Navbar />
             <ShoppingCart />
-            <div id="detail">
+            {/* <div id="detail"> */}
               {/* <Outlet /> */}
-            </div></>
+            {/* </div> */}
+          </>
           }/>
         </Routes>
       </Router>
