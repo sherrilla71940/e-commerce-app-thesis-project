@@ -21,7 +21,12 @@ export const useCartSlice = create<ShoppingCartState & ShoppingCartAction>()((se
 
   addItem: (newItem) => set((state) => {
     // if there is no such item in the cart yet
-    return { cartItems: [...state.cartItems, { ...newItem, quantity: 1 }] }
+    // return { cartItems: [...state.cartItems, { ...newItem, quantity: 1 }] }
+    if (state.cartItems.find(item => item.id === newItem.id) == null) {
+      return { cartItems: [...state.cartItems, { ...newItem, quantity: 1 }] }
+    } else {
+      return { cartItems: [...state.cartItems] }
+    }
   }),
 
   increaseQuantity: (existingItem) => set((state) => {
