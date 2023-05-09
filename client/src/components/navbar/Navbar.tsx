@@ -1,19 +1,31 @@
-import './Navbar.css'
+import styles from './Navbar.module.css'
 import BagIcon from '../../assets/bag-icon.svg'
+import { useNavigate } from 'react-router-dom'
 
 export default function Navbar() {
+
+  const navigate = useNavigate()
+
   return (
-    <div className='navbar-container-sticky'>
-      <div className='navbar-container-block'>
+    <div className={styles.navbarContainerSticky}>
+      <div className={styles.navbarContainerBlock}>
 
-        <h1 className='navbar-left'>E-COMMERCE</h1>
+        <h1
+          className={styles.navbarLeft}
+          onClick={() => navigate('./products')}
+        >E-COMMERCE
+        </h1>
 
-        <input className='navbar-center'></input>
+        <input className={styles.navbarCenter}></input>
 
-        <div className='navbar-right'>
-          <div className='cart-items'>1</div>
-          <img src={BagIcon} className="cart-items-icon" alt="logo" />
-          <div className='user-thumbnail'></div>
+        <div className={styles.navbarRight}>
+          <div className={styles.cartItems}>1</div>
+          <img
+            src={BagIcon}
+            className={styles.cartItemsIcon}
+            alt="logo"
+          />
+          <div className={styles.userThumbnail}></div>
         </div>
 
       </div>

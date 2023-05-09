@@ -4,6 +4,7 @@ import App from './App.tsx'
 import './index.css'
 
 import StoreItems from "./components/store-items/StoreItems";
+import ItemDetails from './components/item-details/ItemDetails.tsx';
 
 import {
   createBrowserRouter,
@@ -15,12 +16,15 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-
+      {
+        path: "/products",
+        element: <StoreItems />,
+      },
+      {
+        path: "/products/:id",
+        element: <ItemDetails />,
+      },
     ]
-  },
-  {
-    path: "/:id",
-    element: <h1>TESTING PAGE</h1>,
   },
 ]);
 

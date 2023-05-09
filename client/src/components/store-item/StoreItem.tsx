@@ -1,15 +1,7 @@
-import './StoreItem.css'
+import styles from './StoreItem.module.css'
+import { Product } from '../../models/models'
 
 import { useNavigate } from 'react-router-dom'
-
-type Product = {
-  id: number
-  name: string
-  color: string
-  size: string
-  price: number
-  image: string
-}
 
 type Props = {
   key: number,
@@ -21,9 +13,9 @@ export default function StoreItem({product}: Props) {
   const navigate = useNavigate()
 
   return (
-    <div className='store-item'>
+    <div className={styles.storeItem}>
       <div
-        className='img'
+        className={styles.img}
         onClick={() => navigate(`./${product.id}`)}
       ></div>
       <p>{product.name}</p>

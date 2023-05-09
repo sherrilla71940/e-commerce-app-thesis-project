@@ -1,15 +1,24 @@
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/navbar/Navbar";
-import StoreItems from "./components/store-items/StoreItems";
+import { useEffect } from "react";
+import ShoppingCart from "./components/shopping-cart/ShoppingCart";
 
 function App() {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    navigate('/products')
+  }, [])
 
   return (
     <>
       <Navbar />
-      <StoreItems />
+      <ShoppingCart />
+      <div id="detail">
+        <Outlet />
+      </div>
     </>
   );
 }

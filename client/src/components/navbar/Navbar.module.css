@@ -1,4 +1,4 @@
-.navbar-container-sticky {
+.navbarContainerSticky {
   display: sticky;
   height: 65px;
   background-color: #EEEEEE;
@@ -6,13 +6,13 @@
   border-bottom: 1px solid #118259;
 }
 
-.navbar-container-block {
+.navbarContainerBlock {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.navbar-left {
+.navbarLeft {
   display: flex;
   align-items: center;
 
@@ -20,9 +20,11 @@
 
   margin: 0 0 0 30px;
   color: #118259;
+
+  cursor: pointer;
 }
 
-.navbar-center {
+.navbarCenter {
   display: flex;
   align-items: center;
 
@@ -36,11 +38,11 @@
   background-color: #C4DDD4;
 }
 
-.navbar-center:focus {
+.navbarCenter:focus {
   border: 1px solid #118259;
 }
 
-.navbar-right {
+.navbarRight {
   display: flex;
   align-items: center;
 
@@ -49,7 +51,7 @@
   margin-right: 30px;
 }
 
-.cart-items {
+.cartItems {
   color: #118259;
   width: 30px;
   height: 30px;
@@ -62,17 +64,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
 }
 
-.cart-items-icon {
+.cartItemsIcon {
   margin-left: 10px;
+
+  cursor: pointer;
 }
 
-.user-thumbnail {
+.userThumbnail {
   width: 45px;
   height: 45px;
   border-radius:100%;
   background-color: #C4DDD4;
 
   margin-left: 10px;
+
+  cursor: pointer;
 }

@@ -1,16 +1,8 @@
-import './StoreItems.css'
+import styles from './StoreItems.module.css'
 
 import StoreItem from '../../components/store-item/StoreItem'
 import mock from '../../mock-data/mock.json'
-
-type Product = {
-  id: number
-  name: string
-  color: string
-  size: string
-  price: number
-  image: string
-}
+import { Product } from '../../models/models'
 
 export default function StoreItems() {
 
@@ -19,7 +11,7 @@ export default function StoreItems() {
     const products: Product[] = data.products;
 
   return (
-    <div className='store-items' >
+    <div className={styles.storeItems} >
         {
           products.map((product: Product) => (
             <StoreItem
