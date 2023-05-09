@@ -2,7 +2,8 @@ import { create } from 'zustand'
 
 type User = {
  isLoggedIn: boolean; 
-  username: string;
+  username?: string;
+  email: string;
   password: string;
 }
 

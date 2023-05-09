@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  color: white;
+  /* color: #118259; */
+  font-size: large;
+  font-weight: bold;
+  /* width: 500px; */
+  box-sizing: border-box;
+  background-color: #7daf9d;
+}
