@@ -21,7 +21,6 @@ export const useCartSlice = create<ShoppingCartState & ShoppingCartAction>()((se
 
   addItem: (newItem) => set((state) => {
     // if there is no such item in the cart yet
-    // return { cartItems: [...state.cartItems, { ...newItem, quantity: 1 }] }
     if (state.cartItems.find(item => item.id === newItem.id) == null) {
       return { cartItems: [...state.cartItems, { ...newItem, quantity: 1 }] }
     } else {
@@ -65,7 +64,6 @@ export const useCartSlice = create<ShoppingCartState & ShoppingCartAction>()((se
     return { cartItems: state.cartItems.filter(item => item.id != existingItemID) }
   }),
 
-  // removeFromCart: () => set({ bears: 0 }),
   openCart: () => set({ isOpen: true }),
   closeCart: () => set({ isOpen: false }),
 
