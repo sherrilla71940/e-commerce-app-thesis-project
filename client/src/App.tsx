@@ -3,15 +3,23 @@ import "./App.css";
 //// METHODS:
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { loginFunction } from "./firebaseAuth/auth";
 //// COMPONENTS:
 import Navbar from "./components/navbar/Navbar";
 import ShoppingCart from "./components/shopping-cart/ShoppingCart";
 import Login from "./components/login/login"
 import StoreItems from "./components/store-items/StoreItems";
+//// State management:
+import { userStore, UserState } from './zustand/UserStore';
+import { useStore } from 'zustand';
+
+const log = console.log.bind(console)
+log('ok')
 
 function App() {
  
+  const { loggedIn } = userStore()
+console.log(loggedIn)
+
   useEffect(() => {
     // navigate('/products')
   }, [])

@@ -29,3 +29,5 @@ export const userStore = create<UserState>((set) => ({
   setPassword: (password) => set(() => ({ password })),
 
 }))
+
+console.log(userStore)

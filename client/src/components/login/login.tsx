@@ -11,21 +11,18 @@ import { loginFunction } from '../../firebaseAuth/auth'
 const log = console.log.bind(console)
 log('ok')
 
-// const state = userStore();
-
-// const { username, email, password } = userStore((state: User) =>
-// ({ username: state.username, email: state.email, password: state.password }))
-
 export default function Login() {
 
-  const [loggedIn, setLogIn] = useState(false);
-  const [id, setID] = useState('');
-  const [username, setUser] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPass] = useState('');
-  
+  const { loggedIn, id, username, email, password, setLoggedIn, setID, setUsername, setEmail, setPassword } = userStore();
 
-log(loggedIn, username, email, password, id)
+ //Note: All the state hooks below have been replaced by the global state above (Zustand) 
+  // const [loggedIn, setLogIn] = useState(false);
+  // const [id, setID] = useState('');
+  // const [username, setUser] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPass] = useState('');
+  
+log(loggedIn, id, username, email, password)
 
   useEffect(() => { 
     // setLogIn(false);
@@ -34,14 +31,14 @@ log(loggedIn, username, email, password, id)
     // setPass('');
   }, []);
   
-  async function login(e: React.FormEvent<HTMLButtonElement>) {
+async function login(e: React.FormEvent<HTMLButtonElement>) {
     e.preventDefault()
     const obj = await loginFunction(email, password)
     setID(obj.id)
-    setLogIn(obj.loggedIn)
+    setLoggedIn(obj.loggedIn)
 }
 
-  function register(e: React.FormEvent<HTMLButtonElement>) {
+function register(e: React.FormEvent<HTMLButtonElement>) {
   e.preventDefault()
   log(e)
   saveUser({username, email, password})
@@ -50,7 +47,7 @@ log(loggedIn, username, email, password, id)
 function userHandler(e: React.ChangeEvent<HTMLInputElement>) {
   e.preventDefault()
   const target = e.target as HTMLInputElement;
-  setUser(target.value);
+  setUsername(target.value);
 } 
 function emailHandler(e: React.ChangeEvent<HTMLInputElement>) {
   const target = e.target as HTMLInputElement;
@@ -58,7 +55,7 @@ function emailHandler(e: React.ChangeEvent<HTMLInputElement>) {
 }
 function passHandler(e: React.ChangeEvent<HTMLInputElement>) {
   const target = e.target as HTMLInputElement;
-  setPass(target.value)
+  setPassword(target.value)
 }
 
   return (
