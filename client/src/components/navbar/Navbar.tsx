@@ -42,9 +42,16 @@ function redirect(){
               />
             </>
           }
-          <button className={styles.button}
-          onClick={redirect}>Sign In</button>
-          {/* <div className={styles.userThumbnail}></div> */}
+          {(loggedIn) ?
+              <img 
+                src='https://source.boringavatars.com/'
+                className={styles.userThumbnail}
+                alt='user pic'
+            />
+            : <button className={styles.button}
+              onClick={redirect}>Sign In</button>
+          }
+          
         </div>
         
         
