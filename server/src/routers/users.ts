@@ -1,5 +1,5 @@
 import express from "express";
-import { postUser, getUsers } from "../controllers/usersController";
+import { postUser, getUsers } from "../controllers/user-controller";
 
 //import controllers
 

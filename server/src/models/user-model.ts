@@ -2,8 +2,8 @@
 // above from original sequelize docs
 import sequelize from "../database/db-connection";
 // import sequelize from "sequelize";
-import { type UserType } from "../../../global-types/index";
 import { Table, Column, Model, HasMany } from "sequelize-typescript";
+import { type UserType } from "../user";
 
 // const UserModel = sequelize.define("User", {
 //   // Model attributes are defined here
