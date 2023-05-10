@@ -18,7 +18,24 @@ function App() {
   return (
       <Router>
         <Routes>
-        <Route path='/' element={<Login />}/>
+        <Route path='/login' element={
+          <>
+          <Navbar/>
+          <Login />
+          </>
+          } />
+        
+        <Route path='/' element={
+          <>
+            <Navbar />
+            <ShoppingCart />
+            <StoreItems/>
+            {/* <div id="detail">
+              <Outlet />
+            </div> */}
+          </>
+          }/>
+        
         <Route path='/products' element={
           <>
             <Navbar />

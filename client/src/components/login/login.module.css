@@ -1,21 +1,19 @@
 .container {
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   align-items: stretch;
-  /* color: white; */
-  color: #118259;
+  /* color: #EEEEEE; */
+  color: #118259; 
   font-size: large;
   font-weight: bold;
   /* width: 500px; */
   /* box-sizing: border-box; */
-  background-color: white;
+  background-color: 
 }
 
 .tabs {
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: stretch; */
-  color: white;
+  color: #118259;
   font-size: large;
   font-weight: bold;
   width: 200px;
@@ -23,13 +21,13 @@
   border-width: 5px;
   border:#118259 ;
   /* box-sizing: border-box; */
-  background-color: #7daf9d;
+  background-color: #C4DDD4;
 }
 
 .input{
-  background-color: #7daf9d;
+  background-color: #C4DDD4;
   border-radius: 2pc;
-  border: white;
+  border: #EEEEEE;
 }
 
 .button{
@@ -40,8 +38,8 @@
       font-size: 1em;
       font-weight: 500;
       font-family: inherit;
-      color: white;
-      background-color:#7daf9d;
+      color: #118259;
+      background-color:#C4DDD4;
       cursor: pointer;
       transition: border-color 0.25s;
 }

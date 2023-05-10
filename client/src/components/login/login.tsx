@@ -1,4 +1,5 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from './login.module.css'
 import * as Tabs from '@radix-ui/react-tabs'
 import { User } from '../../models/models'
@@ -7,9 +8,11 @@ import { saveUser, authUser } from './../../service'
 //Firebase auth
 import { initializeApp } from 'firebase/app'
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
-import { connectAuthEmulator } from 'firebase/auth' //NOTE ONLY FOR TESTING
+
 const log = console.log.bind(console)
 log('ok')
+
+// const navigate = useNavigate()
 
 // const state = userStore();
 
@@ -20,7 +23,6 @@ log('ok')
 // const password = 'password';
 
 export default function Login() {
-
   
   //Ref: https://youtu.be/rQvOAnNvcNQ
 const firebaseConfig = {
@@ -34,8 +36,6 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
   const auth = getAuth(firebaseApp);
-  // connectAuthEmulator(auth, 'http://localhost:9099');
-// const db = getFirestore(firebaseApp);
 
   //Detect auth state
 //   onAuthStateChanged(auth, user => {
@@ -50,6 +50,7 @@ const firebaseApp = initializeApp(firebaseConfig);
   const [username, setUser] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
+  const [id, setID] = useState('');
 
 // log(username, email, password)
 
@@ -65,7 +66,10 @@ const firebaseApp = initializeApp(firebaseConfig);
   // log(email, password)
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password)
-    log(userCredential.user)
+    log(userCredential.user.uid)
+    // setID(userCredential.user.uid)
+    // navigate('./products')
+    setLogIn(true)
   } catch (err) {
     log(err)
   }
