@@ -1,7 +1,7 @@
-export type User = {
-  id: number;
+export type UserType = {
+  id: string; //uuid
   email: string;
   name: string;
   password: string;
-  seller: boolean;
+  isSeller: boolean;
 };
