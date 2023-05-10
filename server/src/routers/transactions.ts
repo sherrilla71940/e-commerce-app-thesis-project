@@ -1,11 +1,14 @@
 import express from "express";
+const { getAllTransactions, postOneTransaction } = require('../controllers/transactionsController');
 
 //import controllers
 
 export default function transactionsRouter(router: express.Router) {
-  router.get("/transactions", (req, res) => {
-    res.json("all transactions here");
-  });
+  router.get("/transactions", getAllTransactions
+  // (req, res) => {
+  //   res.json("all transactions here");
+  // }
+  );
   router.get("/transactions/:id", (req, res) => {
     res.json("get a specific transaction here");
   });
@@ -13,9 +16,11 @@ export default function transactionsRouter(router: express.Router) {
     // probably shouldnt change
     res.json("update a transaction by id here");
   });
-  router.post("/transaction", (req, res) => {
-    res.json("post a transaction here and transaction will recieve id");
-  });
+  router.post("/transactions", postOneTransaction
+  // (req, res) => {
+  //   res.json("post a transaction here and transaction will recieve id");
+  // }
+  );
   router.delete("transactions/:id", (req, res) => {
     res.json("delete a transaction by id here");
   });

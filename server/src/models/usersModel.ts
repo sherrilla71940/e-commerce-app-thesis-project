@@ -1,22 +1,54 @@
-import { Sequelize, Op, Model, DataTypes } from "sequelize";
+
+
+import { Model, Optional, DataTypes } from "sequelize";
 import sequelize from "../database/db-connection";
-// import sequelize from "sequelize";
-// import * from "../Users/aaronsherrill/Documents/codeworks/senior/projects/senior-projects/thesis-project/e-commerce-app-thesis-project/global-types/index";
-import { type User } from "../../../global-types/index";
 
-const UserModel = sequelize.define("User", {
-  // Model attributes are defined here
-  firstName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  lastName: {
-    type: DataTypes.STRING,
-    // allowNull defaults to true
-  },
-});
+interface IUserAttributes {
+    id: number;
+    email: string;
+    name: string;
+    password: string;
+    seller: boolean;
+}
 
-// could also sync all models at the same time, but afraid that if I do that in index.ts it could potentially cause circular dependecies
-(async () => await UserModel.sync())();
+interface UserCreationAttributes
+    extends Optional<IUserAttributes, "id"> {}
 
-export default UserModel;
+export class User
+    extends Model<IUserAttributes, UserCreationAttributes>
+    implements IUserAttributes {
+    public id!: number;
+    public email!: string;
+    public name!: string;
+    public password!: string;
+    public seller!: boolean;
+
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
+}
+
+User.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+        },
+        email: {
+            type: DataTypes.STRING,
+        },
+        name: {
+            type: DataTypes.STRING,
+        },
+        password: {
+            type: DataTypes.STRING,
+        },
+        seller: {
+            type: DataTypes.BOOLEAN,
+        },
+    },
+    {
+        tableName: "transaction",
+        sequelize,
+    }
+);
