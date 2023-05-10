@@ -84,3 +84,8 @@
 
   cursor: pointer;
 }
+
+.button{
+  background-color: #118259;
+  padding-bottom: 12px;
+}

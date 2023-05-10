@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import styles from './login.module.css'
 import * as Tabs from '@radix-ui/react-tabs'
 import { User } from '../../models/models'
@@ -12,6 +12,8 @@ const log = console.log.bind(console)
 log('ok')
 
 export default function Login() {
+  
+  const navigate = useNavigate()
 
   const { loggedIn, id, username, email, password, setLoggedIn, setID, setUsername, setEmail, setPassword } = userStore();
 
@@ -36,6 +38,11 @@ async function login(e: React.FormEvent<HTMLButtonElement>) {
     const obj = await loginFunction(email, password)
     setID(obj.id)
     setLoggedIn(obj.loggedIn)
+    if (obj.loggedIn === true) {
+      navigate('/')
+    } else {
+      alert('Invalid user or password')
+    }
 }
 
 function register(e: React.FormEvent<HTMLButtonElement>) {
@@ -66,7 +73,7 @@ function passHandler(e: React.ChangeEvent<HTMLInputElement>) {
         Register
       </Tabs.Trigger>
       <Tabs.Trigger className={styles.tabs} value="tab2">
-        Log in
+        Login
       </Tabs.Trigger>
     </Tabs.List>
         

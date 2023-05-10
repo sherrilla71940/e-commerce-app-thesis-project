@@ -34,27 +34,30 @@ console.log(loggedIn)
           </>
           } />
         
-        <Route path='/' element={
+        <Route path={'/'} element={
           <>
             <Navbar />
             <ShoppingCart />
+            {/* {
+              (!loggedIn) ? null : <ShoppingCart />
+            } */}
             <StoreItems/>
-            {/* <div id="detail">
-              <Outlet />
-            </div> */}
+            <div id="detail">
+              {/* <Outlet /> */}
+            </div>
           </>
           }/>
         
-        <Route path='/products' element={
-          <>
-            <Navbar />
-            <ShoppingCart />
-            <StoreItems/>
-            {/* <div id="detail">
-              <Outlet />
-            </div> */}
-          </>
-          }/>
+        {/* <Route path='/products' element={ */}
+          {/* <> */}
+            {/* <Navbar /> */}
+            {/* <ShoppingCart /> */}
+            {/* <StoreItems/> */}
+            {/* {/* <div id="detail"> */}
+              {/* <Outlet /> */}
+            {/* </div> */}
+          {/* </> */}
+          {/* }/> */}
         </Routes>
       </Router>
 
