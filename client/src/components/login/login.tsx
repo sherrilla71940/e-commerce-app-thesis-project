@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import styles from './login.module.css'
 import * as Tabs from '@radix-ui/react-tabs'
-import { User } from '../../models/models'
+import * as RadioGroup from '@radix-ui/react-radio-group';
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { userStore } from './../../zustand/UserStore'
 import { saveUser, authUser } from './../../service'
-// //Firebase auth
-import { loginFunction } from '../../firebaseAuth/auth'
+////Firebase auth
+import { loginFunction, registerFunction } from '../../firebaseAuth/auth'
 
 const log = console.log.bind(console)
 log('ok')
@@ -15,7 +15,7 @@ export default function Login() {
   
   const navigate = useNavigate()
 
-  const { loggedIn, id, username, email, password, setLoggedIn, setID, setUsername, setEmail, setPassword } = userStore();
+  const { loggedIn, id, username, email, password, isSeller, setLoggedIn, setID, setUsername, setEmail, setPassword, setSeller } = userStore();
 
  //Note: All the state hooks below have been replaced by the global state above (Zustand) 
   // const [loggedIn, setLogIn] = useState(false);
@@ -45,10 +45,11 @@ async function login(e: React.FormEvent<HTMLButtonElement>) {
     }
 }
 
-function register(e: React.FormEvent<HTMLButtonElement>) {
+async function register(e: React.FormEvent<HTMLButtonElement>) {
   e.preventDefault()
   log(e)
-  saveUser({username, email, password})
+  const obj = await registerFunction(email, password)
+  saveUser({id: obj.id, email: obj.email, name: username, isSeller: isSeller})
 }  
 //Ref:https://freshman.tech/snippets/typescript/fix-value-not-exist-eventtarget/
 function userHandler(e: React.ChangeEvent<HTMLInputElement>) {
@@ -64,7 +65,11 @@ function passHandler(e: React.ChangeEvent<HTMLInputElement>) {
   const target = e.target as HTMLInputElement;
   setPassword(target.value)
 }
-
+function sellerHandler(e: React.ChangeEvent<HTMLInputElement>) {
+  const target = e.target as HTMLInputElement;
+  setSeller(true)
+}
+  
   return (
     <div className={styles.container}>
     <Tabs.Root defaultValue="tab1">
@@ -94,13 +99,28 @@ function passHandler(e: React.ChangeEvent<HTMLInputElement>) {
             <input size={30} value={email} className={styles.input} id="email" placeholder="shop@online.net"
               onChange={emailHandler} required />
       </fieldset>    
-      <fieldset className="">
+      <fieldset>
         <label className="" >
           password      
         </label> <br/>
             <input size={30} value={password} className={styles.input} type="password"
               onChange={passHandler} required />
-      </fieldset>    
+      </fieldset>
+      <fieldset className="">
+        <legend className="" >
+        Would you also like to register as a seller?      
+        </legend>
+        <div>
+            {/* <input type="checkbox" id="seller" value={isSeller}
+                  onChange={sellerHandler} required /> */}
+          <label>Yes, I have items to sell.</label>
+        </div>
+{/* 
+        <div>
+          <input type="radio" id="buyer" value="false"/>
+          <label htmlFor="false">No, I'm here to buy.</label>
+        </div> */}
+      </fieldset>        
       <div>
         <button className={styles.button} onClick={register}>register</button>
       </div>
@@ -123,7 +143,7 @@ function passHandler(e: React.ChangeEvent<HTMLInputElement>) {
         </label> <br/>
             <input size={30} value={password} className={styles.input} type="password"
             onChange={passHandler} required/>
-      </fieldset>
+        </fieldset>  
       <div>
             <button className={styles.button} onClick={login}>login</button>
       </div>

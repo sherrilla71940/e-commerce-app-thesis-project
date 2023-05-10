@@ -1,6 +1,6 @@
 //Firebase auth
 import { initializeApp } from 'firebase/app'
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
 
 
 //Ref: https://youtu.be/rQvOAnNvcNQ
@@ -22,14 +22,28 @@ export async function loginFunction(email: string, password:string) {
     console.log(userCredential.user.uid)
     const id = userCredential.user.uid;
     const loggedIn = true;
-    // setID(userCredential.user.uid)
-    // navigate('./products')
-    return {id, loggedIn}
-    // setLogIn(true)
+    return { id, loggedIn }
+    
   } catch (err) {
     console.log(err)
     const id = '';
     const loggedIn = false;
     return {id, loggedIn}
+  }
+}
+
+export async function registerFunction(email: string, password: string) {
+  // log(email, password)
+  try {
+    const firebaseApp = initializeApp(firebaseConfig);
+    const auth = getAuth(firebaseApp);
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    console.log(userCredential.user)
+    const id = userCredential.user.uid;
+    return { id, email}
+
+  } catch (err) {
+    console.log(err)
+    return
   }
 }

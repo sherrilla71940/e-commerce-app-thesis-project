@@ -39,8 +39,8 @@
       font-size: 1em;
       font-weight: 500;
       font-family: inherit;
-      color: #118259;
-      background-color:#C4DDD4;
+      background-color: #118259;
+      color:#EEEEEE;
       cursor: pointer;
       transition: border-color 0.25s;
 }
