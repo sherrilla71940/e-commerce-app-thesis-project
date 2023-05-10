@@ -48,7 +48,7 @@ User.init(
         },
     },
     {
-        tableName: "transaction",
+        tableName: "user",
         sequelize,
     }
 );

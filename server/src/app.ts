@@ -6,5 +6,6 @@ import router from "./routers";
 
 export const app = express();
 export const port = 3000;
+app.use(express.json())
 
 app.use(router());

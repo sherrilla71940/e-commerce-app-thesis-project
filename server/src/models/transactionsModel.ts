@@ -5,7 +5,7 @@ import sequelize from "../database/db-connection";
 
 interface ITransactionAttributes {
     id: number;
-    testing: string;
+    buyerId: number;
 }
 
 interface TransactionCreationAttributes
@@ -15,7 +15,7 @@ export class Transaction
     extends Model<ITransactionAttributes, TransactionCreationAttributes>
     implements ITransactionAttributes {
     public id!: number;
-    public testing!: string;
+    public buyerId!: number;
 
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
@@ -28,9 +28,9 @@ Transaction.init(
             autoIncrement: true,
             primaryKey: true,
         },
-        testing: {
-            type: DataTypes.STRING,
-        },
+        buyerId: {
+            type: DataTypes.INTEGER,
+        }
     },
     {
         tableName: "transaction",
