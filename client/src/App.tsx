@@ -12,12 +12,9 @@ import StoreItems from "./components/store-items/StoreItems";
 import { userStore, UserState } from './zustand/UserStore';
 import { useStore } from 'zustand';
 
-const log = console.log.bind(console)
-log('ok')
-
 function App() {
  
-  const { loggedIn } = userStore()
+const { loggedIn } = userStore()
 console.log(loggedIn)
 
   useEffect(() => {
@@ -38,9 +35,6 @@ console.log(loggedIn)
           <>
             <Navbar />
             <ShoppingCart />
-            {/* {
-              (!loggedIn) ? null : <ShoppingCart />
-            } */}
             <StoreItems/>
             <div id="detail">
               {/* <Outlet /> */}
@@ -48,16 +42,6 @@ console.log(loggedIn)
           </>
           }/>
         
-        {/* <Route path='/products' element={ */}
-          {/* <> */}
-            {/* <Navbar /> */}
-            {/* <ShoppingCart /> */}
-            {/* <StoreItems/> */}
-            {/* {/* <div id="detail"> */}
-              {/* <Outlet /> */}
-            {/* </div> */}
-          {/* </> */}
-          {/* }/> */}
         </Routes>
       </Router>
 

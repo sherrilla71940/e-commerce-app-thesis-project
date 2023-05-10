@@ -8,8 +8,8 @@ import { saveUser, authUser } from './../../service'
 ////Firebase auth
 import { loginFunction, registerFunction } from '../../firebaseAuth/auth'
 
-const log = console.log.bind(console)
-log('ok')
+// const log = console.log.bind(console)
+// log('ok')
 
 export default function Login() {
   
@@ -24,14 +24,7 @@ export default function Login() {
   // const [email, setEmail] = useState('');
   // const [password, setPass] = useState('');
   
-log(loggedIn, id, username, email, password)
-
-  useEffect(() => { 
-    // setLogIn(false);
-    // setUser('');
-    // setEmail('');
-    // setPass('');
-  }, []);
+// log(loggedIn, id, username, email, password)
   
 async function login(e: React.FormEvent<HTMLButtonElement>) {
     e.preventDefault()
@@ -47,9 +40,15 @@ async function login(e: React.FormEvent<HTMLButtonElement>) {
 
 async function register(e: React.FormEvent<HTMLButtonElement>) {
   e.preventDefault()
-  log(e)
+  // log(e)
   const obj = await registerFunction(email, password)
-  saveUser({id: obj.id, email: obj.email, name: username, isSeller: isSeller})
+  if (obj) {
+    saveUser({ id: obj.id, email: obj.email, name: username, isSeller: isSeller })
+    alert('Registration successful!')
+  } else {
+    alert('Registration failure')
+  }
+  
 }  
 //Ref:https://freshman.tech/snippets/typescript/fix-value-not-exist-eventtarget/
 function userHandler(e: React.ChangeEvent<HTMLInputElement>) {
