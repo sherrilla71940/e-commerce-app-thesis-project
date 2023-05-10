@@ -1,7 +1,7 @@
 import { default as ProductModel } from "../models/product-model";
 import { Request, Response } from "express";
 
-export async function postProduct(req: Request, res: Response) {
+export async function postProduct(req: Request, res: Response): Promise<void> {
   console.log("post product endpoint reached", req.body);
   try {
     const product = await ProductModel.create(req.body);
@@ -16,7 +16,7 @@ export async function postProduct(req: Request, res: Response) {
   }
 }
 
-export async function getProducts(req: Request, res: Response) {
+export async function getProducts(req: Request, res: Response): Promise<void> {
   try {
     const products = await ProductModel.findAll({});
     res.status(200);
@@ -30,7 +30,7 @@ export async function getProducts(req: Request, res: Response) {
   }
 }
 
-export async function getProduct(req: Request, res: Response) {
+export async function getProduct(req: Request, res: Response): Promise<void> {
   try {
     const product = await ProductModel.findOne({
       where: {
@@ -53,7 +53,10 @@ export async function getProduct(req: Request, res: Response) {
   }
 }
 
-export async function deleteProduct(req: Request, res: Response) {
+export async function deleteProduct(
+  req: Request,
+  res: Response
+): Promise<void> {
   console.log("delete product by id endpoint reached");
   try {
     const deletedProduct = await ProductModel.destroy({
@@ -77,7 +80,10 @@ export async function deleteProduct(req: Request, res: Response) {
   }
 }
 
-export async function updateProduct(req: Request, res: Response) {
+export async function updateProduct(
+  req: Request,
+  res: Response
+): Promise<void> {
   console.log("update product by id endpoint reached");
   try {
     const foundProduct = await ProductModel.findOne({

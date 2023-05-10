@@ -1,7 +1,7 @@
 import { default as UserModel } from "../models/user-model";
 import { Request, Response } from "express";
 
-export async function postUser(req: Request, res: Response) {
+export async function postUser(req: Request, res: Response): Promise<void> {
   console.log("post user endpoint reached");
   try {
     const user = await UserModel.create(req.body);
@@ -16,7 +16,7 @@ export async function postUser(req: Request, res: Response) {
   }
 }
 
-export async function getUsers(req: Request, res: Response) {
+export async function getUsers(req: Request, res: Response): Promise<void> {
   console.log("get users endpoint reached");
   try {
     const users = await UserModel.findAll({});
@@ -31,7 +31,7 @@ export async function getUsers(req: Request, res: Response) {
   }
 }
 
-export async function getUser(req: Request, res: Response) {
+export async function getUser(req: Request, res: Response): Promise<void> {
   console.log("get user by id endpoint reached");
   try {
     const foundUser = await UserModel.findOne({
@@ -62,7 +62,7 @@ wheras hard destroy will completely destroy a record
 use soft desotry if in future you might want to recover a deleted record
 */
 
-export async function deleteUser(req: Request, res: Response) {
+export async function deleteUser(req: Request, res: Response): Promise<void> {
   console.log("delete user by id endpoint reached");
   try {
     const deletedUser = await UserModel.destroy({
