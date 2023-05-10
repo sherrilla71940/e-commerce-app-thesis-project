@@ -3,6 +3,7 @@ import "./App.css";
 //// METHODS:
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { loginFunction } from "./firebaseAuth/auth";
 //// COMPONENTS:
 import Navbar from "./components/navbar/Navbar";
 import ShoppingCart from "./components/shopping-cart/ShoppingCart";

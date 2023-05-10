@@ -5,9 +5,8 @@ import * as Tabs from '@radix-ui/react-tabs'
 import { User } from '../../models/models'
 import { userStore } from './../../zustand/UserStore'
 import { saveUser, authUser } from './../../service'
-//Firebase auth
-import { initializeApp } from 'firebase/app'
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
+// //Firebase auth
+import { loginFunction } from '../../firebaseAuth/auth'
 
 const log = console.log.bind(console)
 log('ok')
@@ -24,35 +23,14 @@ log('ok')
 
 export default function Login() {
   
-  //Ref: https://youtu.be/rQvOAnNvcNQ
-const firebaseConfig = {
-  apiKey: "AIzaSyB-S_yjhrbbMBmLHJtI5PdIqHKA1KhKsTE",
-  authDomain: "test-ba3ab.firebaseapp.com",
-  projectId: "test-ba3ab",
-  storageBucket: "test-ba3ab.appspot.com",
-  messagingSenderId: "209300872871",
-  appId: "1:209300872871:web:bb37dac326ca36a11cc582"
-};
-
-const firebaseApp = initializeApp(firebaseConfig);
-  const auth = getAuth(firebaseApp);
-
-  //Detect auth state
-//   onAuthStateChanged(auth, user => {
-//     if (user != null) {
-//       console.log('logged in');
-//     } else {
-//       console.log('no user')
-//     }
-// })
-
   const [loggedIn, setLogIn] = useState(false);
+  const [id, setID] = useState('');
   const [username, setUser] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
-  const [id, setID] = useState('');
+  
 
-// log(username, email, password)
+log(loggedIn, username, email, password, id)
 
   useEffect(() => { 
     // setLogIn(false);
@@ -62,17 +40,10 @@ const firebaseApp = initializeApp(firebaseConfig);
   }, []);
   
   async function login(e: React.FormEvent<HTMLButtonElement>) {
-  e.preventDefault()
-  // log(email, password)
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password)
-    log(userCredential.user.uid)
-    // setID(userCredential.user.uid)
-    // navigate('./products')
-    setLogIn(true)
-  } catch (err) {
-    log(err)
-  }
+    e.preventDefault()
+    const obj = await loginFunction(email, password)
+    setID(obj.id)
+    setLogIn(obj.loggedIn)
 }
 
   function register(e: React.FormEvent<HTMLButtonElement>) {

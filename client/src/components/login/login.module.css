@@ -9,7 +9,7 @@
   font-weight: bold;
   /* width: 500px; */
   /* box-sizing: border-box; */
-  background-color: 
+  background-color: #EEEEEE;
 }
 
 .tabs {
@@ -28,6 +28,7 @@
   background-color: #C4DDD4;
   border-radius: 2pc;
   border: #EEEEEE;
+  color: #118259;
 }
 
 .button{
