@@ -36,7 +36,7 @@ export async function getUser(req: Request, res: Response) {
   try {
     const foundUser = await UserModel.findOne({
       where: {
-        id: req.params,
+        id: req.params.id,
       },
     });
     if (foundUser) {

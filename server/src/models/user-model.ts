@@ -35,6 +35,6 @@ class User extends Model<UserType, UserType> {
 
 sequelize.addModels([User]);
 
-(async () => await User.sync())();
+(async () => await User.sync({ alter: true }))();
 
 export default User;

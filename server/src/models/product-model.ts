@@ -1,10 +1,10 @@
 import sequelize from "../database/db-connection";
-import { Table, Column, Model, HasMany } from "sequelize-typescript";
+import { Table, Column, Model, HasMany, DataType } from "sequelize-typescript";
 import { type ProductType } from "../product";
 
 @Table
 class Product extends Model<ProductType, ProductType> {
-  @Column({ primaryKey: true })
+  @Column({ primaryKey: true, autoIncrement: true })
   id: number;
   @Column
   name: string;
@@ -22,6 +22,6 @@ class Product extends Model<ProductType, ProductType> {
 
 sequelize.addModels([Product]);
 
-(async () => await Product.sync())();
+(async () => await Product.sync({ alter: true }))();
 
 export default Product;
