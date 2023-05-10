@@ -4,7 +4,7 @@ import * as RadioGroup from '@radix-ui/react-radio-group';
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { userStore } from './../../zustand/UserStore'
-import { saveUser, authUser } from './../../service'
+import { saveUser } from './../../service'
 ////Firebase auth
 import { loginFunction, registerFunction } from '../../firebaseAuth/auth'
 

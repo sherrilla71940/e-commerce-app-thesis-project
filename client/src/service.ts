@@ -1,6 +1,6 @@
 const API_URL = "http://localhost:3000"
 
-export async function saveUser(body) {
+export async function saveUser(body: any) {
   const response = await fetch(`${API_URL}/user`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -13,8 +13,8 @@ export async function saveUser(body) {
   return
 }
 
-export async function authUser(body) {
-  const response = await fetch(`${API_URL}/user/${username}`, {
+export async function getUser(body: any) {
+  const response = await fetch(`${API_URL}/user/`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
