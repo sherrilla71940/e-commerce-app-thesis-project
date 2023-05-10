@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import styles from './login.module.css'
 import * as Tabs from '@radix-ui/react-tabs'
 import { User } from '../../models/models'
@@ -11,18 +11,13 @@ import { loginFunction } from '../../firebaseAuth/auth'
 const log = console.log.bind(console)
 log('ok')
 
-// const navigate = useNavigate()
-
 // const state = userStore();
 
 // const { username, email, password } = userStore((state: User) =>
 // ({ username: state.username, email: state.email, password: state.password }))
-// const username = 'a';
-// const email = 'a@a.com';
-// const password = 'password';
 
 export default function Login() {
-  
+
   const [loggedIn, setLogIn] = useState(false);
   const [id, setID] = useState('');
   const [username, setUser] = useState('');
