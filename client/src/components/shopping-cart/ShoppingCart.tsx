@@ -1,5 +1,5 @@
 import styles from './ShoppingCart.module.css'
-
+import {checkout} from './checkoutFunction'
 import { useCartSlice } from '../../zustand/ShoppingCartSlice'
 import { CartItemType } from '../../models/models'
 import CartItem from '../cart-item/CartItem'
@@ -37,14 +37,15 @@ export default function ShoppingCart() {
                 className={styles.totalValue}
               >
                 {cartItems.reduce((total, cartItem) => {
+                  console.log(cartItem)
                   return total + (cartItem.price * cartItem.quantity)
                 }, 0)}
               </h3>
             </div>
 
-            <div className={styles.checkout}>
-              <h3>Checkout</h3>
-            </div>
+            <button className={styles.checkout} onClick={checkout}>
+              Checkout
+            </button>
           </div>
 
         </div>
