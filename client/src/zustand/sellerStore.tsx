@@ -6,14 +6,14 @@ export type sellerProduct = {
   category?: string,
   price: number,
   sellerID: string,
-  quantity: string,
+  quantity: number,
   picture_url?: string;
   
   setName: (name: string) => void;
   setCat: (id: string) => void;
   setPrice: (price: number) => void;
   setSellerID: (sellerID: string) => void;
-  setQuantity: (quantity: string) => void;
+  setQuantity: (quantity: number) => void;
   setPic: (isSeller: string) => void;
 }
 
@@ -23,7 +23,7 @@ export const sellerStore = create<sellerProduct>((set) => ({
   category: '',
   price: 0,
   sellerID: '',
-  quantity: '',
+  quantity: 0,
   picture_url: '',
 
   setName: (name) => set(() => ({ name })),

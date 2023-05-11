@@ -8,30 +8,38 @@ export default function ProductForm() {
   
 const navigate = useNavigate()
 
-
+const { name, category, price, sellerID, quantity, picture_url } = sellerStore()
+const { setName, setCat, setPrice, setSellerID, setQuantity, setPic } = sellerStore()
+  
 async function addProduct(e: React.FormEvent<HTMLButtonElement>) {
   e.preventDefault()
   // if (obj) {
-  //   saveUser({ id: obj.id, email: obj.email, name: username, isSeller: isSeller })
+  //   saveUser({ id: obj.id, category: obj.category, name: username, isSeller: isSeller })
   // }
 }  
 
-function userHandler(e: React.ChangeEvent<HTMLInputElement>) {
+function nameHandler(e: React.ChangeEvent<HTMLInputElement>) {
   e.preventDefault()
   const target = e.target as HTMLInputElement;
-  // setUsername(target.value);
+  setName(target.value);
 } 
-function emailHandler(e: React.ChangeEvent<HTMLInputElement>) {
+function categoryHandler(e: React.ChangeEvent<HTMLInputElement>) {
   const target = e.target as HTMLInputElement;
-  // setEmail(target.value)
+  setCat(target.value)
 }
-function passHandler(e: React.ChangeEvent<HTMLInputElement>) {
+function priceHandler(e: React.ChangeEvent<HTMLInputElement>) {
   const target = e.target as HTMLInputElement;
-  // setPassword(target.value)
+  console.log(target)
+  setPrice(Number(target.value))
 }
+function qtyHandler(e: React.ChangeEvent<HTMLInputElement>) {
+  const target = e.target as HTMLInputElement;
+  setQuantity(Number(target.value))
+}
+  
 function sellerHandler(e: React.ChangeEvent<HTMLInputElement>) {
   const target = e.target as HTMLInputElement;
-  // setSeller(true)
+  setSellerID('')
 }
   
   return (
@@ -40,42 +48,38 @@ function sellerHandler(e: React.ChangeEvent<HTMLInputElement>) {
       <form>
       <fieldset>
         <label className="">
-          username
+          name
         </label> <br/>
-            <input size={30} value={username} className={styles.input} id="username" placeholder="onlinestore"
-              onChange={userHandler} required />
+            <input size={30} value={name} className={styles.input} type="text"
+              onChange={nameHandler} required />
       </fieldset>
       <fieldset>
         <label className="">
-          email
+          category
         </label> <br/>
-            <input size={30} value={email} className={styles.input} id="email" placeholder="shop@online.net"
-              onChange={emailHandler} required />
+            <input size={30} value={category} className={styles.input} type="text"
+              onChange={categoryHandler} required />
       </fieldset>    
       <fieldset>
         <label className="" >
-          password      
+          price      
         </label> <br/>
-            <input size={30} value={password} className={styles.input} type="password"
-              onChange={passHandler} required />
+            <input min="0" value={price} className={styles.input} type="number"
+              onChange={priceHandler} required />
       </fieldset>
-      <fieldset className="">
-        <legend className="" >
-        Would you also like to register as a seller?      
-        </legend>
+      <fieldset>
+        <label className="" >
+          quantity     
+        </label> <br/>
+            <input min="1" value={quantity} className={styles.input} type="number"
+              onChange={qtyHandler} required />
+      </fieldset>
+      <fieldset>
+        <label htmlFor="product picture">Upload product picture:</label>
+        <input type="file" name="product-pic"></input>
+      </fieldset>  
         <div>
-            {/* <input type="checkbox" id="seller" value={isSeller}
-                  onChange={sellerHandler} required /> */}
-          <label>Yes, I have items to sell.</label>
-        </div>
-{/* 
-        <div>
-          <input type="radio" id="buyer" value="false"/>
-          <label htmlFor="false">No, I'm here to buy.</label>
-        </div> */}
-      </fieldset>        
-      <div>
-        <button className={styles.button} onClick={register}>register</button>
+        <button className={styles.button} onClick={addProduct}>Add product</button>
       </div>
       </form>
    

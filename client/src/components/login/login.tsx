@@ -88,14 +88,14 @@ function sellerHandler(e: React.ChangeEvent<HTMLInputElement>) {
         <label className="">
           username
         </label> <br/>
-            <input size={30} value={username} className={styles.input} id="username" placeholder="onlinestore"
+            <input size={30} value={username} className={styles.input} type="text" placeholder="onlinestore"
               onChange={userHandler} required />
       </fieldset>
       <fieldset>
         <label className="">
           email
         </label> <br/>
-            <input size={30} value={email} className={styles.input} id="email" placeholder="shop@online.net"
+            <input size={30} value={email} className={styles.input} type="email" placeholder="shop@online.net"
               onChange={emailHandler} required />
       </fieldset>    
       <fieldset>
