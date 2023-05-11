@@ -11,6 +11,13 @@ export interface Product {
   image: string
 }
 
+export type User = {
+  isLoggedIn: boolean
+  username?: string
+  email: string
+  password: string
+}
+
 export interface CartItemType extends Product {
   quantity: number
 }

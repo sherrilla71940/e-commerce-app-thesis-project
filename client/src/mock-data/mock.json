@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Classic T-Shirt",
-      "color": "White",
+      "color": "#EEEEEE",
       "size": "S",
       "price": 19.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -48,7 +48,7 @@
     {
       "id": 6,
       "name": "Graphic T-Shirt",
-      "color": "White",
+      "color": "#EEEEEE",
       "size": "L",
       "price": 29.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -57,7 +57,7 @@
     {
       "id": 7,
       "name": "Striped T-Shirt",
-      "color": "Black/White",
+      "color": "Black/#EEEEEE",
       "size": "XL",
       "price": 34.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -66,7 +66,7 @@
     {
       "id": 8,
       "name": "Striped T-Shirt",
-      "color": "Red/White",
+      "color": "Red/#EEEEEE",
       "size": "S",
       "price": 34.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -84,7 +84,7 @@
     {
       "id": 10,
       "name": "Polo Shirt",
-      "color": "White",
+      "color": "#EEEEEE",
       "size": "L",
       "price": 39.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
