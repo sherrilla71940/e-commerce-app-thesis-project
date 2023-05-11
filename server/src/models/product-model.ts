@@ -1,9 +1,9 @@
 import sequelize from "../database/db-connection";
 import { Table, Column, Model, HasMany, DataType } from "sequelize-typescript";
-import { type ProductType } from "../product";
+import { type ProductType } from "../../../global-types/index";
 
 @Table
-class Product extends Model<ProductType, ProductType> {
+class Product extends Model<ProductType> {
   @Column({ primaryKey: true, autoIncrement: true })
   id: number;
   @Column

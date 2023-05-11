@@ -1,4 +1,8 @@
-import { default as ProductModel } from "../models/product-model";
+// import { default as ProductModel } from "../models/product-model";
+import { Product as ProductModel, User as UserModel } from "../models/models";
+// import * as Models from "../models/models";
+// const ProductModel = Models.Product;
+
 import { Request, Response } from "express";
 
 export async function postProduct(req: Request, res: Response): Promise<void> {
@@ -7,6 +11,8 @@ export async function postProduct(req: Request, res: Response): Promise<void> {
     const product = await ProductModel.create(req.body);
     res.status(201);
     res.json(product);
+
+    //
   } catch (e: unknown) {
     if (e instanceof Error) {
       console.log(e.message);
