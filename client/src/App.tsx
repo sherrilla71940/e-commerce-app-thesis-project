@@ -9,6 +9,7 @@ import ShoppingCart from "./components/shopping-cart/ShoppingCart";
 import Login from "./components/login/login"
 import StoreItems from "./components/store-items/StoreItems";
 import ItemDetails from "./components/item-details/ItemDetails";
+import Menu from './components/user-menu/UserMenu'
 //// State management:
 import { userStore, UserState } from './zustand/UserStore';
 import { useStore } from 'zustand';
@@ -36,6 +37,7 @@ console.log(loggedIn)
           <>
             <Navbar />
             <ShoppingCart />
+            <Menu/>
             <StoreItems/>
             <div id="detail">
               {/* <Outlet /> */}

@@ -3,6 +3,7 @@ import BagIcon from '../../assets/bag-icon.svg'
 import { useNavigate } from 'react-router-dom'
 import { useCartSlice } from './../../zustand/ShoppingCartSlice'
 import { userStore } from './../../zustand/UserStore'
+import { menuStore } from '../../zustand/menuStore'
 
 export default function Navbar() {
 
@@ -10,9 +11,10 @@ export default function Navbar() {
 
   const openCart = useCartSlice((state) => state.openCart)
   const cartItems = useCartSlice((state) => state.cartItems)
-
+  
   const { loggedIn, username, email } = userStore()
-
+  const { visible, setVisibility} = menuStore();
+ console.log(visible)
 function redirect(){
   navigate('/login')
 }
@@ -48,9 +50,10 @@ function redirect(){
           </>}
           {(loggedIn) ?
               <img 
-                src='https://source.boringavatars.com/'
-                className={styles.userThumbnail}
-                alt='user pic'
+              src='https://source.boringavatars.com/'
+              className={styles.userThumbnail}
+              alt='user pic'
+              onClick={setVisibility}
             />
             : <button className={styles.button}
               onClick={redirect}>Sign In</button>
