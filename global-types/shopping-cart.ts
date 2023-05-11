@@ -1,4 +1,4 @@
-export type ShoppingCart = {
+export type ShoppingCartType = {
   id: number;
-  userId: number;
+  userId: string; //uuid
 };

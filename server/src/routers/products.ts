@@ -1,19 +1,16 @@
 import express from "express";
+import {
+  getProducts,
+  postProduct,
+  getProduct,
+  deleteProduct,
+  updateProduct,
+} from "../controllers/product-controller";
 
 export default function productsRouter(router: express.Router) {
-  router.get("/products", (req, res) => {
-    res.json("all products here");
-  });
-  router.get("/products/:id", (req, res) => {
-    res.json("get a specific product here");
-  });
-  router.put("products/:id", (req, res) => {
-    res.json("update a product by id here");
-  });
-  router.post("/product", (req, res) => {
-    res.json("post a product here and product will recieve id");
-  });
-  router.delete("products/:id", (req, res) => {
-    res.json("delete a product by id here");
-  });
+  router.get("/products", getProducts);
+  router.post("/product", postProduct);
+  router.get("/products/:id", getProduct);
+  router.put("/products/:id", updateProduct);
+  router.delete("/products/:id", deleteProduct);
 }
