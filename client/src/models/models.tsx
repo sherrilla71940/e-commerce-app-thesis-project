@@ -1,22 +1,14 @@
-export type Product = {
+export type ProductSize = 'S' | 'M' | 'L' | 'XL';
+
+
+export interface Product {
   id: number
   name: string
   color: string
-  size: string
+  size: ProductSize
   price: number
   description: string,
   image: string
-}
-
-export type CartItemType = {
-  id: number
-  name: string
-  color: string
-  size: string
-  price: number,
-  description: string,
-  image: string,
-  quantity?: number
 }
 
 export type User = {
@@ -24,4 +16,8 @@ export type User = {
   username?: string
   email: string
   password: string
+}
+
+export interface CartItemType extends Product {
+  quantity: number
 }

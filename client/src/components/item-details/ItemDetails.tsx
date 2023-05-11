@@ -1,12 +1,13 @@
 import styles from './ItemDetails.module.css'
-import { useCartSlice } from '../../zustand/ShoppingCartStore'
+import { useCartSlice } from '../../zustand/ShoppingCartSlice'
 import mock from '../../mock-data/mock.json'
 import { useParams } from 'react-router-dom'
-import { Product } from '../../models/models'
+import { Product, ProductSize } from '../../models/models'
+import { useState } from 'react'
 
 export default function ItemDetails() {
 
-  const increaseQuantity = useCartSlice((state) => state.increaseQuantity)
+  const addItem = useCartSlice((state) => state.addItem)
   const openCart = useCartSlice((state) => state.openCart)
 
   // URL param
@@ -16,7 +17,26 @@ export default function ItemDetails() {
   // URL query and fetch the DB
   const data = JSON.parse(JSON.stringify(mock))
   const products: Product[] = data.products;
-  const product =products.find(product => String(product.id) === param.id)
+  let product = products.find(product => String(product.id) === param.id)
+
+  const [item, setItem] = useState(product)
+
+  // handle size selection
+  const handleSizeSelection = (e: React.SyntheticEvent) => {
+    const size = e.currentTarget.textContent as ProductSize // refactor to make more strict type
+    // console.log('PRODUCT:', {...product, size: size})
+    // return {...product, size: size}
+    if (size && product) {
+      setItem({...product, size: size})
+
+      // change this later to useRef
+      const sizes = document.querySelectorAll('.size')
+      sizes.forEach(s => {
+        if (s.textContent === size) s.classList.add('selected')
+        else s.classList.remove('selected')
+      })
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -39,17 +59,17 @@ export default function ItemDetails() {
         <h4 className={styles.price}>{product?.price}</h4>
 
         <div className={styles.sizes}>
-          <div className={styles.size}>S</div>
-          <div className={styles.size}>M</div>
-          <div className={styles.size}>L</div>
-          <div className={styles.size}>XL</div>
+          <div className={styles.size} onClick={handleSizeSelection}>S</div>
+          <div className={styles.size} onClick={handleSizeSelection}>M</div>
+          <div className={styles.size} onClick={handleSizeSelection}>L</div>
+          <div className={styles.size} onClick={handleSizeSelection}>XL</div>
         </div>
 
         <div
           className={styles.addToCart}
           onClick={() => {
-            if(product) {
-              increaseQuantity(product);
+            if(item) {
+              addItem(item);
               openCart();
             }
           }}
