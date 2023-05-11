@@ -3,6 +3,7 @@ import BagIcon from '../../assets/bag-icon.svg'
 import { useNavigate } from 'react-router-dom'
 import { useCartSlice } from './../../zustand/ShoppingCartSlice'
 import { userStore } from './../../zustand/UserStore'
+import { CartItemType } from '../../models/models'
 
 export default function Navbar() {
 
@@ -31,15 +32,19 @@ function redirect(){
         
         
         <div className={styles.navbarRight}>
-          {(!loggedIn) ? null : <>
+          {(!loggedIn) ?
+            
             <div className={styles.cartItems}
               onClick={() => openCart()}>1
             </div>
+          
+            : <>
+            <div className={styles.cartItems}
+                onClick={() => openCart()}>
+                {cartItems.reduce((total:number, cartItem: CartItemType) => {
+              return total + cartItem.quantity}, 0)}
+            </div>
   
-            {cartItems.reduce((total:any, cartItem:any) => {
-              return total + cartItem.quantity
-            }, 0)}
-         
             <img
               src={BagIcon}
               className={styles.cartItemsIcon}
