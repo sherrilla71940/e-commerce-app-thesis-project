@@ -13,11 +13,15 @@ export default function Navbar() {
   const cartItems = useCartSlice((state) => state.cartItems)
   
   const { loggedIn, username, email } = userStore()
-  const { visible, setVisibility} = menuStore();
- console.log(visible)
-function redirect(){
-  navigate('/login')
-}
+  const { visible,  setVisibility} = menuStore();
+
+  function redirect(){
+    navigate('/login')
+  }
+
+  function clickAvatar() {
+    setVisibility(true)
+  }
 
   return (
     <nav className={styles.navbarContainerSticky}>
@@ -53,7 +57,7 @@ function redirect(){
               src='https://source.boringavatars.com/'
               className={styles.userThumbnail}
               alt='user pic'
-              onClick={setVisibility}
+              onClick={clickAvatar}
             />
             : <button className={styles.button}
               onClick={redirect}>Sign In</button>
