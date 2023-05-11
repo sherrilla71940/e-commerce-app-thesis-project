@@ -1,5 +1,5 @@
-export type TransactionBasket = {
+export type TransactionBasketType = {
   id: number;
-  buyerId: number;
+  buyerId: string;
   date: Date;
 };

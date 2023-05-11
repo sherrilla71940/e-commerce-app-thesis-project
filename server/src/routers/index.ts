@@ -7,10 +7,10 @@ import transactionsRouter from "./transactions";
 
 const router = express.Router();
 
-export default (): express.Router => {
+export default function configuredRouterGenerator(): express.Router {
   usersRouter(router);
   productsRouter(router);
   shoppingCartsRouter(router);
   transactionsRouter(router);
   return router;
-};
+}

@@ -1,4 +1,4 @@
-export type TransactionBasketProduct = {
+export type TransactionBasketProductType = {
   id: number;
   transactionId: number;
   productId: number;
