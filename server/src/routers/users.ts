@@ -5,6 +5,7 @@ import {
   getUser,
   deleteUser,
   updateUser,
+  getSellers,
 } from "../controllers/user-controller";
 
 //import controllers
@@ -15,4 +16,5 @@ export default function usersRouter(router: express.Router) {
   router.post("/user", postUser);
   router.delete("/users/:id", deleteUser);
   router.put("/users/:id", updateUser);
+  router.get("/sellers", getSellers);
 }

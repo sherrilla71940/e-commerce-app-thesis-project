@@ -1,6 +1,27 @@
 import { User as UserModel } from "../models/models";
 import { Request, Response } from "express";
 
+export async function getSellers(req: Request, res: Response): Promise<void> {
+  try {
+    const sellers = await UserModel.findAll({
+      where: {
+        isSeller: true,
+      },
+    });
+    if (sellers) {
+      res.status(200);
+      res.json(sellers);
+    } else {
+      res.status(404);
+      res.json("could not find any sellers");
+    }
+  } catch (e) {
+    console.log(e.mesage);
+    res.status(400);
+    res.json("ran into error while fetching all sellers");
+  }
+}
+
 export async function postUser(req: Request, res: Response): Promise<void> {
   console.log("post user endpoint reached");
   try {
