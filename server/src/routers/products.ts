@@ -5,6 +5,7 @@ import {
   getProduct,
   unlistProduct,
   updateProduct,
+  deleteAllProducts,
 } from "../controllers/product-controller";
 
 export default function productsRouter(router: express.Router) {
@@ -13,5 +14,6 @@ export default function productsRouter(router: express.Router) {
   router.get("/products", getProducts); // mvp 3 done
   router.delete("/products/:id", unlistProduct); // mvp 4 done
 
+  router.delete("/products", deleteAllProducts);
   router.put("/products/:id", updateProduct); // not mvp and not integrated with current flow
 }
