@@ -1,16 +1,16 @@
 import express from "express";
 import { addShoppingCart, deleteShoppingCart } from "../controllers/shopping-cart-controller";
-import { addProductToShoppingCart, deleteProductFromShoppingCart, getAllProductsFromShoppingCart, getOneShoppingCart } from "../controllers/shopping-cart-product-controller";
+import { addProductToShoppingCart, deleteProductFromShoppingCart, getAllProductsFromShoppingCart, getOneShoppingCart, getAllShoppingCarts } from "../controllers/shopping-cart-product-controller";
 //import controllers
 
 export default function shoppingCartsRouter(router: express.Router) {
-  router.get("/shoppingcarts", (req, res) => {
-    res.json("all shoppingcarts here");
-  });
 
   router.put("shoppingcarts/:id", (req, res) => {
     res.json("update a shopping cart by id here");
   });
+
+  // get all shopping carts
+  router.get("/getallshoppingcarts", getAllShoppingCarts);
 
   // get one specific shopping cart
   router.post("/getoneshoppingcart", getOneShoppingCart);

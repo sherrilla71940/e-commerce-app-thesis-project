@@ -21,6 +21,12 @@ export async function getOneShoppingCart (req: Request, res: Response) {
   return shoppingCart
 }
 
+export async function getAllShoppingCarts (req: Request, res: Response) {
+  const shoppingCarts = await ShoppingCart.findAll({})
+  res.json(shoppingCarts)
+  return shoppingCarts
+}
+
 async function addToShoppingCart (product: { shoppingCartId: number, productId: number, productQuantity: number}) {
   // console.log('adding product to shopping cart')
   try {
