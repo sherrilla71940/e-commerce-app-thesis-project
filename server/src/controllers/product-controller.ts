@@ -1,6 +1,6 @@
 // const ProductModel = {};
-// @ts-ignore
-import { Product as ProductModel } from "../models/models";
+import Models from "../models/models";
+const ProductModel = Models.Product;
 // import * as Models from "../models/models";
 // const ProductModel = Models.Product;
 
