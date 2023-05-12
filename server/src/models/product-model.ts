@@ -22,6 +22,6 @@ class Product extends Model<ProductType, ProductType> {
 
 sequelize.addModels([Product]);
 
-(async () => await Product.async({ alter: true }))();
+(async () => await Product.sync({ alter: true }))();
 
 export default Product;

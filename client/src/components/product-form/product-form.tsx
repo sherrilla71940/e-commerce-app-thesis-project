@@ -1,21 +1,36 @@
+import { useState } from 'react'
 import styles from './product-form.module.css'
 import * as Tabs from '@radix-ui/react-tabs'
 import { useNavigate } from 'react-router-dom'
 import { sellerStore } from '../../zustand/sellerStore'
-import { saveUser } from '../../service'
+import { saveUser, postProduct } from '../../service'
+
+
+const log = console.log.bind(console)
+log('ok')
 
 export default function ProductForm() {
   
 const navigate = useNavigate()
 
-const { name, category, price, sellerID, quantity, picture_url } = sellerStore()
-const { setName, setCat, setPrice, setSellerID, setQuantity, setPic } = sellerStore()
+  const [name, setName] = useState('');
+  const [cat, setCat] = useState('');
+  const [price, setPrice] = useState(0);
+  const [sellerID, setSellerID] = useState('');
+  const [quantity, setQuantity] = useState(0);
+  const [picture_url, setPic] = useState('');
+  
+setPic('https://picsum.photos/id/237/200/300')
   
 async function addProduct(e: React.FormEvent<HTMLButtonElement>) {
   e.preventDefault()
-  // if (obj) {
-  //   saveUser({ id: obj.id, category: obj.category, name: username, isSeller: isSeller })
-  // }
+  try {
+    postProduct({ name: name, category: cat, price: price, sellerID: sellerID, quantity: quantity, picture_url: picture_url })
+    navigate('/')
+  } catch (err) {
+    console.log(err)
+    alert('Posting the product on your store was unsuccesful, please try again!')
+  }
 }  
 
 function nameHandler(e: React.ChangeEvent<HTMLInputElement>) {
@@ -44,7 +59,7 @@ function sellerHandler(e: React.ChangeEvent<HTMLInputElement>) {
   
   return (
     <div className={styles.container}>
-    <p >Create an account.</p>    
+    <p >Product information:</p>    
       <form>
       <fieldset>
         <label className="">
@@ -57,7 +72,7 @@ function sellerHandler(e: React.ChangeEvent<HTMLInputElement>) {
         <label className="">
           category
         </label> <br/>
-            <input size={30} value={category} className={styles.input} type="text"
+            <input size={30} value={cat} className={styles.input} type="text"
               onChange={categoryHandler} required />
       </fieldset>    
       <fieldset>

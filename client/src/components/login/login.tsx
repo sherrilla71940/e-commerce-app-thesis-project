@@ -8,9 +8,6 @@ import { saveUser } from './../../service'
 ////Firebase auth
 import { loginFunction, registerFunction } from '../../firebaseAuth/auth'
 
-// const log = console.log.bind(console)
-// log('ok')
-
 export default function Login() {
   
   const navigate = useNavigate()
@@ -24,14 +21,12 @@ export default function Login() {
   // const [email, setEmail] = useState('');
   // const [password, setPass] = useState('');
   
-// log(loggedIn, id, username, email, password)
-  
 async function login(e: React.FormEvent<HTMLButtonElement>) {
     e.preventDefault()
-    const obj = await loginFunction(email, password)
-    setID(obj.id)
-    setLoggedIn(obj.loggedIn)
-    if (obj.loggedIn === true) {
+    const user = await loginFunction(email, password)
+    setID(user.id)
+    setLoggedIn(user.loggedIn)
+    if (user.loggedIn === true) {
       navigate('/')
     } else {
       alert('Invalid user or password')
@@ -41,9 +36,9 @@ async function login(e: React.FormEvent<HTMLButtonElement>) {
 async function register(e: React.FormEvent<HTMLButtonElement>) {
   e.preventDefault()
   // log(e)
-  const obj = await registerFunction(email, password)
-  if (obj) {
-    saveUser({ id: obj.id, email: obj.email, name: username, isSeller: isSeller })
+  const user = await registerFunction(email, password)
+  if (user) {
+    saveUser({ id: user.id, email: user.email, name: username, isSeller: isSeller })
     alert('Registration successful!')
   } else {
     alert('Registration failure')
