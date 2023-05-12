@@ -11,6 +11,7 @@ import sequelize from "../database/db-connection";
 // import type { UserType, ProductType } from "../../../global-types/index";
 import User from "./user-model";
 import Product from "./product-model";
+import ShoppingCart from './shopping-cart-model'
 
 // @Table
 // export class User extends Model<UserType> {
@@ -61,7 +62,7 @@ import Product from "./product-model";
 //   seller: User;
 // }
 
-sequelize.addModels([User, Product]);
+sequelize.addModels([User, Product, ShoppingCart]);
 
 (async () => await sequelize.sync({ alter: true }))();
 

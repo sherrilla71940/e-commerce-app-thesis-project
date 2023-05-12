@@ -9,7 +9,7 @@ import {
 
 export default function productsRouter(router: express.Router) {
   router.get("/products", getProducts);
-  router.post("/product", postProduct);
+  router.post("/products", postProduct);
   router.get("/products/:id", getProduct);
   router.put("/products/:id", updateProduct);
   router.delete("/products/:id", deleteProduct);

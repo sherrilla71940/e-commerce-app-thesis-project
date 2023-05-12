@@ -1,8 +1,9 @@
 // import UserModel from "../models/user-model";
 // const UserModel = {};
-
-import { User as UserModel } from "../models/models";
 import { Request, Response } from "express";
+
+import Models from "../models/models";
+const UserModel = Models.User
 
 export async function postUser(req: Request, res: Response): Promise<void> {
   console.log("post user endpoint reached");

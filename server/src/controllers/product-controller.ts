@@ -1,6 +1,7 @@
 // const ProductModel = {};
-// @ts-ignore
-import { Product as ProductModel } from "../models/models";
+
+import Models from "../models/models";
+const ProductModel = Models.Product
 // import * as Models from "../models/models";
 // const ProductModel = Models.Product;
 
@@ -13,7 +14,6 @@ export async function postProduct(req: Request, res: Response): Promise<void> {
     res.status(201);
     res.json(product);
 
-    //
   } catch (e: unknown) {
     if (e instanceof Error) {
       console.log(e.message);
