@@ -6,6 +6,6 @@ sequelize.addModels([User, Product]);
 
 (async () => await sequelize.sync({ alter: true }))();
 
-export default { User, Product };
+export { User, Product };
 // export User;
 // export Product;

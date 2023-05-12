@@ -1,5 +1,4 @@
-import Models from "../models/models";
-const ProductModel = Models.Product;
+import { Product as ProductModel } from "../models/models";
 import { Request, Response } from "express";
 
 export async function postProduct(req: Request, res: Response): Promise<void> {

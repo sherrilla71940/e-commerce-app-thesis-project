@@ -1,5 +1,4 @@
-import Models from "../models/models";
-const UserModel = Models.User;
+import { User as UserModel } from "../models/models";
 import { Request, Response } from "express";
 
 export async function postUser(req: Request, res: Response): Promise<void> {
