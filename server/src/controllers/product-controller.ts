@@ -1,14 +1,21 @@
-import { Product as ProductModel } from "../models/models";
+import { Product as ProductModel, User as UserModel } from "../models/models";
 import { Request, Response } from "express";
 
 export async function postProduct(req: Request, res: Response): Promise<void> {
   console.log("post product endpoint reached", req.body);
   try {
     const product = await ProductModel.create(req.body);
+    const User = await UserModel.findOne({
+      where: {
+        id: req.body.sellerId,
+      },
+    });
+    User.set({
+      isSeller: true,
+    });
+    await User.save();
     res.status(201);
     res.json(product);
-
-    //
   } catch (e: unknown) {
     if (e instanceof Error) {
       console.log(e.message);
@@ -55,7 +62,7 @@ export async function getProduct(req: Request, res: Response): Promise<void> {
   }
 }
 
-export async function deleteProduct(
+export async function unlistProduct(
   req: Request,
   res: Response
 ): Promise<void> {

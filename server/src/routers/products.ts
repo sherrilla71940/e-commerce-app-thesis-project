@@ -3,14 +3,15 @@ import {
   getProducts,
   postProduct,
   getProduct,
-  deleteProduct,
+  unlistProduct,
   updateProduct,
 } from "../controllers/product-controller";
 
 export default function productsRouter(router: express.Router) {
-  router.get("/products", getProducts);
-  router.post("/product", postProduct);
-  router.get("/products/:id", getProduct);
+  router.post("/product", postProduct); // mvp 1
+  router.get("/products/:id", getProduct); // mvp 2
+  router.get("/products", getProducts); // mvp 3
+  router.delete("/products/:id", unlistProduct); // mvp 4
+
   router.put("/products/:id", updateProduct);
-  router.delete("/products/:id", deleteProduct);
 }
