@@ -1,7 +1,3 @@
-// import UserModel from "../models/user-model";
-// const UserModel = {};
-
-// import { User as UserModel } from "../models/models";
 import Models from "../models/models";
 const UserModel = Models.User;
 import { Request, Response } from "express";

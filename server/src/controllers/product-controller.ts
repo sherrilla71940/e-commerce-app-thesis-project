@@ -1,9 +1,5 @@
-// const ProductModel = {};
 import Models from "../models/models";
 const ProductModel = Models.Product;
-// import * as Models from "../models/models";
-// const ProductModel = Models.Product;
-
 import { Request, Response } from "express";
 
 export async function postProduct(req: Request, res: Response): Promise<void> {

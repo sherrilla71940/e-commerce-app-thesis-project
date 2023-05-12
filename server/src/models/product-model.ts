@@ -1,4 +1,3 @@
-import sequelize from "../database/db-connection";
 import {
   Table,
   Column,
@@ -36,9 +35,5 @@ class Product extends Model<ProductType> {
   @BelongsTo(() => User)
   seller: User;
 }
-
-// sequelize.addModels([Product]);
-
-// (async () => await Product.sync({ force: true }))();
 
 export default Product;
