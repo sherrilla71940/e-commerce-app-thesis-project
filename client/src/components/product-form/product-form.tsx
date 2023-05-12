@@ -2,6 +2,7 @@ import { useState } from 'react'
 import styles from './product-form.module.css'
 import * as Tabs from '@radix-ui/react-tabs'
 import { useNavigate } from 'react-router-dom'
+import { userStore } from './../../zustand/UserStore'
 import { sellerStore } from '../../zustand/sellerStore'
 import { saveUser, postProduct } from '../../service'
 
@@ -13,6 +14,8 @@ export default function ProductForm() {
   
 const navigate = useNavigate()
 
+const { id } = userStore();
+  
   const [name, setName] = useState('');
   const [cat, setCat] = useState('');
   const [price, setPrice] = useState(0);
@@ -21,6 +24,7 @@ const navigate = useNavigate()
   const [picture_url, setPic] = useState('');
   
 setPic('https://picsum.photos/id/237/200/300')
+setSellerID(id);
   
 async function addProduct(e: React.FormEvent<HTMLButtonElement>) {
   e.preventDefault()
@@ -52,10 +56,9 @@ function qtyHandler(e: React.ChangeEvent<HTMLInputElement>) {
   setQuantity(Number(target.value))
 }
   
-function sellerHandler(e: React.ChangeEvent<HTMLInputElement>) {
-  const target = e.target as HTMLInputElement;
-  setSellerID('')
-}
+// function sellerHandler(e: React.ChangeEvent<HTMLInputElement>) {
+//   const target = e.target as HTMLInputElement;  
+// }
   
   return (
     <div className={styles.container}>
