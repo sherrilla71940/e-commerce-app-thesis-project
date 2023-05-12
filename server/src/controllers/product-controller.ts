@@ -8,7 +8,6 @@ export async function postProduct(req: Request, res: Response): Promise<void> {
     res.status(201);
     res.json(product);
 
-    //
   } catch (e: unknown) {
     if (e instanceof Error) {
       console.log(e.message);
