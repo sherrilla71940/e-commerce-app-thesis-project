@@ -1,6 +1,6 @@
 import express from "express";
-import { addToShoppingCart, deleteFromShoppingCart } from "../controllers/shopping-cart-controller";
-
+import { addShoppingCart, deleteShoppingCart } from "../controllers/shopping-cart-controller";
+import { addProductToShoppingCart, deleteProductFromShoppingCart, getAllProductsFromShoppingCart } from "../controllers/shopping-cart-product-controller";
 //import controllers
 
 export default function shoppingCartsRouter(router: express.Router) {
@@ -13,8 +13,14 @@ export default function shoppingCartsRouter(router: express.Router) {
   router.put("shoppingcarts/:id", (req, res) => {
     res.json("update a shopping cart by id here");
   });
-  
-  router.post("/shoppingcarts", addToShoppingCart);
 
-  router.delete("/shoppingcarts/:id", deleteFromShoppingCart);
+  // Add Product to shopping cart
+  router.post("/shoppingcart", addProductToShoppingCart);
+
+  // Add Product to shopping cart
+  router.delete("/shoppingcart", deleteProductFromShoppingCart);
+
+  // Get all Products from shopping cart
+  router.get("/shoppingcart", getAllProductsFromShoppingCart);
+
 }

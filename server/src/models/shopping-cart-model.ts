@@ -1,8 +1,4 @@
 
-// import { Sequelize, Op, Model, DataTypes } from "sequelize";
-// above from original sequelize docs
-import sequelize from "../database/db-connection";
-// import sequelize from "sequelize";
 import { Table, Column, Model, HasMany, ForeignKey, BelongsTo } from "sequelize-typescript";
 import User from '../models/user-model';
 import { type ShoppingCartType } from "../../../global-types";
@@ -20,10 +16,5 @@ class ShoppingCart extends Model<ShoppingCartType, ShoppingCartType> {
   @BelongsTo(() => User)
   user: User;
 }
-// could also sync all models at the same time, but afraid that if I do that in index.ts it could potentially cause circular dependecies
-
-// sequelize.addModels([ShoppingCart]);
-
-// (async () => await ShoppingCart.sync({ force: true }))();
 
 export default ShoppingCart;
