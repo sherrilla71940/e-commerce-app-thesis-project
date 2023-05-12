@@ -4,6 +4,7 @@ import {
   Model,
   ForeignKey,
   BelongsTo,
+  AllowNull,
 } from "sequelize-typescript";
 import { type ProductType } from "../../../global-types/index";
 import User from "./user-model";
@@ -23,7 +24,7 @@ class Product extends Model<ProductType> {
   price: number;
 
   @ForeignKey(() => User)
-  @Column
+  @Column({ allowNull: true })
   sellerId: string;
 
   @Column
