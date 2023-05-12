@@ -1,4 +1,4 @@
-import { default as UserModel } from "../models/user-model";
+import { User as UserModel } from "../models/models";
 import { Request, Response } from "express";
 
 export async function postUser(req: Request, res: Response): Promise<void> {
