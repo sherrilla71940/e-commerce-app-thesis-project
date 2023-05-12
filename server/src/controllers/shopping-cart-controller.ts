@@ -30,26 +30,23 @@ export async function addShoppingCart(userId: string): Promise<ShoppingCart | Er
   }
 }
 
-export async function deleteShoppingCart(req: Request, res: Response): Promise<void> {
-  console.log("delete shopping cart endpoint reached", req.body);
+export async function deleteShoppingCart(shoppingCartId): Promise<number | Error> {
+  
   try {
-    const product = await ShoppingCart.destroy({
+    const deletedShoppingCart = await ShoppingCart.destroy({
       where: {
-        id: req.params.id
+        id: shoppingCartId
       }
     });
-    if (product) {
-      res.status(200);
-      res.json(`successfully deleted shopping cart: ${req.params.id}`);
-    } else {
-      res.status(404);
-      res.json("cannot delete non-existent shopping cart");
+    if (deletedShoppingCart) {
+      return deletedShoppingCart
     }
   } catch (e: unknown) {
     if (e instanceof Error) {
-      console.log(e.message);
-      res.status(400);
-      res.json("ran into error while deleting shopping cart");
+      return e
+      // console.log(e.message);
+      // res.status(400);
+      // res.json("ran into error while deleting shopping cart");
     }
   }
 }

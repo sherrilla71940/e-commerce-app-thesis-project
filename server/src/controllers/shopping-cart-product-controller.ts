@@ -1,6 +1,6 @@
 import { default as ShoppingCart } from "../models/shopping-cart-model";
 import { Request, Response } from "express";
-import { addShoppingCart } from "./shopping-cart-controller";
+import { addShoppingCart, deleteShoppingCart } from "./shopping-cart-controller";
 
 import ShoppingCartProduct from "../models/shopping-cart-product-model";
 
@@ -94,17 +94,45 @@ export async function deleteProductFromShoppingCart(req: Request, res: Response)
     // console.log(shoppingCart)
 
     if (shoppingCart) {
+
+      const allProductsInCart = await ShoppingCartProduct.findAll({
+        where: {
+          shoppingCartId: shoppingCart.id
+        }
+      })
+      console.log('TOTAL ITEMS: ', allProductsInCart.length)
+
       const deletedBoolean = await deleteFromShoppingCart({shoppingCartId: shoppingCart.id, productId: req.body.productId})
       // console.log(deletedBoolean)
-      if (deletedBoolean === 0) {
-        console.log('something went wrong when deleting from shopping cart')
-        res.status(400)
-        res.send('something went wrong when deleting from shopping cart')
-      } else if (deletedBoolean === 1) {
-        console.log('deleted successfully from existing shopping cart')
-        res.status(200)
-        res.send('deleted successfully from your shopping cart')
+
+      if (allProductsInCart.length > 1) {
+        // 1. delete product from shopping cart
+        if (deletedBoolean === 0) {
+          console.log('there was more then 1 item in the card, but something went wrong')
+          res.status(400)
+          res.send('something went wrong when deleting from shopping cart')
+        } else if (deletedBoolean === 1) {
+          console.log('there was more then 1 item. Deleted with seccess.')
+          res.status(200)
+          res.send('successfully deleted from your shopping cart')
+        }
+      } else {
+        // 1. delete last product from shopping cart
+        // 2. delete shopping cart
+        if (deletedBoolean === 0) {
+          console.log('there was 1 item only, but something went wtrong')
+          res.status(400)
+          res.send('something went wrong when deleting from shopping cart')
+        } else if (deletedBoolean === 1) {
+          deleteShoppingCart(shoppingCart.id)
+          console.log('deleted last item from existing shopping cart')
+          res.status(200)
+          res.send('deleted last product from your shopping cart')
+        }
       }
+    } else {
+      res.status(200)
+      res.send('the las item was deleted and the shopping cart was deleted as well')
     }
   } catch (e: unknown) {
     if (e instanceof Error) {
