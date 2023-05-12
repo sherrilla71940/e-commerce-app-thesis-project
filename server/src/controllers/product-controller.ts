@@ -41,16 +41,19 @@ export async function postProduct(req: Request, res: Response): Promise<void> {
   }
 }
 
-export async function getProducts(req: Request, res: Response): Promise<void> {
+export async function getListedProducts(
+  req: Request,
+  res: Response
+): Promise<void> {
   try {
-    // const products = await ProductModel.findAll({
-    //   where: {
-    //     sellerId: {
-    //       [Op.ne]: null,
-    //     },
-    //   },
-    // });
-    const products = await ProductModel.findAll();
+    const products = await ProductModel.findAll({
+      where: {
+        sellerId: {
+          [Op.ne]: null,
+        },
+      },
+    });
+    // const products = await ProductModel.findAll();
     res.status(200);
     res.json(products);
   } catch (e: unknown) {
@@ -172,5 +175,30 @@ export async function updateProduct(
       res.status(400);
       res.json("error encountered when updating product");
     }
+  }
+}
+
+export async function getSellerProducts(
+  req: Request,
+  res,
+  Response
+): Promise<void> {
+  try {
+    const products = await ProductModel.findAll({
+      where: {
+        sellerId: req.params.sid,
+      },
+    });
+    if (products) {
+      res.status(200);
+      res.json(products);
+    } else {
+      res.status(404);
+      res.json(`could not find any products for seller ${req.params.sid}`);
+    }
+  } catch (e) {
+    console.log(e.message);
+    res.status(400);
+    res.json("Ran into error while trying to find seller products");
   }
 }
