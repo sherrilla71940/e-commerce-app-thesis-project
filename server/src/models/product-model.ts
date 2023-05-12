@@ -4,9 +4,11 @@ import {
   Model,
   ForeignKey,
   BelongsTo,
+  HasMany,
 } from "sequelize-typescript";
 import { type ProductType } from "../../../global-types/index";
 import User from "./user-model";
+import TransactionBasketProduct from "./transactionBasketProduct-model";
 
 @Table
 class Product extends Model<ProductType> {
@@ -34,6 +36,9 @@ class Product extends Model<ProductType> {
 
   @BelongsTo(() => User)
   seller: User;
+
+  @HasMany(() => TransactionBasketProduct)
+  basketProducts: TransactionBasketProduct[];
 }
 
 export default Product;
