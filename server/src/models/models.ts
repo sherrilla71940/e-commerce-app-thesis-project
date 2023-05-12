@@ -1,66 +1,70 @@
 import sequelize from "../database/db-connection";
-import {
-  Table,
-  Column,
-  Model,
-  HasMany,
-  DataType,
-  ForeignKey,
-  BelongsTo,
-} from "sequelize-typescript";
-import type { UserType, ProductType } from "../../../global-types/index";
+// import {
+//   Table,
+//   Column,
+//   Model,
+//   HasMany,
+//   DataType,
+//   ForeignKey,
+//   BelongsTo,
+// } from "sequelize-typescript";
+// import type { UserType, ProductType } from "../../../global-types/index";
+import User from "./user-model";
+import Product from "./product-model";
 
-@Table
-export class User extends Model<UserType> {
-  @Column({ primaryKey: true })
-  id: string;
+// @Table
+// export class User extends Model<UserType> {
+//   @Column({ primaryKey: true })
+//   id: string;
 
-  @Column
-  email: string;
+//   @Column
+//   email: string;
 
-  @Column
-  name: string;
+//   @Column
+//   name: string;
 
-  @Column
-  password: string;
+//   @Column
+//   password: string;
 
-  @Column
-  isSeller: boolean;
+//   @Column
+//   isSeller: boolean;
 
-  @HasMany(() => Product)
-  products: Product[];
-}
+//   @HasMany(() => Product)
+//   products: Product[];
+// }
 
-@Table
-export class Product extends Model<ProductType> {
-  @Column({ primaryKey: true, autoIncrement: true })
-  id: number;
+// @Table
+// export class Product extends Model<ProductType> {
+//   @Column({ primaryKey: true, autoIncrement: true })
+//   id: number;
 
-  @Column
-  name: string;
+//   @Column
+//   name: string;
 
-  @Column
-  category: string;
+//   @Column
+//   category: string;
 
-  @Column
-  price: number;
+//   @Column
+//   price: number;
 
-  @ForeignKey(() => User)
-  @Column
-  sellerId: string;
+//   @ForeignKey(() => User)
+//   @Column
+//   sellerId: string;
 
-  @Column
-  quantity: number;
+//   @Column
+//   quantity: number;
 
-  @Column
-  pictureUrl: string;
+//   @Column
+//   pictureUrl: string;
 
-  @BelongsTo(() => User)
-  seller: User;
-}
+//   @BelongsTo(() => User)
+//   seller: User;
+// }
 
 sequelize.addModels([User, Product]);
 
 (async () => await sequelize.sync({ alter: true }))();
 
-// export default { User, Product };
+export default { User, Product };
+// export User;
+// export Product;

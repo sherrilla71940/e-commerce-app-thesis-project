@@ -1,5 +1,6 @@
-// import { default as ProductModel } from "../models/product-model";
-import { Product as ProductModel, User as UserModel } from "../models/models";
+// const ProductModel = {};
+// @ts-ignore
+import { Product as ProductModel } from "../models/models";
 // import * as Models from "../models/models";
 // const ProductModel = Models.Product;
 

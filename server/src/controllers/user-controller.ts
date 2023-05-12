@@ -1,4 +1,6 @@
-// import { default as UserModel } from "../models/user-model";
+// import UserModel from "../models/user-model";
+// const UserModel = {};
+
 import { User as UserModel } from "../models/models";
 import { Request, Response } from "express";
 
