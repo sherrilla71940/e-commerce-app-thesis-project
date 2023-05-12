@@ -25,7 +25,7 @@ class Product extends Model<ProductType> {
   price: number;
 
   @ForeignKey(() => User)
-  @Column
+  @Column({ allowNull: true })
   sellerId: string;
 
   @Column
