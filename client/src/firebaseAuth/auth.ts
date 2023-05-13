@@ -1,6 +1,6 @@
-//Firebase auth
+//Firebase auth: Ref--> https://firebase.google.com/docs/auth/web/auth-state-persistence
 import { initializeApp } from 'firebase/app'
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, browserSessionPersistence, setPersistence } from 'firebase/auth'
 
 
 //Ref: https://youtu.be/rQvOAnNvcNQ
@@ -18,10 +18,14 @@ export async function loginFunction(email: string, password:string) {
   try {
     const firebaseApp = initializeApp(firebaseConfig);
     const auth = getAuth(firebaseApp);
+
+    setPersistence(auth, browserSessionPersistence)
+    
     const userCredential = await signInWithEmailAndPassword(auth, email, password)
-    console.log(userCredential.user.uid)
+    // console.log(userCredential.user.uid)
     const id = userCredential.user.uid;
     const loggedIn = true;
+
     return { id, loggedIn }
     
   } catch (err) {

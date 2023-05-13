@@ -9,6 +9,8 @@ import ShoppingCart from "./components/shopping-cart/ShoppingCart";
 import Login from "./components/login/login"
 import StoreItems from "./components/store-items/StoreItems";
 import ItemDetails from "./components/item-details/ItemDetails";
+import Menu from './components/menu/menu'
+import ProductForm from './components/product-form/product-form'
 //// State management:
 import { userStore, UserState } from './zustand/UserStore';
 import { useStore } from 'zustand';
@@ -16,7 +18,7 @@ import { useStore } from 'zustand';
 function App() {
  
 const { loggedIn } = userStore()
-console.log(loggedIn)
+// console.log(loggedIn)
 
   useEffect(() => {
     // navigate('/products')
@@ -36,6 +38,7 @@ console.log(loggedIn)
           <>
             <Navbar />
             <ShoppingCart />
+            <Menu/>
             <StoreItems/>
             <div id="detail">
               {/* <Outlet /> */}
@@ -54,6 +57,14 @@ console.log(loggedIn)
           </>
           }/>
 
+          <Route path={'/seller'} element={
+            <>
+              <Navbar />
+              <Menu/>
+              <ProductForm/>
+            </>
+            } />
+        
         </Routes>
       </Router>
 

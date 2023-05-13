@@ -12,7 +12,7 @@ export default function ItemDetails() {
 
   // URL param
   const param = useParams()
-  console.log(param.id)
+  // console.log(param.id)
 
   // URL query and fetch the DB
   const data = JSON.parse(JSON.stringify(mock))
