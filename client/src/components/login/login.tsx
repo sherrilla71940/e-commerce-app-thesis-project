@@ -69,14 +69,14 @@ function sellerHandler(e: React.ChangeEvent<HTMLInputElement>) {
     <Tabs.Root defaultValue="tab1">
     <Tabs.List  aria-label="Manage your account">
       <Tabs.Trigger className={styles.tabs} value="tab1">
-        Register
+        Login
       </Tabs.Trigger>
       <Tabs.Trigger className={styles.tabs} value="tab2">
-        Login
+        Register
       </Tabs.Trigger>
     </Tabs.List>
         
-    <Tabs.Content value="tab1">
+    <Tabs.Content value="tab2">
     <p >Create an account.</p>    
       <form>
       <fieldset>
@@ -100,28 +100,12 @@ function sellerHandler(e: React.ChangeEvent<HTMLInputElement>) {
             <input size={30} value={password} className={styles.input} type="password"
               onChange={passHandler} required />
       </fieldset>
-      <fieldset className="">
-        <legend className="" >
-        Would you also like to register as a seller?      
-        </legend>
-        <div>
-            {/* <input type="checkbox" id="seller" value={isSeller}
-                  onChange={sellerHandler} required /> */}
-          <label>Yes, I have items to sell.</label>
-        </div>
-{/* 
-        <div>
-          <input type="radio" id="buyer" value="false"/>
-          <label htmlFor="false">No, I'm here to buy.</label>
-        </div> */}
-      </fieldset>        
       <div>
         <button className={styles.button} onClick={register}>register</button>
       </div>
       </form>
-      
     </Tabs.Content>
-    <Tabs.Content  value="tab2">
+    <Tabs.Content  value="tab1">
     <p className="pb-5">Welcome back!</p>
     <form>
       <fieldset className="">

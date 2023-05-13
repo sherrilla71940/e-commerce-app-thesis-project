@@ -13,29 +13,43 @@ export default function Menu() {
   const {visible, setVisibility} = menuStore();
   // console.log(visible, setVisibility)
 
-  function redirect() {
-    
-  navigate('/sell');
+  function goToSell() {
+    navigate('/sell');
+    console.log(visible)
+  }
+
+  function closeMenu() {
+    // navigate('/sell');
     setVisibility(false)
     console.log(visible)
+  }
+  
+  function backToLogin() {
+    navigate('/login');
+    // setVisibility(false)
+    // console.log(visible)
   }
 
   return (
     <>
       {(visible) ?
         <div className={styles.container}>
+          <div className={styles.menuItem}>
+            {/* <div className={styles.options}>close</div> */}
+            <h1
+              className={styles.closeMenu}
+              onClick={closeMenu}
+            >+</h1>
+          </div>
 
-          <div className={styles.menuItem} onClick={redirect}>
+          <div className={styles.menuItem} onClick={goToSell}>
             <img
               src={box}
               className={styles.options}
               alt="logo"
             />
             <p className={styles.text}>Sell</p>
-            {/* <h1
-              className={styles.closeMenu}
-              // onClick={}
-            >+</h1> */}
+
           </div>
           <div className={styles.menuItem}>
             <img
@@ -46,7 +60,7 @@ export default function Menu() {
             />
             <p className={styles.text}>Settings</p>
           </div>
-          <div className={styles.menuItem}>
+          <div className={styles.menuItem} onClick={backToLogin}>
             <img
               src={logout}
               className={styles.options}
