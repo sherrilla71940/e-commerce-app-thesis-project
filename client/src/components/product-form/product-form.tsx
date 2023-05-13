@@ -14,7 +14,7 @@ export default function ProductForm() {
   
 const navigate = useNavigate()
 
-const { id } = userStore();
+// const { id } = userStore();
   
   const [name, setName] = useState('');
   const [cat, setCat] = useState('');
@@ -24,13 +24,13 @@ const { id } = userStore();
   const [picture_url, setPic] = useState('');
   
 setPic('https://picsum.photos/id/237/200/300')
-setSellerID(id);
+// setSellerID(id);
   
 async function addProduct(e: React.FormEvent<HTMLButtonElement>) {
   e.preventDefault()
   try {
     postProduct({ name: name, category: cat, price: price, sellerID: sellerID, quantity: quantity, picture_url: picture_url })
-    navigate('/')
+    // navigate('/')
   } catch (err) {
     console.log(err)
     alert('Posting the product on your store was unsuccesful, please try again!')
