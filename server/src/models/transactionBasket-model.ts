@@ -4,29 +4,29 @@ import {
   Model,
   ForeignKey,
   BelongsTo,
-  HasMany
+  HasMany,
 } from "sequelize-typescript";
 import { type TransactionBasketType } from "../../../global-types/index";
-import User from './user-model';
+import User from "./user-model";
 import TransactionBasketProduct from "./transactionBasketProduct-model";
 
 @Table
 class TransactionBasket extends Model<TransactionBasketType> {
   @Column({ primaryKey: true, autoIncrement: true })
-  id: number;
+  id!: number;
 
   @ForeignKey(() => User)
   @Column
-  buyerId: string;
+  buyerId!: string;
 
   @Column
-  date: Date;
+  date!: Date;
 
   @BelongsTo(() => User)
-  buyer: User;
+  buyer!: User;
 
   @HasMany(() => TransactionBasketProduct)
-  basketProducts: TransactionBasketProduct[];
+  basketProducts!: TransactionBasketProduct[];
 }
 
 export default TransactionBasket;
