@@ -3,7 +3,7 @@ export type ProductType = {
   name: string;
   category: string;
   price: number;
-  sellerId: string; // uuid
+  sellerId: string | null; // uuid
   quantity: number;
   pictureUrl: string;
 };

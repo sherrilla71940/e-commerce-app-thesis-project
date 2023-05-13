@@ -6,25 +6,25 @@ import TransactionBasket from "./transactionBasket-model";
 @Table
 class User extends Model<UserType> {
   @Column({ primaryKey: true })
-  id: string;
+  id!: string;
 
   @Column
-  email: string;
+  email!: string;
 
   @Column
-  name: string;
+  name!: string;
 
   @Column
-  password: string;
+  password!: string;
 
   @Column
-  isSeller: boolean;
+  isSeller!: boolean;
 
   @HasMany(() => Product)
-  products: Product[];
+  products!: Product[];
 
   @HasMany(() => TransactionBasket)
-  transactions: TransactionBasket[];
+  transactions!: TransactionBasket[];
 }
 
 export default User;
