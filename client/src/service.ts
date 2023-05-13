@@ -14,7 +14,7 @@ export async function saveUser(body: any) {
 }
 
 // export async function getUser(body: any) {
-//   const response = await fetch(`${API_URL}/product`, {
+//   const response = await fetch(`${API_URL}/user`, {
 //     method: 'GET',
 //     headers: { 'Content-Type': 'application/json' },
 //     body: JSON.stringify(body)
