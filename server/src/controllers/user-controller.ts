@@ -3,29 +3,31 @@ import { Request, Response } from "express";
 
 export async function getSellers(req: Request, res: Response): Promise<void> {
   try {
-    const sellers = await UserModel.findAll({
+    const sellers: UserModel[] | [] = await UserModel.findAll({
       where: {
         isSeller: true,
       },
     });
-    if (sellers) {
+    if (sellers.length) {
       res.status(200);
       res.json(sellers);
     } else {
       res.status(404);
       res.json("could not find any sellers");
     }
-  } catch (e) {
-    console.log(e.mesage);
-    res.status(400);
-    res.json("ran into error while fetching all sellers");
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      console.log(e.message);
+      res.status(400);
+      res.json("ran into error while fetching all sellers");
+    }
   }
 }
 
 export async function postUser(req: Request, res: Response): Promise<void> {
   console.log("post user endpoint reached");
   try {
-    const user = await UserModel.create(req.body);
+    const user: UserModel = await UserModel.create(req.body);
     res.status(201);
     res.json(user);
   } catch (e: unknown) {
@@ -40,7 +42,7 @@ export async function postUser(req: Request, res: Response): Promise<void> {
 export async function getUsers(req: Request, res: Response): Promise<void> {
   console.log("get users endpoint reached");
   try {
-    const users = await UserModel.findAll({});
+    const users: UserModel[] | [] = await UserModel.findAll({});
     res.status(200);
     res.json(users);
   } catch (e: unknown) {
@@ -55,7 +57,7 @@ export async function getUsers(req: Request, res: Response): Promise<void> {
 export async function getUser(req: Request, res: Response): Promise<void> {
   console.log("get user by id endpoint reached");
   try {
-    const foundUser = await UserModel.findOne({
+    const foundUser: UserModel | null = await UserModel.findOne({
       where: {
         id: req.params.id,
       },
@@ -86,7 +88,7 @@ use soft desotry if in future you might want to recover a deleted record
 export async function deleteUser(req: Request, res: Response): Promise<void> {
   console.log("delete user by id endpoint reached");
   try {
-    const deletedUser = await UserModel.destroy({
+    const deletedUser: number = await UserModel.destroy({
       where: {
         id: req.params.id,
       },
@@ -110,7 +112,7 @@ export async function deleteUser(req: Request, res: Response): Promise<void> {
 export async function updateUser(req: Request, res: Response) {
   console.log("update user by id endpoint reached");
   try {
-    const foundUser = await UserModel.findOne({
+    const foundUser: UserModel | null = await UserModel.findOne({
       where: {
         id: req.params.id,
       },
