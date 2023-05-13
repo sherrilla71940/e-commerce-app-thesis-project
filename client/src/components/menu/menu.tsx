@@ -31,7 +31,7 @@ export default function Menu() {
   }
 
   function goToStore() {
-    navigate(`/sellers/:s${id}`);
+    navigate(`/sellers/:${id}`);
   }
 
   return (

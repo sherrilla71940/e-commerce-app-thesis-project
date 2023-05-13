@@ -13,10 +13,13 @@ import Menu from './components/menu/menu'
 import ProductForm from './components/product-form/product-form'
 //// State management:
 import { userStore, UserState } from './zustand/UserStore';
-import { useStore } from 'zustand';
+import SellerStore from "./assets/seller-store/SellerStore";
+// import { useStore } from 'zustand';
 
 function App() {
- 
+
+ const { id } = userStore();
+  
 const { loggedIn } = userStore()
 // console.log(loggedIn)
 
@@ -65,11 +68,11 @@ const { loggedIn } = userStore()
             </>
             } />
           
-          <Route path={'/mystore'} element={
+          <Route path={`/sellers/:${id}`} element={
             <>
               <Navbar />
               <Menu/>
-              <ProductForm/>
+              <SellerStore/>
             </>
             } />
         
