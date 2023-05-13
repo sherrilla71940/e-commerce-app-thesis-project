@@ -59,10 +59,6 @@ function passHandler(e: React.ChangeEvent<HTMLInputElement>) {
   const target = e.target as HTMLInputElement;
   setPassword(target.value)
 }
-function sellerHandler(e: React.ChangeEvent<HTMLInputElement>) {
-  const target = e.target as HTMLInputElement;
-  setSeller(true)
-}
   
   return (
     <div className={styles.container}>

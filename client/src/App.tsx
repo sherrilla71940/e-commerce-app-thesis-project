@@ -64,6 +64,14 @@ const { loggedIn } = userStore()
               <ProductForm/>
             </>
             } />
+          
+          <Route path={'/mystore'} element={
+            <>
+              <Navbar />
+              <Menu/>
+              <ProductForm/>
+            </>
+            } />
         
         </Routes>
       </Router>
