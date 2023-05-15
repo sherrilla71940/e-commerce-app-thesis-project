@@ -13,8 +13,8 @@ export async function saveUser(body: any) {
   return;
 }
 
-// export async function postProduct(body: any) {
-//   const response = await fetch(`${API_URL}/product`, {
+// export async function getUser(body: any) {
+//   const response = await fetch(`${API_URL}/user`, {
 //     method: 'GET',
 //     headers: { 'Content-Type': 'application/json' },
 //     body: JSON.stringify(body)
