@@ -10,6 +10,7 @@ import {
 import { type ProductType } from "../../../global-types/index";
 import User from "./user-model";
 import TransactionBasketProduct from "./transactionBasketProduct-model";
+import ShoppingCartProduct from "./shopping-cart-product-model";
 
 @Table
 class Product extends Model<ProductType> {
@@ -40,6 +41,9 @@ class Product extends Model<ProductType> {
 
   @HasMany(() => TransactionBasketProduct)
   basketProducts!: TransactionBasketProduct[];
+
+  @HasMany(() => ShoppingCartProduct)
+  shoppingCartProduct: ShoppingCartProduct[];
 }
 
 export default Product;

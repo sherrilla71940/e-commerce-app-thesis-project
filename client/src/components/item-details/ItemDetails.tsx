@@ -4,9 +4,10 @@ import mock from '../../mock-data/mock.json'
 import { useParams } from 'react-router-dom'
 import { Product, ProductSize } from '../../models/models'
 import { useState } from 'react'
+import { addToShoppingCart } from '../../services/shopping-cart-service'
+
 
 export default function ItemDetails() {
-
   const addItem = useCartSlice((state) => state.addItem)
   const openCart = useCartSlice((state) => state.openCart)
 
@@ -67,10 +68,18 @@ export default function ItemDetails() {
 
         <div
           className={styles.addToCart}
-          onClick={() => {
+          onClick={async () => {
             if(item) {
-              addItem(item);
-              openCart();
+              const newCartItem = await addToShoppingCart({
+                userId: '1',
+                productId: 1,
+              });
+              // check if response === typeof ShoppingCartItem
+              // console.log('-->', newCartItem)
+              if (newCartItem.productQuantity) {
+                addItem(newCartItem)
+                openCart();
+              }
             }
           }}
         >ADD TO CART
