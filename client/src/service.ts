@@ -26,16 +26,16 @@ export async function postProduct(body: any) {
   return
 }
 
-////// PRODUCTS:
-export async function saveUser(body: any) {
-  const response = await fetch(`${API_URL}/user`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  });
-  if (!response.ok) {
-    throw new Error('Failed to post');
-  }
-  await response.json();
-  return
-}
+// ////// PRODUCTS:
+// export async function saveUser(body: any) {
+//   const response = await fetch(`${API_URL}/user`, {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(body)
+//   });
+//   if (!response.ok) {
+//     throw new Error('Failed to post');
+//   }
+//   await response.json();
+//   return
+// }

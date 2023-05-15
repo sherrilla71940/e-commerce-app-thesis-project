@@ -18,10 +18,10 @@ export default function shoppingCartsRouter(router: express.Router) {
   // Add Product to shopping cart
   router.post("/shoppingcart", addProductToShoppingCart);
 
-  // Add Product to shopping cart
+  // Delete Product to shopping cart
   router.delete("/shoppingcart", deleteProductFromShoppingCart);
 
   // Get all Products from shopping cart
-  router.get("/shoppingcart", getAllProductsFromShoppingCart);
+  router.post("/shoppingcartproducts", getAllProductsFromShoppingCart);
 
 }
