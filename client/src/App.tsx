@@ -65,7 +65,7 @@ const { loggedIn } = userStore()
             </>
             } />
           
-          <Route path={`/sellers/:${id}`} element={
+          <Route path={`/sellers/${id}`} element={
             <>
               <Navbar />
               <Menu/>
