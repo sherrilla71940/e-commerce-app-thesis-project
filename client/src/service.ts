@@ -30,7 +30,7 @@ export async function postProduct(body: any) {
 
 ///// Sellers Products
 export async function getSellerProducts(id:string) {
-  const response = await fetch(`${API_URL}/sellers/:${id}`, {
+  const response = await fetch(`${API_URL}/sellers/${id}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   });
