@@ -1,35 +1,21 @@
-const API_URL = "http://localhost:3000"
+const API_URL = "http://localhost:3000";
 ///// USERS:
 export async function saveUser(body: any) {
   const response = await fetch(`${API_URL}/user`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
   });
   if (!response.ok) {
-    throw new Error('Failed to post');
+    throw new Error("Failed to post");
   }
   await response.json();
-  return
+  return;
 }
 
-export async function postProduct(body: any) {
-  const response = await fetch(`${API_URL}/product`, {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  });
-  if (!response.ok) {
-    throw new Error('Failed to post');
-  }
-  await response.json();
-  return
-}
-
-// ////// PRODUCTS:
-// export async function saveUser(body: any) {
-//   const response = await fetch(`${API_URL}/user`, {
-//     method: 'POST',
+// export async function postProduct(body: any) {
+//   const response = await fetch(`${API_URL}/product`, {
+//     method: 'GET',
 //     headers: { 'Content-Type': 'application/json' },
 //     body: JSON.stringify(body)
 //   });
@@ -39,3 +25,18 @@ export async function postProduct(body: any) {
 //   await response.json();
 //   return
 // }
+
+////// PRODUCTS:
+export async function postProduct(body: any) {
+  const response = await fetch(`${API_URL}/product`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!response.ok) {
+    throw new Error("Failed to post");
+  }
+  const json = await response.json();
+  console.log(json);
+  return;
+}

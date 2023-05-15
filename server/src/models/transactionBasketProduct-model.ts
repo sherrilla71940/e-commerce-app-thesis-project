@@ -3,7 +3,7 @@ import {
   Column,
   Model,
   ForeignKey,
-  BelongsTo
+  BelongsTo,
 } from "sequelize-typescript";
 import { type TransactionBasketProductType } from "../../../global-types/index";
 import TransactionBasket from "./transactionBasket-model";
@@ -12,24 +12,24 @@ import Product from "./product-model";
 @Table
 class TransactionBasketProduct extends Model<TransactionBasketProductType> {
   @Column({ primaryKey: true, autoIncrement: true })
-  id: number;
+  id!: number;
 
   @ForeignKey(() => TransactionBasket)
   @Column
-  transactionId: number;
+  transactionId!: number;
 
   @ForeignKey(() => Product)
   @Column
-  productId: number;
+  productId!: number;
 
   @Column
-  quantity: number;
+  quantity!: number;
 
   @BelongsTo(() => TransactionBasket)
-  transaction: TransactionBasket;
+  transaction!: TransactionBasket;
 
   @BelongsTo(() => Product)
-  product: Product;
+  product!: Product;
 }
 
 export default TransactionBasketProduct;

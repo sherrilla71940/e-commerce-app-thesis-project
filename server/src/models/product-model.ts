@@ -5,6 +5,7 @@ import {
   ForeignKey,
   BelongsTo,
   HasMany,
+  DataType,
 } from "sequelize-typescript";
 import { type ProductType } from "../../../global-types/index";
 import User from "./user-model";
@@ -14,32 +15,32 @@ import ShoppingCartProduct from "./shopping-cart-product-model";
 @Table
 class Product extends Model<ProductType> {
   @Column({ primaryKey: true, autoIncrement: true })
-  id: number;
+  id!: number;
 
   @Column
-  name: string;
+  name!: string;
 
   @Column
-  category: string;
+  category!: string;
 
   @Column
-  price: number;
+  price!: number;
 
   @ForeignKey(() => User)
   @Column({ allowNull: true })
   sellerId: string;
 
   @Column
-  quantity: number;
+  quantity!: number;
 
   @Column
-  pictureUrl: string;
+  pictureUrl!: string;
 
   @BelongsTo(() => User)
-  seller: User;
+  seller!: User;
 
   @HasMany(() => TransactionBasketProduct)
-  basketProducts: TransactionBasketProduct[];
+  basketProducts!: TransactionBasketProduct[];
 
   @HasMany(() => ShoppingCartProduct)
   shoppingCartProduct: ShoppingCartProduct[];
