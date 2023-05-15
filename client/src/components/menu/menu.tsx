@@ -15,7 +15,7 @@ export default function Menu() {
 
   function redirect() {
     
-  navigate('/seller');
+  navigate('/sell');
     setVisibility(false)
     console.log(visible)
   }
