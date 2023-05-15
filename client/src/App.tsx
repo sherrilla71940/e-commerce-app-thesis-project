@@ -1,8 +1,8 @@
 
 import "./App.css";
 //// METHODS:
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 //// COMPONENTS:
 import Navbar from "./components/navbar/Navbar";
 import ShoppingCart from "./components/shopping-cart/ShoppingCart";
@@ -15,14 +15,11 @@ import ProductForm from './components/product-form/product-form'
 import { userStore, UserState } from './zustand/UserStore';
 import { useStore } from 'zustand';
 
+
 function App() {
- 
+
 const { loggedIn } = userStore()
 // console.log(loggedIn)
-
-  useEffect(() => {
-    // navigate('/products')
-  }, [])
 
   return (
       <Router>
@@ -33,7 +30,7 @@ const { loggedIn } = userStore()
           <Login />
           </>
           } />
-        
+
         <Route path={'/'} element={
           <>
             <Navbar />
@@ -45,7 +42,7 @@ const { loggedIn } = userStore()
             </div>
           </>
           }/>
-        
+
          <Route path={'/:id'} element={
           <>
             <Navbar />
@@ -64,7 +61,7 @@ const { loggedIn } = userStore()
               <ProductForm/>
             </>
             } />
-        
+
         </Routes>
       </Router>
 

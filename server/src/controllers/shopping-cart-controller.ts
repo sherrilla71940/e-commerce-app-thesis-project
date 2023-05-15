@@ -31,7 +31,7 @@ export async function addShoppingCart(userId: string): Promise<ShoppingCart | Er
 }
 
 export async function deleteShoppingCart(shoppingCartId): Promise<number | Error> {
-  
+
   try {
     const deletedShoppingCart = await ShoppingCart.destroy({
       where: {

@@ -1,5 +1,4 @@
-import { Table, Column, Model, HasMany, ForeignKey, BelongsTo } from "sequelize-typescript";
-import User from '../models/user-model';
+import { Table, Column, Model, ForeignKey, BelongsTo } from "sequelize-typescript";
 import { type ShoppingCartProductType } from "../../../global-types";
 import ShoppingCart from "./shopping-cart-model";
 import Product from "./product-model";
@@ -23,6 +22,9 @@ class ShoppingCartProduct extends Model<ShoppingCartProductType, ShoppingCartPro
 
   @BelongsTo(() => ShoppingCart)
   shoppingCart: ShoppingCart;
+
+  @BelongsTo(() => Product)
+  product: Product;
 }
 
 export default ShoppingCartProduct;

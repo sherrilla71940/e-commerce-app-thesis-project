@@ -1,6 +1,7 @@
 import styles from './CartItem.module.css'
 import { CartItemType } from '../../models/models'
 import { useCartSlice } from '../../zustand/ShoppingCartSlice'
+import { deleteProductFromShoppingCart } from '../../services/shopping-cart-service'
 
 export default function CartItem ({cartItem}: {cartItem: CartItemType}) {
   const increaseQuantity = useCartSlice((state) => state.increaseQuantity)
@@ -33,7 +34,10 @@ export default function CartItem ({cartItem}: {cartItem: CartItemType}) {
 
         <p
           className={styles.delete}
-          onClick={() => removeFromCart(cartItem.id)}
+          onClick={() => {
+            deleteProductFromShoppingCart({userId: '2', productId: 491})
+            removeFromCart(cartItem.id)
+          }}
         >+</p>
 
       </div>
