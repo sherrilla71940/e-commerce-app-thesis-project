@@ -64,15 +64,15 @@ function passHandler(e: React.ChangeEvent<HTMLInputElement>) {
     <div className={styles.container}>
     <Tabs.Root defaultValue="tab1">
     <Tabs.List  aria-label="Manage your account">
-      <Tabs.Trigger className={styles.tabs} value="tab1">
+      <Tabs.Trigger className={styles.tabs} value="tab2">
         Login
       </Tabs.Trigger>
-      <Tabs.Trigger className={styles.tabs} value="tab2">
+      <Tabs.Trigger className={styles.tabs} value="tab1">
         Register
       </Tabs.Trigger>
     </Tabs.List>
         
-    <Tabs.Content value="tab2">
+    <Tabs.Content value="tab1">
     <p >Create an account.</p>    
       <form>
       <fieldset>
@@ -101,7 +101,7 @@ function passHandler(e: React.ChangeEvent<HTMLInputElement>) {
       </div>
       </form>
     </Tabs.Content>
-    <Tabs.Content  value="tab1">
+    <Tabs.Content  value="tab2">
     <p className="pb-5">Welcome back!</p>
     <form>
       <fieldset className="">
