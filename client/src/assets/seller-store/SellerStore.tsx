@@ -25,6 +25,7 @@ export default function SellerStore() {
   
   return (
     <div className={styles.storeItems} >
+      <h1>My Store:</h1>
         {
           products.map((product: Product) => (
             <StoreItem
