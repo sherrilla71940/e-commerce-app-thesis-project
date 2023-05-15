@@ -75,7 +75,7 @@ export default function ItemDetails() {
                 productId: 1,
               });
               // check if response === typeof ShoppingCartItem
-              console.log('-->', newCartItem)
+              // console.log('-->', newCartItem)
               if (newCartItem.productQuantity) {
                 addItem(newCartItem)
                 openCart();
