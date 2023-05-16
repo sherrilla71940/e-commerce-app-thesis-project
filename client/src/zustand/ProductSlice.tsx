@@ -1,19 +1,20 @@
+// import { Product } from '../models/models'
 import { create } from 'zustand'
-import { Product } from '../models/models'
+import { ProductType } from '../../../global-types/product'
 
 type ProductsState = {
-  storeItems: Product[]
+  storeItems: ProductType[]
 }
 
 type ProductsAction = {
-  addProduct: (newProduct: Product) => void
+  addProduct: (newProduct: ProductType) => void
 }
 
 export const useProductsSlice = create<ProductsState & ProductsAction>()((set) => ({
 
   storeItems: [],
 
-  addProduct: (newProduct: Product) => set((state) => {
+  addProduct: (newProduct: ProductType) => set((state) => {
     // if there is no such item in the cart yet
     if (state.storeItems.find(item => item.id === newProduct.id) == null) {
       return { storeItems: [...state.storeItems, { ...newProduct, quantity: 1 }] }

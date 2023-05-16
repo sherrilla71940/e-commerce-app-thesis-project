@@ -1,12 +1,15 @@
 import styles from './CartItem.module.css'
-import { CartItemType } from '../../models/models'
 import { useCartSlice } from '../../zustand/ShoppingCartSlice'
+import { userStore } from '../../zustand/UserStore'
 import { deleteProductFromShoppingCart, getShoppingCartProduct } from '../../services/shopping-cart-service'
 import { useEffect, useState } from 'react'
 import { ProductType } from '../../../../global-types/product'
 import { ShoppingCartProductType } from '../../../../global-types/shopping-cart-product'
 
 export default function CartItem ({cartItem}: {cartItem: ShoppingCartProductType}) {
+
+  const id = userStore((state) => state.id)
+
   const increaseQuantity = useCartSlice((state) => state.increaseQuantity)
   const decreaseQuantity = useCartSlice((state) => state.decreaseQuantity)
   const removeFromCart = useCartSlice((state) => state.removeFromCart)
@@ -16,7 +19,7 @@ export default function CartItem ({cartItem}: {cartItem: ShoppingCartProductType
 
   useEffect(() => {
 
-    const fetcAllShoppingCartProducts = async () => {
+    const fetcShoppingCartProduct = async () => {
 
       try {
         const shoppingCartProducts = await getShoppingCartProduct({productId: cartItem.productId})
@@ -33,7 +36,7 @@ export default function CartItem ({cartItem}: {cartItem: ShoppingCartProductType
       }
     }
 
-    fetcAllShoppingCartProducts()
+    fetcShoppingCartProduct()
 
   }, [])
 
@@ -41,8 +44,8 @@ export default function CartItem ({cartItem}: {cartItem: ShoppingCartProductType
 
   return (
     <div className={styles.container}>
+      <div className={styles.img}></div>
       <div className={styles.itemInfo}>
-        <div className={styles.img}></div>
 
         <div className={styles.left}>
           <p className={styles.name}>{fetchedItem?.name}</p>
@@ -55,7 +58,7 @@ export default function CartItem ({cartItem}: {cartItem: ShoppingCartProductType
             className={styles.decrease}
             // onClick={() => decreaseQuantity(cartItem)}
           >-</p>
-          <p className={styles.size}>{fetchedItem?.quantity}</p>
+          <p className={styles.size}>{cartItem?.productQuantity}</p>
           <p
             className={styles.increase}
             // onClick={() => increaseQuantity(cartItem)}
@@ -65,7 +68,7 @@ export default function CartItem ({cartItem}: {cartItem: ShoppingCartProductType
         <p
           className={styles.delete}
           onClick={() => {
-            deleteProductFromShoppingCart({userId: '1', productId: cartItem.productId})
+            deleteProductFromShoppingCart({userId: id, productId: cartItem.productId})
             removeFromCart(cartItem.id)
           }}
         >+</p>

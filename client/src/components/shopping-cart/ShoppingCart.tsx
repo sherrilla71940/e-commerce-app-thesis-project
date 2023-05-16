@@ -1,13 +1,17 @@
 import styles from './ShoppingCart.module.css'
 import {checkout} from './checkoutFunction'
 import { useCartSlice } from '../../zustand/ShoppingCartSlice'
-import { CartItemType } from '../../models/models'
 import CartItem from '../cart-item/CartItem'
 import { getShoppingCartProducts } from '../../services/shopping-cart-service'
 import { useEffect } from 'react'
+import { ShoppingCartProductType } from '../../../../global-types/shopping-cart-product'
+import { userStore } from '../../zustand/UserStore'
 
 
 export default function ShoppingCart() {
+
+  const id = userStore((state) => state.id)
+
   const cartItems = useCartSlice((state) => state.cartItems)
   const isOpen = useCartSlice((state) => state.isOpen)
   const addItem = useCartSlice((state) => state.addItem)
@@ -18,10 +22,10 @@ export default function ShoppingCart() {
     const fetcAllShoppingCartProducts = async () => {
 
       try {
-        const shoppingCartProducts = await getShoppingCartProducts({userId: "1"})
+        const shoppingCartProducts = await getShoppingCartProducts({userId: id})
         // console.log('shoppingCartProducts: ', shoppingCartProducts)
 
-        shoppingCartProducts.forEach((product: CartItemType) => {
+        shoppingCartProducts.forEach((product: ShoppingCartProductType) => {
           addItem(product)
         })
       } catch(error) {
@@ -47,7 +51,7 @@ export default function ShoppingCart() {
           </div>
 
           <ul>
-            {cartItems.map((cartItem: CartItemType) => (
+            {cartItems.map((cartItem) => (
               <li key={cartItem.id}>
                 <CartItem cartItem={cartItem} />
               </li>

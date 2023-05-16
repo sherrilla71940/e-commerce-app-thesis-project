@@ -1,14 +1,19 @@
+// import mock from '../../mock-data/mock.json'
+
 import styles from './ItemDetails.module.css'
 import { useCartSlice } from '../../zustand/ShoppingCartSlice'
-import mock from '../../mock-data/mock.json'
 import { useParams } from 'react-router-dom'
-import { Product, ProductSize } from '../../models/models'
+import { ProductSize } from '../../models/models'
 import { useState } from 'react'
 import { addToShoppingCart } from '../../services/shopping-cart-service'
 import { useProductsSlice } from '../../zustand/ProductSlice'
+import { userStore } from '../../zustand/UserStore'
+import { ShoppingCartProductType } from '../../../../global-types/shopping-cart-product'
 
 
 export default function ItemDetails() {
+  const id = userStore((state) => state.id)
+
   const storeItems = useProductsSlice((state) => state.storeItems)
   const addItem = useCartSlice((state) => state.addItem)
   const openCart = useCartSlice((state) => state.openCart)
@@ -30,7 +35,7 @@ export default function ItemDetails() {
     // console.log('PRODUCT:', {...product, size: size})
     // return {...product, size: size}
     if (size && product) {
-      setItem({...product, size: size})
+      // setItem({...product, size: size})
 
       // change this later to useRef
       const sizes = document.querySelectorAll('.size')
@@ -58,7 +63,7 @@ export default function ItemDetails() {
       {/* RIGHT */}
       <div className={styles.right}>
         <h1 className={styles.name}>{product?.name}</h1>
-        <h4 className={styles.description}>{product?.description}</h4>
+        {/* <h4 className={styles.description}>{product?.description}</h4> */}
         <h4 className={styles.price}>{product?.price}</h4>
 
         <div className={styles.sizes}>
@@ -72,8 +77,8 @@ export default function ItemDetails() {
           className={styles.addToCart}
           onClick={async () => {
             if(product) {
-              const newCartItem = await addToShoppingCart({
-                userId: '1',
+              const newCartItem: ShoppingCartProductType = await addToShoppingCart({
+                userId: id,
                 productId: product.id,
               });
               // check if response === typeof ShoppingCartItem
