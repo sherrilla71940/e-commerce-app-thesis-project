@@ -9,7 +9,6 @@ import { postImage } from "./../../cloudinary/apiService"
 
 
 const log = console.log.bind(console);
-log("ok");
 
 export default function ProductForm() {
   

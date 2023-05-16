@@ -19,7 +19,7 @@ export default function ShoppingCart() {
 
   useEffect(() => {
 
-    const fetcAllShoppingCartProducts = async () => {
+    const fetchAllShoppingCartProducts = async () => {
 
       try {
         const shoppingCartProducts = await getShoppingCartProducts({userId: id})
@@ -33,7 +33,7 @@ export default function ShoppingCart() {
       }
     }
 
-    fetcAllShoppingCartProducts()
+    // fetchAllShoppingCartProducts()
 
   }, [])
 
