@@ -2,16 +2,17 @@
 import styles from './Item.module.css'
 import { useNavigate } from 'react-router-dom'
 import { ProductType } from '../../../../global-types/product'
-import { Product } from '../../models/models'
+// import { Product } from '../../models/models'
 
 type Props = {
   key: number,
-  // product: ProductType
-  product: Product
+  product: ProductType
+  // product: Product
 }
 
 export default function StoreItem({product}: Props) {
-console.log(product.image)
+
+console.log(product.pictureUrl)
   const navigate = useNavigate()
 
   return (
@@ -20,8 +21,10 @@ console.log(product.image)
         // className={styles.img}
         onClick={() => navigate(`/${product.id}`)}>
         <p>{product.name}</p>
+        <p>{product.category}</p>
         <p>{product.price}</p>
-        <img src={product.image}></img>
+        <p>{product.quantity}</p>
+        <img src={product.pictureUrl}></img>
         {/* <img src={product.pictureUrl}></img> */}  
       </div>
 

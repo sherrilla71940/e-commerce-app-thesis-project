@@ -4,7 +4,7 @@ import * as Tabs from "@radix-ui/react-tabs";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "./../../zustand/UserStore";
 import { sellerStore } from "../../zustand/sellerStore";
-import { saveUser, postProduct } from "../../service";
+import { saveUser, postProduct } from "../../services/seller-service";
 import { postImage } from "./../../cloudinary/apiService"
 
 

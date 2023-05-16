@@ -8,7 +8,7 @@ import { getStoreProducts } from '../../services/store-products-service'
 import { ProductType } from '../../../../global-types/product'
 
 export default function StoreItems() {
-  
+
   const storeItems = useProductsSlice((state) => state.storeItems)
   const addProduct = useProductsSlice((state) => state.addProduct)
 
