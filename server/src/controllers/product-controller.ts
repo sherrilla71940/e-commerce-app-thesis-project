@@ -68,16 +68,25 @@ export async function postProduct(req: Request, res: Response): Promise<void> {
   }
 }
 
-export async function getListedProducts(
+export async function getListedAndInStockProducts(
   req: Request,
   res: Response
 ): Promise<void> {
   try {
     const products: ProductModel[] | [] = await ProductModel.findAll({
       where: {
-        sellerId: {
-          [Op.ne]: null,
-        },
+        [Op.and]: [
+          {
+            sellerId: {
+              [Op.ne]: null,
+            },
+          },
+          {
+            quantity: {
+              [Op.gt]: 0,
+            },
+          },
+        ],
       },
     });
     // const products = await ProductModel.findAll();
