@@ -27,7 +27,7 @@ export default function ItemDetails() {
   // const products: Product[] = data.products;
   let product = storeItems.find(item => String(item.id) === param.id)
 
-  const [item, setItem] = useState(product)
+  // const [item, setItem] = useState(product)
 
   // handle size selection
   const handleSizeSelection = (e: React.SyntheticEvent) => {
