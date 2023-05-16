@@ -1,10 +1,18 @@
 import express from "express";
-import { addShoppingCart, deleteShoppingCart } from "../controllers/shopping-cart-controller";
-import { addProductToShoppingCart, deleteProductFromShoppingCart, getAllProductsFromShoppingCart, getOneShoppingCart, getAllShoppingCarts } from "../controllers/shopping-cart-product-controller";
+import {
+  addShoppingCart,
+  deleteShoppingCart,
+} from "../controllers/shopping-cart-controller";
+import {
+  addProductToShoppingCart,
+  deleteProductFromShoppingCart,
+  getAllProductsFromShoppingCart,
+  getOneShoppingCart,
+  getAllShoppingCarts,
+} from "../controllers/shopping-cart-product-controller";
 //import controllers
 
 export default function shoppingCartsRouter(router: express.Router) {
-
   router.put("shoppingcarts/:id", (req, res) => {
     res.json("update a shopping cart by id here");
   });
@@ -22,6 +30,7 @@ export default function shoppingCartsRouter(router: express.Router) {
   router.delete("/shoppingcart", deleteProductFromShoppingCart);
 
   // Get all Products from shopping cart
-  router.post("/shoppingcartproducts", getAllProductsFromShoppingCart);
-
+  // router.post("/shoppingcartproducts", getAllProductsFromShoppingCart);
+  // aaron: changing to get instead of post
+  router.get("/shoppingcartproducts", getAllProductsFromShoppingCart);
 }

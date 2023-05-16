@@ -19,8 +19,9 @@ class TransactionBasket extends Model<TransactionBasketType> {
   @Column
   buyerId!: string;
 
-  @Column
-  date!: Date;
+  // @Column
+  // date!: Date;
+  // commented out by aaron since sequelize already creates a createdAt automatically for us
 
   @BelongsTo(() => User)
   buyer!: User;

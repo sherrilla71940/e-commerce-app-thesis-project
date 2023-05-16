@@ -1,6 +1,9 @@
 import { default as ShoppingCart } from "../models/shopping-cart-model";
 import { Request, Response } from "express";
-import { addShoppingCart, deleteShoppingCart } from "./shopping-cart-controller";
+import {
+  addShoppingCart,
+  deleteShoppingCart,
+} from "./shopping-cart-controller";
 
 import ShoppingCartProduct from "../models/shopping-cart-product-model";
 import Product from "../models/product-model";
@@ -8,52 +11,57 @@ import Product from "../models/product-model";
 async function shoppingCartFinder(userId: string) {
   const shoppingCart = await ShoppingCart.findOne({
     where: {
-      userId: userId
-    }
+      userId: userId,
+    },
   });
 
-  return shoppingCart
+  return shoppingCart;
 }
 
-
 export async function getOneShoppingCart(req: Request, res: Response) {
-  const shoppingCart = await shoppingCartFinder(req.body.userId)
-  res.json(shoppingCart)
-  return shoppingCart
+  const shoppingCart = await shoppingCartFinder(req.body.userId);
+  res.json(shoppingCart);
+  return shoppingCart;
 }
 
 export async function getAllShoppingCarts(req: Request, res: Response) {
-  const shoppingCarts = await ShoppingCart.findAll({})
-  res.json(shoppingCarts)
-  return shoppingCarts
+  const shoppingCarts = await ShoppingCart.findAll({});
+  res.json(shoppingCarts);
+  return shoppingCarts;
 }
 
-async function addToShoppingCart(product: { shoppingCartId: number, productId: number, productQuantity: number }) {
+async function addToShoppingCart(product: {
+  shoppingCartId: number;
+  productId: number;
+  productQuantity: number;
+}) {
   // console.log('adding product to shopping cart')
   try {
-    const newShoppingCartProduct = await ShoppingCartProduct.create(product)
-    return newShoppingCartProduct
+    const newShoppingCartProduct = await ShoppingCartProduct.create(product);
+    return newShoppingCartProduct;
   } catch (error) {
-    return error
+    return error;
   }
 }
 
-async function productFinder(ids: { shoppingCartId: number, productId: number }) {
+async function productFinder(ids: {
+  shoppingCartId: number;
+  productId: number;
+}) {
   // console.log('adding product to shopping cart')
-  console.log(ids.shoppingCartId, ids.productId)
+  console.log(ids.shoppingCartId, ids.productId);
   try {
     const product = await ShoppingCartProduct.findOne({
       where: {
         shoppingCartId: ids.shoppingCartId,
-        productId: ids.productId
-      }
-    })
+        productId: ids.productId,
+      },
+    });
 
     // console.log(product)
-    return product
-
+    return product;
   } catch (error) {
-    return error
+    return error;
   }
 }
 
@@ -64,18 +72,22 @@ async function productFinder(ids: { shoppingCartId: number, productId: number })
 // 3. if shopping cart does exist, i.e. there already is a product in that shopping cart
 // 3.1. add product to existing shopping cart
 
+// aaron: if we plan to delete shopping cart if there are no products in cart, we should also check if cart is empty after deleting product from cart
 
-async function deleteFromShoppingCart(ids: { shoppingCartId: number, productId: number }) {
+async function deleteFromShoppingCart(ids: {
+  shoppingCartId: number;
+  productId: number;
+}) {
   try {
     const res = await ShoppingCartProduct.destroy({
       where: {
         shoppingCartId: ids.shoppingCartId,
         productId: ids.productId,
-      }
-    })
-    return res
+      },
+    });
+    return res;
   } catch (error) {
-    return error
+    return error;
   }
 }
 
@@ -135,7 +147,6 @@ async function deleteFromShoppingCart(ids: { shoppingCartId: number, productId: 
 //   }
 // }
 
-
 // export async function getAllProductsFromShoppingCart (req: Request, res: Response) {
 //   console.log('STAGE: 1')
 //   try {
@@ -157,35 +168,36 @@ async function deleteFromShoppingCart(ids: { shoppingCartId: number, productId: 
 //   }
 // }
 
-export async function addProductToShoppingCart(req: Request, res: Response): Promise<void> {
+export async function addProductToShoppingCart(
+  req: Request,
+  res: Response
+): Promise<void> {
   try {
-
     let shoppingCartId = null;
 
     const existingShoppingCart = await ShoppingCart.findOne({
       where: {
-        userId: "1" // here comes userID
-      }
-    })
+        userId: "1", // here comes userID
+      },
+    });
 
-    shoppingCartId = existingShoppingCart?.id
+    shoppingCartId = existingShoppingCart?.id;
 
-    const hasShoppingCartId = shoppingCartId >= 1
+    const hasShoppingCartId = shoppingCartId >= 1;
     // console.log({hasShoppingCartId})
 
     if (!hasShoppingCartId) {
       // if shopping cart does NOT exist
 
       const newShoppingCart = await ShoppingCart.create({
-        userId: "1"
-      })
+        userId: "1",
+      });
       // console.log('Shopping Cart does NOT exist', newShoppingCart.id)
       if (newShoppingCart.id) {
-        shoppingCartId = newShoppingCart.id
+        shoppingCartId = newShoppingCart.id;
       } else {
-        throw new Error('error while creating shopping cart')
+        throw new Error("error while creating shopping cart");
       }
-
     }
 
     // if shopping cart exists
@@ -195,89 +207,90 @@ export async function addProductToShoppingCart(req: Request, res: Response): Pro
     const newShoppingCartProduct = await addToShoppingCart({
       shoppingCartId, // id from shoppping cart
       productId: 1,
-      productQuantity: 1
-    })
+      productQuantity: 1,
+    });
 
     // console.log('NEW SC: ', newShoppingCartProduct)
 
     if (newShoppingCartProduct.id) {
       // console.log('Shopping Cart ID does exist', newShoppingCartProduct.id)
-      res.json(newShoppingCartProduct)
+      res.json(newShoppingCartProduct);
     } else {
-      throw new Error('error while adding product to shopping cart')
+      throw new Error("error while adding product to shopping cart");
     }
-
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
 
-export async function deleteProductFromShoppingCart(req: Request, res: Response): Promise<Response<any, Record<string, any>>> {
+export async function deleteProductFromShoppingCart(
+  req: Request,
+  res: Response
+): Promise<Response<any, Record<string, any>>> {
   try {
-
     let hasShoppingCartID = null;
 
     const shoppingCart = await ShoppingCart.findOne({
       include: [ShoppingCartProduct],
       where: {
-        userId: "1" // here comes userID
-      }
-    })
+        userId: "1", // here comes userID
+      },
+    });
 
     // console.log('SHOPPING CART: ', shoppingCart.id)
 
-    hasShoppingCartID = shoppingCart?.id >= 1
+    hasShoppingCartID = shoppingCart?.id >= 1;
     // console.log(hasShoppingCartID)
 
     if (hasShoppingCartID) {
       const isDeleted = await ShoppingCartProduct.destroy({
         where: {
           shoppingCartId: 1,
-          productId: 1
-        }
-      })
+          productId: 1,
+        },
+      });
 
       // console.log('isDeleted: ', isDeleted)
-      return res.json(isDeleted)
+      return res.json(isDeleted);
     }
 
-    throw new Error('Shopping Cart not found')
-
+    throw new Error("Shopping Cart not found");
   } catch (error) {
     // send a response
-    console.log(error)
-    res.send(error)
+    console.log(error);
+    res.send(error);
   }
 }
 
-export async function getAllProductsFromShoppingCart(req: Request, res: Response) {
+export async function getAllProductsFromShoppingCart(
+  req: Request,
+  res: Response
+) {
   try {
-
     let hasShoppingCartID = null;
 
     const shoppingCart = await ShoppingCart.findOne({
       include: [ShoppingCartProduct],
       where: {
-        userId: "1" // here comes userID
-      }
-    })
+        userId: "1", // here comes userID
+      },
+    });
 
-    hasShoppingCartID = shoppingCart?.id >= 1
+    hasShoppingCartID = shoppingCart?.id >= 1;
     // console.log(hasShoppingCartID)
 
     if (hasShoppingCartID) {
-      const { shoppingCartProducts } = shoppingCart
-      return res.json(shoppingCartProducts)
+      const { shoppingCartProducts } = shoppingCart;
+      return res.json(shoppingCartProducts);
     }
 
     // send a response
     // code runs only if shopping cart DOES exist
     // console.log('CASE')
-    res.json([])
-
+    res.json([]);
   } catch (error) {
     // send a response
-    console.log(error)
-    res.json([])
+    console.log(error);
+    res.json([]);
   }
 }
