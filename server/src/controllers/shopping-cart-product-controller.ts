@@ -168,6 +168,7 @@ async function deleteFromShoppingCart(ids: {
 //   }
 // }
 
+//
 export async function addProductToShoppingCart(
   req: Request,
   res: Response

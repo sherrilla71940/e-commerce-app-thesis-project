@@ -17,33 +17,36 @@ import User from "../models/user-model";
 //   }
 // }
 
-export async function addShoppingCart(userId: string): Promise<ShoppingCart | Error> {
+export async function addShoppingCart(
+  userId: string
+): Promise<ShoppingCart | Error> {
   try {
-    const newShoppingCart = await ShoppingCart.create({userId: userId});
+    const newShoppingCart = await ShoppingCart.create({ userId: userId });
     if (newShoppingCart) {
-      return newShoppingCart
+      return newShoppingCart;
     }
   } catch (e: unknown) {
     if (e instanceof Error) {
-      return e
+      return e;
     }
   }
 }
 
-export async function deleteShoppingCart(shoppingCartId): Promise<number | Error> {
-
+export async function deleteShoppingCart(
+  shoppingCartId
+): Promise<number | Error> {
   try {
     const deletedShoppingCart = await ShoppingCart.destroy({
       where: {
-        id: shoppingCartId
-      }
+        id: shoppingCartId,
+      },
     });
     if (deletedShoppingCart) {
-      return deletedShoppingCart
+      return deletedShoppingCart;
     }
   } catch (e: unknown) {
     if (e instanceof Error) {
-      return e
+      return e;
       // console.log(e.message);
       // res.status(400);
       // res.json("ran into error while deleting shopping cart");
