@@ -88,6 +88,7 @@ async function updateProductQuantityAfterTransaction(
 // step 4 delete cart for user
 
 // when users checkouts, he will send an array of products to buy
+// use cascade affect in sequelize to delete all shopping cart product when shopping cart is deleted
 export async function checkout(req: Request, res: Response): Promise<void> {
   const cartToCheckout: requestCheckoutCart = req.body;
   try {
