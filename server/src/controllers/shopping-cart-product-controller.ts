@@ -19,7 +19,7 @@ async function shoppingCartFinder(userId: string) {
 }
 
 export async function getOneShoppingCart(req: Request, res: Response) {
-  const shoppingCart = await shoppingCartFinder(req.body.userId);
+  const shoppingCart = await shoppingCartFinder(req.params.uid);
   res.json(shoppingCart);
   return shoppingCart;
 }
@@ -50,7 +50,7 @@ export async function productFinder(req: Request, res: Response) {
   try {
     const product = await Product.findOne({
       where: {
-        id: req.body.productId,
+        id: req.params.pid,
       },
     });
 
@@ -75,15 +75,18 @@ export async function productFinder(req: Request, res: Response) {
 
 // aaron: if we plan to delete shopping cart if there are no products in cart, we should also check if cart is empty after deleting product from cart
 
-async function deleteFromShoppingCart(ids: {
+async function deleteFromShoppingCart({
+  shoppingCartId,
+  productId,
+}: {
   shoppingCartId: number;
   productId: number;
 }) {
   try {
     const res = await ShoppingCartProduct.destroy({
       where: {
-        shoppingCartId: ids.shoppingCartId,
-        productId: ids.productId,
+        shoppingCartId: shoppingCartId,
+        productId: productId,
       },
     });
     return res;
@@ -274,7 +277,7 @@ export async function getAllProductsFromShoppingCart(
     const shoppingCart = await ShoppingCart.findOne({
       include: [ShoppingCartProduct],
       where: {
-        userId: req.body.userId, // here comes userID
+        userId: req.params.uid, // here comes userID
       },
     });
 

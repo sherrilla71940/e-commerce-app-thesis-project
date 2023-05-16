@@ -22,17 +22,19 @@ export default function shoppingCartsRouter(router: express.Router) {
   router.get("/getallshoppingcarts", getAllShoppingCarts);
 
   // get one specific shopping cart
-  router.post("/getoneshoppingcart", getOneShoppingCart);
+  // router.post("/getoneshoppingcart", getOneShoppingCart);
+  router.get("/getoneshoppingcart/:uid", getOneShoppingCart);
 
   // Add Product to shopping cart
   router.post("/shoppingcart", addProductToShoppingCart);
 
-  // Delete Product to shopping cart
+  // Delete Product from shopping cart
   router.delete("/shoppingcart", deleteProductFromShoppingCart);
 
   // Get all Products from shopping cart
-  router.post("/shoppingcartproducts", getAllProductsFromShoppingCart);
+  router.post("/shoppingcartproducts/:uid", getAllProductsFromShoppingCart);
 
   // Get one Product
-  router.post("/shoppingcartproduct", productFinder);
+  // router.post("/shoppingcartproduct", productFinder);
+  router.get("/shoppingcartproduct/:pid", productFinder);
 }
