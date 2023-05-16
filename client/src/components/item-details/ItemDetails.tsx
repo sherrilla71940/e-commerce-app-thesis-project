@@ -5,9 +5,11 @@ import { useParams } from 'react-router-dom'
 import { Product, ProductSize } from '../../models/models'
 import { useState } from 'react'
 import { addToShoppingCart } from '../../services/shopping-cart-service'
+import { useProductsSlice } from '../../zustand/ProductSlice'
 
 
 export default function ItemDetails() {
+  const storeItems = useProductsSlice((state) => state.storeItems)
   const addItem = useCartSlice((state) => state.addItem)
   const openCart = useCartSlice((state) => state.openCart)
 
@@ -16,9 +18,9 @@ export default function ItemDetails() {
   // console.log(param.id)
 
   // URL query and fetch the DB
-  const data = JSON.parse(JSON.stringify(mock))
-  const products: Product[] = data.products;
-  let product = products.find(product => String(product.id) === param.id)
+  // const data = JSON.parse(JSON.stringify(mock))
+  // const products: Product[] = data.products;
+  let product = storeItems.find(item => String(item.id) === param.id)
 
   const [item, setItem] = useState(product)
 
@@ -69,10 +71,10 @@ export default function ItemDetails() {
         <div
           className={styles.addToCart}
           onClick={async () => {
-            if(item) {
+            if(product) {
               const newCartItem = await addToShoppingCart({
                 userId: '1',
-                productId: 1,
+                productId: product.id,
               });
               // check if response === typeof ShoppingCartItem
               // console.log('-->', newCartItem)

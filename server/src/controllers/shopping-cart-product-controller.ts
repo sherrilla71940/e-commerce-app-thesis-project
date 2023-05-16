@@ -38,19 +38,23 @@ async function addToShoppingCart(product: { shoppingCartId: number, productId: n
   }
 }
 
-async function productFinder(ids: { shoppingCartId: number, productId: number }) {
+export async function productFinder(req: Request, res: Response) {
   // console.log('adding product to shopping cart')
-  console.log(ids.shoppingCartId, ids.productId)
+
   try {
-    const product = await ShoppingCartProduct.findOne({
+    const product = await Product.findOne({
       where: {
-        shoppingCartId: ids.shoppingCartId,
-        productId: ids.productId
+        id: req.body.productId
       }
     })
 
     // console.log(product)
-    return product
+
+    if (product.id) {
+      res.json(product)
+    }
+
+    throw new Error('Cannot find product for this shopping cart')
 
   } catch (error) {
     return error

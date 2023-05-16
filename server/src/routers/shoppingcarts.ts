@@ -1,6 +1,13 @@
 import express from "express";
 import { addShoppingCart, deleteShoppingCart } from "../controllers/shopping-cart-controller";
-import { addProductToShoppingCart, deleteProductFromShoppingCart, getAllProductsFromShoppingCart, getOneShoppingCart, getAllShoppingCarts } from "../controllers/shopping-cart-product-controller";
+import {
+  addProductToShoppingCart,
+  deleteProductFromShoppingCart,
+  getAllProductsFromShoppingCart,
+  getOneShoppingCart,
+  getAllShoppingCarts,
+  productFinder
+} from "../controllers/shopping-cart-product-controller";
 //import controllers
 
 export default function shoppingCartsRouter(router: express.Router) {
@@ -23,5 +30,8 @@ export default function shoppingCartsRouter(router: express.Router) {
 
   // Get all Products from shopping cart
   router.post("/shoppingcartproducts", getAllProductsFromShoppingCart);
+
+  // Get one Product
+  router.post("/shoppingcartproduct", productFinder);
 
 }

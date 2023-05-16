@@ -19,7 +19,7 @@ export default function ShoppingCart() {
 
       try {
         const shoppingCartProducts = await getShoppingCartProducts({userId: "1"})
-        console.log('shoppingCartProducts: ', shoppingCartProducts)
+        // console.log('shoppingCartProducts: ', shoppingCartProducts)
 
         shoppingCartProducts.forEach((product: CartItemType) => {
           addItem(product)
