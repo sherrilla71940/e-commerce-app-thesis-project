@@ -38,19 +38,23 @@ async function addToShoppingCart(product: { shoppingCartId: number, productId: n
   }
 }
 
-async function productFinder(ids: { shoppingCartId: number, productId: number }) {
+export async function productFinder(req: Request, res: Response) {
   // console.log('adding product to shopping cart')
-  console.log(ids.shoppingCartId, ids.productId)
+
   try {
-    const product = await ShoppingCartProduct.findOne({
+    const product = await Product.findOne({
       where: {
-        shoppingCartId: ids.shoppingCartId,
-        productId: ids.productId
+        id: req.body.productId
       }
     })
 
     // console.log(product)
-    return product
+
+    if (product.id) {
+      res.json(product)
+    }
+
+    throw new Error('Cannot find product for this shopping cart')
 
   } catch (error) {
     return error
@@ -164,7 +168,7 @@ export async function addProductToShoppingCart(req: Request, res: Response): Pro
 
     const existingShoppingCart = await ShoppingCart.findOne({
       where: {
-        userId: "1" // here comes userID
+        userId: req.body.userId // here comes userID
       }
     })
 
@@ -177,7 +181,7 @@ export async function addProductToShoppingCart(req: Request, res: Response): Pro
       // if shopping cart does NOT exist
 
       const newShoppingCart = await ShoppingCart.create({
-        userId: "1"
+        userId: req.body.userId
       })
       // console.log('Shopping Cart does NOT exist', newShoppingCart.id)
       if (newShoppingCart.id) {
@@ -194,7 +198,7 @@ export async function addProductToShoppingCart(req: Request, res: Response): Pro
     // if it doesn't, add new item
     const newShoppingCartProduct = await addToShoppingCart({
       shoppingCartId, // id from shoppping cart
-      productId: 1,
+      productId: req.body.productId,
       productQuantity: 1
     })
 
@@ -220,7 +224,7 @@ export async function deleteProductFromShoppingCart(req: Request, res: Response)
     const shoppingCart = await ShoppingCart.findOne({
       include: [ShoppingCartProduct],
       where: {
-        userId: "1" // here comes userID
+        userId: req.body.userId // here comes userID
       }
     })
 
@@ -232,8 +236,8 @@ export async function deleteProductFromShoppingCart(req: Request, res: Response)
     if (hasShoppingCartID) {
       const isDeleted = await ShoppingCartProduct.destroy({
         where: {
-          shoppingCartId: 1,
-          productId: 1
+          shoppingCartId: shoppingCart.id,
+          productId: req.body.productId
         }
       })
 
@@ -258,7 +262,7 @@ export async function getAllProductsFromShoppingCart(req: Request, res: Response
     const shoppingCart = await ShoppingCart.findOne({
       include: [ShoppingCartProduct],
       where: {
-        userId: "1" // here comes userID
+        userId: req.body.userId  // here comes userID
       }
     })
 
