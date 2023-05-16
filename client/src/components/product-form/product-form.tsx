@@ -5,24 +5,25 @@ import { useNavigate } from "react-router-dom";
 import { userStore } from "./../../zustand/UserStore";
 import { sellerStore } from "../../zustand/sellerStore";
 import { saveUser, postProduct } from "../../service";
+import { postImage } from "./../../cloudinary/apiService"
+
 
 const log = console.log.bind(console);
 log("ok");
 
 export default function ProductForm() {
-  // const navigate = useNavigate();
-
+  
   const { id } = userStore();
 
-  const [name, setName] = useState("");
-  const [cat, setCat] = useState("");
-  const [price, setPrice] = useState(0);
-  const [sellerID, setSellerID] = useState(id);
-  const [quantity, setQuantity] = useState(0);
-  const [picture_url, setPic] = useState(
-    "https://picsum.photos/id/237/200/300"
-  );
-
+  const [name, setName] = useState<string>("");
+  const [cat, setCat] = useState<string>("");
+  const [price, setPrice] = useState<number>(0);
+  const [sellerID, setSellerID] = useState<string>(id);
+  const [quantity, setQuantity] = useState<number>(0);
+  const [picture_url, setPic] = useState<File>();
+    // "https://picsum.photos/id/237/200/300"
+  // );
+console.log(picture_url)
   // setPic("https://picsum.photos/id/237/200/300");
   // setSellerID(id);
 
@@ -37,7 +38,8 @@ export default function ProductForm() {
         quantity: quantity,
         pictureUrl: picture_url,
       });
-      // navigate('/')
+
+      postImage(picture_url)
     } catch (err) {
       console.log(err);
       alert(
@@ -65,9 +67,13 @@ export default function ProductForm() {
     setQuantity(Number(target.value));
   }
 
-  // function sellerHandler(e: React.ChangeEvent<HTMLInputElement>) {
-  //   const target = e.target as HTMLInputElement;
-  // }
+  function uploadImage(e: React.ChangeEvent<HTMLInputElement>) {
+    const target = e.target as HTMLInputElement;
+    if (target.files) {
+      setPic(target.files[0])  
+    }
+    
+  }
 
   return (
     <div className={styles.container}>
@@ -119,7 +125,7 @@ export default function ProductForm() {
         </fieldset>
         <fieldset>
           <label htmlFor="product picture">Upload product picture:</label>
-          <input type="file" name="product-pic"></input>
+          <input type="file" name="product-pic" onChange={uploadImage}></input>
         </fieldset>
         <div>
           <button className={styles.button} onClick={addProduct}>
