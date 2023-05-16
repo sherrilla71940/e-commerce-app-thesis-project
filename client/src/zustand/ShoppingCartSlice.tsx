@@ -1,15 +1,16 @@
+// import { CartItemType, Product } from '../models/models'
 import { create } from 'zustand'
-import { CartItemType, Product } from '../models/models'
+import { ShoppingCartProductType } from '../../../global-types/shopping-cart-product'
 
 type ShoppingCartState = {
   isOpen: boolean,
-  cartItems: CartItemType[]
+  cartItems: ShoppingCartProductType[]
 }
 
 type ShoppingCartAction = {
-  addItem: (newItem: Product) => void
-  increaseQuantity: (newItem: CartItemType) => void
-  decreaseQuantity: (existingItem: CartItemType) => void
+  addItem: (newItem: ShoppingCartProductType) => void
+  increaseQuantity: (newItem: ShoppingCartProductType) => void
+  decreaseQuantity: (existingItem: ShoppingCartProductType) => void
   removeFromCart: (existingItemID: number) => void
   openCart: () => void
   closeCart: () => void
@@ -32,8 +33,8 @@ export const useCartSlice = create<ShoppingCartState & ShoppingCartAction>()((se
 
     const newState = state.cartItems.map(item => {
       // if the item does exist in the cart
-      if (existingItem.quantity && item.id === existingItem?.id) {
-        return { ...existingItem, quantity: existingItem.quantity + 1 }
+      if (existingItem.productQuantity && item.id === existingItem?.id) {
+        return { ...existingItem, quantity: existingItem.productQuantity + 1 }
       } else {
         return item
       }
@@ -44,14 +45,14 @@ export const useCartSlice = create<ShoppingCartState & ShoppingCartAction>()((se
 
   decreaseQuantity: (existingItem) => set((state) => {
     // if there is no such item in the cart yet
-    if (state.cartItems.find(item => item === existingItem)?.quantity === 1) {
+    if (state.cartItems.find(item => item === existingItem)?.productQuantity === 1) {
       return { cartItems: state.cartItems.filter(item => item.id != existingItem.id) }
     }
     else {
       const newState = state.cartItems.map(item => {
         // if the item does exist in the cart
-        if (existingItem.quantity && item.id === existingItem?.id) {
-          return { ...existingItem, quantity: existingItem.quantity - 1 }
+        if (existingItem.productQuantity && item.id === existingItem?.id) {
+          return { ...existingItem, quantity: existingItem.productQuantity - 1 }
         } else {
           return item
         }

@@ -9,6 +9,7 @@ import {
   getAllProductsFromShoppingCart,
   getOneShoppingCart,
   getAllShoppingCarts,
+  productFinder,
 } from "../controllers/shopping-cart-product-controller";
 //import controllers
 
@@ -30,7 +31,8 @@ export default function shoppingCartsRouter(router: express.Router) {
   router.delete("/shoppingcart", deleteProductFromShoppingCart);
 
   // Get all Products from shopping cart
-  // router.post("/shoppingcartproducts", getAllProductsFromShoppingCart);
-  // aaron: changing to get instead of post
-  router.get("/shoppingcartproducts", getAllProductsFromShoppingCart);
+  router.post("/shoppingcartproducts", getAllProductsFromShoppingCart);
+
+  // Get one Product
+  router.post("/shoppingcartproduct", productFinder);
 }

@@ -2,12 +2,36 @@ import { Product as ProductModel, User as UserModel } from "../models/models";
 import { Request, Response } from "express";
 import { Op } from "sequelize";
 
+// export async function getAllProducts(
+//   req: Request,
+//   res: Response
+// ): Promise<void> {
+//   console.log('REACHED THE CONTROLLER')
+//   try {
+//     const allProducts: ProductModel[] | [] = await ProductModel.findAll({});
+//     if (allProducts.length) {
+//       res.status(200);
+//       res.json(allProducts);
+//     } else {
+//       res.status(404);
+//       res.json("no products exist");
+//     }
+//   } catch (e: unknown) {
+//     if (e instanceof Error) {
+//       console.log(e.message);
+//       res.status(400);
+//       res.json("ran into error while finding all products");
+//     }
+//   }
+// }
+
 export async function getAllProducts(
   req: Request,
   res: Response
 ): Promise<void> {
+  console.log('REACHED THE CONTROLLER')
   try {
-    const allProducts: ProductModel[] | [] = await ProductModel.findAll({});
+    const allProducts = await ProductModel.findAll({});
     if (allProducts.length) {
       res.status(200);
       res.json(allProducts);

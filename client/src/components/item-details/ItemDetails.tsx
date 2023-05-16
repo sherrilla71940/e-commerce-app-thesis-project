@@ -1,13 +1,20 @@
+// import mock from '../../mock-data/mock.json'
+
 import styles from './ItemDetails.module.css'
 import { useCartSlice } from '../../zustand/ShoppingCartSlice'
-import mock from '../../mock-data/mock.json'
 import { useParams } from 'react-router-dom'
-import { Product, ProductSize } from '../../models/models'
+import { ProductSize } from '../../models/models'
 import { useState } from 'react'
 import { addToShoppingCart } from '../../services/shopping-cart-service'
+import { useProductsSlice } from '../../zustand/ProductSlice'
+import { userStore } from '../../zustand/UserStore'
+import { ShoppingCartProductType } from '../../../../global-types/shopping-cart-product'
 
 
 export default function ItemDetails() {
+  const id = userStore((state) => state.id)
+
+  const storeItems = useProductsSlice((state) => state.storeItems)
   const addItem = useCartSlice((state) => state.addItem)
   const openCart = useCartSlice((state) => state.openCart)
 
@@ -16,11 +23,11 @@ export default function ItemDetails() {
   // console.log(param.id)
 
   // URL query and fetch the DB
-  const data = JSON.parse(JSON.stringify(mock))
-  const products: Product[] = data.products;
-  let product = products.find(product => String(product.id) === param.id)
+  // const data = JSON.parse(JSON.stringify(mock))
+  // const products: Product[] = data.products;
+  let product = storeItems.find(item => String(item.id) === param.id)
 
-  const [item, setItem] = useState(product)
+  // const [item, setItem] = useState(product)
 
   // handle size selection
   const handleSizeSelection = (e: React.SyntheticEvent) => {
@@ -28,7 +35,7 @@ export default function ItemDetails() {
     // console.log('PRODUCT:', {...product, size: size})
     // return {...product, size: size}
     if (size && product) {
-      setItem({...product, size: size})
+      // setItem({...product, size: size})
 
       // change this later to useRef
       const sizes = document.querySelectorAll('.size')
@@ -56,7 +63,7 @@ export default function ItemDetails() {
       {/* RIGHT */}
       <div className={styles.right}>
         <h1 className={styles.name}>{product?.name}</h1>
-        <h4 className={styles.description}>{product?.description}</h4>
+        {/* <h4 className={styles.description}>{product?.description}</h4> */}
         <h4 className={styles.price}>{product?.price}</h4>
 
         <div className={styles.sizes}>
@@ -69,10 +76,10 @@ export default function ItemDetails() {
         <div
           className={styles.addToCart}
           onClick={async () => {
-            if(item) {
-              const newCartItem = await addToShoppingCart({
-                userId: '1',
-                productId: 1,
+            if(product) {
+              const newCartItem: ShoppingCartProductType = await addToShoppingCart({
+                userId: id,
+                productId: product.id,
               });
               // check if response === typeof ShoppingCartItem
               // console.log('-->', newCartItem)

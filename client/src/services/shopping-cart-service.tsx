@@ -8,7 +8,7 @@ export async function addToShoppingCart(body: any) {
 
   if (response.ok) {
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
     return data;
   } else {
     throw new Error('Failed to add product to shopping cart');
@@ -29,7 +29,7 @@ export async function deleteProductFromShoppingCart(body: any) {
 
   if (response.ok) {
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
     return data;
   } else {
     throw new Error('Failed to delete product from shopping cart');
@@ -47,10 +47,29 @@ export async function getShoppingCartProducts(body: any) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     })
-    console.log('RESPONSE: ', response)
+    // console.log('RESPONSE: ', response)
     if (response.ok) {
       const data = await response.json()
-      console.log('DATA: ', data)
+      // console.log('DATA: ', data)
+      return data;
+    }
+
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export async function getShoppingCartProduct(body: any) {
+  try {
+    const response = await fetch('http://localhost:3000/shoppingcartproduct', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    })
+    // console.log('RESPONSE: ', response)
+    if (response.ok) {
+      const data = await response.json()
+      // console.log('DATA: ', data)
       return data;
     }
 
