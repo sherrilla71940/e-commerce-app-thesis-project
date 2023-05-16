@@ -31,6 +31,7 @@ export default function Menu() {
   }
 
   function goToStore() {
+    // setVisibility(false)
     navigate(`/sellers/${id}`);
   }
 

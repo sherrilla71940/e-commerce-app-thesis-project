@@ -4,7 +4,7 @@ import styles from './ItemDetails.module.css'
 import { useCartSlice } from '../../zustand/ShoppingCartSlice'
 import { useParams } from 'react-router-dom'
 import { ProductSize } from '../../models/models'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { addToShoppingCart } from '../../services/shopping-cart-service'
 import { useProductsSlice } from '../../zustand/ProductSlice'
 import { userStore } from '../../zustand/UserStore'
@@ -15,7 +15,7 @@ import { ShoppingCartProductType } from '../../../../global-types/shopping-cart-
 export default function ItemDetails() {
   const { id } = userStore()
   const { visible, setVisibility } = menuStore();
-  
+
   console.log(visible)
   const storeItems = useProductsSlice((state) => state.storeItems)
   const addItem = useCartSlice((state) => state.addItem)
@@ -24,7 +24,10 @@ export default function ItemDetails() {
   // URL param
   const param = useParams()
   // console.log(param.id)
-
+useEffect(() => {
+ setVisibility(false)
+  }, [id]);
+ 
   // URL query and fetch the DB
   // const data = JSON.parse(JSON.stringify(mock))
   // const products: Product[] = data.products;
