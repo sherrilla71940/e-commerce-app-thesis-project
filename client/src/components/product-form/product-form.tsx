@@ -30,16 +30,22 @@ console.log(picture_url)
   async function addProduct(e: React.FormEvent<HTMLButtonElement>) {
     e.preventDefault();
     try {
-      postProduct({
-        name: name,
-        category: cat,
-        price: price,
-        sellerId: sellerID,
-        quantity: quantity,
-        pictureUrl: picture_url,
-      });
+      
+      if (picture_url) {
+        const image = await postImage(picture_url)
+        console.log(image)
+        postProduct({
+          name: name,
+          category: cat,
+          price: price,
+          sellerId: sellerID,
+          quantity: quantity,
+          pictureUrl: image,
+        });
+      } else {
+        console.log('Image not found')
+      }
 
-      postImage(picture_url)
     } catch (err) {
       console.log(err);
       alert(
