@@ -37,7 +37,7 @@ export default function Navbar() {
         
         
         <div className={styles.navbarRight}>
-          {(!loggedIn) ? null : <>
+          {(loggedIn) ? null : <>
             <div className={styles.cartItems}
               onClick={() => openCart()}>
                 {cartItems.reduce((total:any, cartItem:any) => {
@@ -52,7 +52,7 @@ export default function Navbar() {
               onClick={() => openCart()}
             />
           </>}
-          {(loggedIn) ?
+          {(!loggedIn) ?
               <img 
               src='https://source.boringavatars.com/'
               className={styles.userThumbnail}

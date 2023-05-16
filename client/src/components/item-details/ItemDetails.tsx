@@ -8,12 +8,15 @@ import { useState } from 'react'
 import { addToShoppingCart } from '../../services/shopping-cart-service'
 import { useProductsSlice } from '../../zustand/ProductSlice'
 import { userStore } from '../../zustand/UserStore'
+import { menuStore } from '../../zustand/menuStore'
 import { ShoppingCartProductType } from '../../../../global-types/shopping-cart-product'
 
 
 export default function ItemDetails() {
-  const id = userStore((state) => state.id)
-
+  const { id } = userStore()
+  const { visible, setVisibility } = menuStore();
+  
+  console.log(visible)
   const storeItems = useProductsSlice((state) => state.storeItems)
   const addItem = useCartSlice((state) => state.addItem)
   const openCart = useCartSlice((state) => state.openCart)
