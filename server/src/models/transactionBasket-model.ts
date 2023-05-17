@@ -17,7 +17,7 @@ class TransactionBasket extends Model<TransactionBasketType> {
 
   @ForeignKey(() => User)
   @Column
-  buyerId!: string;
+  buyerId: string | null;
 
   // @Column
   // date!: Date;

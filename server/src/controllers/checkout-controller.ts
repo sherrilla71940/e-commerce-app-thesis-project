@@ -36,8 +36,9 @@ export default async function checkOutCart(
         shoppingCartId: cartToCheckout.cartId,
       },
     });
-    if (!cartToCheckoutProducts.length)
+    if (!cartToCheckoutProducts.length) {
       throw new Error("no products in cart, cannot checkout empty cart");
+    }
     cartToCheckoutProducts.forEach(async (product) => {
       // creates transaction product in transaction product table
       await createTransactionProduct(
