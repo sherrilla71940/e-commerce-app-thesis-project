@@ -8,7 +8,8 @@
   right: 0;
   width: 30vw;
   max-width: 600px;
-  height: calc(100vh - 65px);
+  height: 600px;
+  /* height: calc(100vh - 65px); */
 
   padding: 20px;
 

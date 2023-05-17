@@ -44,7 +44,7 @@ export default function CartItem ({cartItem}: {cartItem: ShoppingCartProductType
 
   return (
     <div className={styles.container}>
-      <div className={styles.img}></div>
+      <img className={styles.img} src={fetchedItem?.pictureUrl} alt='small product image'/>
       <div className={styles.itemInfo}>
 
         <div className={styles.left}>
