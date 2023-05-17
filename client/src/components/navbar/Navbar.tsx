@@ -30,7 +30,7 @@ export default function Navbar() {
          <img className={styles.img} alt='store_logo' src={logo} />
         {/* <h1
           className={styles.navbarLeft}
-          onClick={() => navigate('/1')}
+          onClick={() => navigate('/')}
         >E-COMMERCE
         </h1> */}
        

@@ -53,8 +53,8 @@ export default function ItemDetails() {
 
       {/* LEFT */}
       <div className={styles.left}>
-        <img className={styles.mainImage} src={product?.image} alt='item_picture'></img>
-        {/* <img className={styles.mainImage} src={product?.pictureUrl} alt='item_picture'></img> */}
+        {/* <img className={styles.mainImage} src={product?.image} alt='item_picture'></img> */}
+        <img className={styles.mainImage} src={product?.pictureUrl} alt='item_picture'></img>
         <div className={styles.sideImages}>
           {/* <div className={styles.sideImage}></div>
           <div className={styles.sideImage}></div>
