@@ -7,8 +7,19 @@ import { useEffect } from 'react'
 import { ShoppingCartProductType } from '../../../../global-types/shopping-cart-product'
 import { userStore } from '../../zustand/UserStore'
 
+import { useStripe } from '@stripe/react-stripe-js';
+
 
 export default function ShoppingCart() {
+
+  const stripe = useStripe();
+
+  const handleSubmit = async () => {
+    const session = await checkout()
+    // console.log(session)
+
+    stripe?.redirectToCheckout({ sessionId: session.id})
+  }
 
   const id = userStore((state) => state.id)
 
@@ -71,7 +82,10 @@ export default function ShoppingCart() {
               </h3> */}
             </div>
 
-            <button className={styles.checkout} onClick={checkout}>
+            <button
+              className={styles.checkout}
+              onClick={handleSubmit}
+            >
               Checkout
             </button>
           </div>

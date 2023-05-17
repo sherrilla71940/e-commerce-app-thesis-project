@@ -4,6 +4,7 @@ import usersRouter from "./users";
 import productsRouter from "./products";
 import shoppingCartsRouter from "./shoppingcarts";
 import transactionsRouter from "./transactions";
+import stripeRouter from "./stripecheckout"
 
 const router = express.Router();
 
@@ -12,5 +13,6 @@ export default function configuredRouterGenerator(): express.Router {
   productsRouter(router);
   shoppingCartsRouter(router);
   transactionsRouter(router);
+  stripeRouter(router);
   return router;
 }
