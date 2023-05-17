@@ -17,6 +17,8 @@ const sequelize = new Sequelize({
   dialect: "postgres",
   username: "postgres",
   password: "sz240f",
+  // username: "aaronsherrill",
+  // password: "",
   logging: false,
   // models: [__dirname + '/models'], // or [Player, Team],
 });
