@@ -20,16 +20,8 @@ export default function CartItem({
   const decreaseQuantity = useCartSlice((state) => state.decreaseQuantity);
   const removeFromCart = useCartSlice((state) => state.removeFromCart);
 
-<<<<<<< HEAD
-  const increaseQuantity = useCartSlice((state) => state.increaseQuantity)
-  const decreaseQuantity = useCartSlice((state) => state.decreaseQuantity)
-  const removeFromCart = useCartSlice((state) => state.removeFromCart)
-
-  const [fetchedItem, setFetchedItem] = useState<ProductType>()
-=======
   console.log("->", cartItem.productId);
   const [fetchedItem, setFetchedItem] = useState<ProductType>();
->>>>>>> development
 
   useEffect(() => {
     const fetchShoppingCartProduct = async () => {
@@ -66,33 +58,17 @@ console.log(fetchedItem?.pictureUrl)
         <div className={styles.right}>
           <p
             className={styles.decrease}
-<<<<<<< HEAD
-            onClick={() => {
-              decreaseQuantity(cartItem)
-              console.log(cartItem)
-            }}
-          >-</p>
-          <p className={styles.size}>{cartItem?.productQuantity}</p>
-          <p
-            className={styles.increase}
-            onClick={() => {
-              increaseQuantity(cartItem)
-              console.log(cartItem)
-            }}
-          >+</p>
-=======
-            // onClick={() => decreaseQuantity(cartItem)}
+            onClick={() => decreaseQuantity(cartItem)}
           >
             -
           </p>
           <p className={styles.size}>{cartItem?.productQuantity}</p>
           <p
             className={styles.increase}
-            // onClick={() => increaseQuantity(cartItem)}
+            onClick={() => increaseQuantity(cartItem)}
           >
             +
           </p>
->>>>>>> development
         </div>
 
         <p
