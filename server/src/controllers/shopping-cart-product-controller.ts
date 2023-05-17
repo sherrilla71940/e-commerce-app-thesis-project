@@ -254,7 +254,18 @@ export async function deleteProductFromShoppingCart(
           productId: req.body.productId,
         },
       });
-
+      const cartStillHasProducts = await ShoppingCartProduct.findOne({
+        where: {
+          shoppingCartId: shoppingCart.id,
+        },
+      });
+      if (!cartStillHasProducts) {
+        await ShoppingCart.destroy({
+          where: {
+            id: shoppingCart.id,
+          },
+        });
+      }
       // console.log('isDeleted: ', isDeleted)
       return res.json(isDeleted);
     }

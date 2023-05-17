@@ -30,6 +30,8 @@ export default function shoppingCartsRouter(router: express.Router) {
 
   // Delete Product from shopping cart
   router.delete("/shoppingcart", deleteProductFromShoppingCart); // ** Alejandra done **
+  // need to checkout how the front end requests this endpoint, because a cart should be
+  // deleted when there are no more products in cart, or after checkout, or when user is deleted
 
   // Get all Products from shopping cart
   router.get("/shoppingcartproducts/:uid", getAllProductsFromShoppingCart); // ** Alejandra done **

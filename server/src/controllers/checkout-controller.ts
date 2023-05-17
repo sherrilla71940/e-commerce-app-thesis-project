@@ -24,7 +24,7 @@ export async function checkout(req: Request, res: Response): Promise<void> {
   const cartToCheckout: requestCheckoutCart = req.body;
   try {
     if (!cartToCheckout.cartId) throw new Error("missing cart id");
-    // create transaction if no products in cart quantity > quantity in stock
+    // loop through products in cart and create transaction if no products in cart quantity > quantity in stock
     const transactionId = await createTransaction(cartToCheckout);
     // for each product in cart to checkout, run two helper functions
     cartToCheckout.cart.forEach(async (product) => {
