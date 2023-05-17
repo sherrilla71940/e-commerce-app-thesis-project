@@ -13,9 +13,9 @@
 import { Sequelize } from "sequelize-typescript";
 
 const sequelize = new Sequelize({
-  database: "thesis",
+  database: "cd_thesis",
   dialect: "postgres",
-  username: "postgres",
+  username: "javiermalbran",
   password: "",
   logging: false,
   // models: [__dirname + '/models'], // or [Player, Team],

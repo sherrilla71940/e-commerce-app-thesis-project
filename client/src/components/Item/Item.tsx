@@ -24,7 +24,7 @@ console.log(product.pictureUrl)
         <p>{product.category}</p>
         <p>{product.price}</p>
         <p>{product.quantity}</p>
-        <img src={product.pictureUrl}></img>
+        <img className = {styles.img} src={product.pictureUrl}></img>
         {/* <img src={product.pictureUrl}></img> */}  
       </div>
 
