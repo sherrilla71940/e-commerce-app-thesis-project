@@ -178,6 +178,7 @@ export async function addProductToShoppingCart(
   res: Response
 ): Promise<void> {
   try {
+    // res.json("add product endpoint reached");
     let shoppingCartId = null;
 
     const existingShoppingCart = await ShoppingCart.findOne({
@@ -209,6 +210,17 @@ export async function addProductToShoppingCart(
     // maybe add here a check -> check if product id already exists in that shopping cart
     // if it does, do not allow repeated items
     // if it doesn't, add new item
+    const hasSameProductInCartAlready = await ShoppingCartProduct.findOne({
+      where: {
+        productId: shoppingCartId,
+      },
+    });
+
+    if (hasSameProductInCartAlready)
+      throw new Error(
+        "cannot add 2 of the same products to the same cart. You should update product quantity in a different controller"
+      );
+
     const newShoppingCartProduct = await addToShoppingCart({
       shoppingCartId, // id from shoppping cart
       productId: req.body.productId,
@@ -219,11 +231,14 @@ export async function addProductToShoppingCart(
 
     if (newShoppingCartProduct.id) {
       // console.log('Shopping Cart ID does exist', newShoppingCartProduct.id)
+      res.status(200);
       res.json(newShoppingCartProduct);
     } else {
       throw new Error("error while adding product to shopping cart");
     }
   } catch (error) {
+    res.status(400);
+    res.json("could not add product to cart");
     console.log(error);
   }
 }
@@ -283,6 +298,7 @@ export async function getAllProductsFromShoppingCart(
   res: Response
 ) {
   try {
+    // res.json("get all products reached");
     let hasShoppingCartID = null;
 
     const shoppingCart = await ShoppingCart.findOne({
@@ -303,7 +319,9 @@ export async function getAllProductsFromShoppingCart(
     // send a response
     // code runs only if shopping cart DOES exist
     // console.log('CASE')
-    res.json([]);
+    res.json(
+      "this user does not have a cart, must add at least 1 product to cart first"
+    );
   } catch (error) {
     // send a response
     console.log(error);

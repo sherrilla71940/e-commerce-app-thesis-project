@@ -25,7 +25,7 @@ export default function shoppingCartsRouter(router: express.Router) {
   // router.post("/getoneshoppingcart", getOneShoppingCart);
   router.get("/getoneshoppingcart/:uid", getOneShoppingCart); // mvp
 
-  // Add Product to shopping cart
+  // Add Product to shopping cart (create cart if not exists) req.body should contain userId and productId
   router.post("/shoppingcart", addProductToShoppingCart); //mvp  ** Alejandra done **
 
   // Delete Product from shopping cart

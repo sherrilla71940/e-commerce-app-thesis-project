@@ -5,6 +5,7 @@ import {
   TransactionBasketProduct as TransactionBasketProductModel,
   // ShoppingCartProduct as ShoppingCartProductModel,
   ShoppingCart as ShoppingCartModel,
+  ShoppingCartProduct as ShoppingCartProductModel,
 } from "../models/models";
 import { Request, Response } from "express";
 import { Op } from "sequelize";
@@ -20,14 +21,24 @@ import {
 
 // when users checkouts, he will send req.body to backend that matches requestCheckoutCart type
 // set up shoppingcartmodel to use cascade affect in sequelize to delete all shopping cart product when shopping cart is deleted
-export async function checkout(req: Request, res: Response): Promise<void> {
+export default async function checkOutCart(
+  req: Request,
+  res: Response
+): Promise<void> {
   const cartToCheckout: requestCheckoutCart = req.body;
   try {
     if (!cartToCheckout.cartId) throw new Error("missing cart id");
     // loop through products in cart and create transaction if no products in cart quantity > quantity in stock
     const transactionId = await createTransaction(cartToCheckout);
     // for each product in cart to checkout, run two helper functions
-    cartToCheckout.cart.forEach(async (product) => {
+    const cartToCheckoutProducts = await ShoppingCartProductModel.findAll({
+      where: {
+        shoppingCartId: cartToCheckout.cartId,
+      },
+    });
+    if (!cartToCheckoutProducts.length)
+      throw new Error("no products in cart, cannot checkout empty cart");
+    cartToCheckoutProducts.forEach(async (product) => {
       // creates transaction product in transaction product table
       await createTransactionProduct(
         transactionId as number,
@@ -44,7 +55,7 @@ export async function checkout(req: Request, res: Response): Promise<void> {
       await deleteShoppingCart(cartToCheckout.cartId);
       res.status(200);
       res.json(
-        `created transaction: ${transactionId} with products: ${cartToCheckout.cart}`
+        `created transaction: ${transactionId} with products: ${cartToCheckoutProducts}`
       );
     });
   } catch (e: unknown) {

@@ -3,13 +3,14 @@ import {
   TransactionBasket as TransactionBasketModel,
   TransactionBasketProduct as TransactionBasketProductModel,
   ShoppingCart as ShoppingCartModel,
+  ShoppingCartProduct as ShoppingCartProductModel,
 } from "../models/models";
 import { ShoppingCartProductType } from "../../../global-types/index";
 
 export type requestCheckoutCart = {
-  cartId?: number;
+  cartId: number;
   buyerId: string;
-  cart: ShoppingCartProductType[];
+  // cart: ShoppingCartProductType[];
 };
 
 // note in frontend when checkout, request body must match type above
@@ -17,8 +18,14 @@ export type requestCheckoutCart = {
 // step 1
 export async function createTransaction({
   buyerId,
-  cart,
-}: requestCheckoutCart): Promise<number | void> {
+  cartId,
+}: // cart,
+requestCheckoutCart): Promise<number | void> {
+  const cart = await ShoppingCartProductModel.findAll({
+    where: {
+      shoppingCartId: cartId,
+    },
+  });
   cart.forEach(async (productObj) => {
     const product = await ProductModel.findOne({
       where: {

@@ -14,6 +14,6 @@ export default function configuredRouterGenerator(): express.Router {
   productsRouter(router);
   shoppingCartsRouter(router);
   transactionsRouter(router);
-  // checkoutRouter(router);
+  checkoutRouter(router);
   return router;
 }
