@@ -10,9 +10,8 @@ import { userStore } from "./../../zustand/UserStore";
 export default function Menu() {
 
   const navigate = useNavigate()
-  
-  const { id } = userStore();
 
+  const { id } = userStore();
   const {visible, setVisibility} = menuStore();
   // console.log(visible, setVisibility)
 

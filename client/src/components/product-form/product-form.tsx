@@ -12,6 +12,8 @@ const log = console.log.bind(console);
 
 export default function ProductForm() {
   
+  const navigate = useNavigate();
+  
   const { id } = userStore();
 
   const [name, setName] = useState<string>("");
@@ -41,8 +43,11 @@ console.log(picture_url)
           quantity: quantity,
           pictureUrl: image,
         });
+        navigate(`/sellers/${id}`);
+        // alert('Product successfuly saved, go to your store to see your products!')
       } else {
-        console.log('Image not found')
+        console.log('Image not posted')
+        alert('Error ocurred when submitting your product')
       }
 
     } catch (err) {
