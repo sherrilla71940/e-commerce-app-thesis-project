@@ -37,13 +37,15 @@ class Product extends Model<ProductType> {
   pictureUrl!: string;
 
   @BelongsTo(() => User)
-  seller!: User;
+  seller: User | null;
 
   @HasMany(() => TransactionBasketProduct)
-  basketProducts!: TransactionBasketProduct[];
+  basketProducts: TransactionBasketProduct[];
 
-  @HasMany(() => ShoppingCartProduct)
-  shoppingCartProduct: ShoppingCartProduct[];
+  @HasMany(() => ShoppingCartProduct, {
+    onDelete: "CASCADE",
+  })
+  shoppingCartProducts: ShoppingCartProduct[];
 }
 
 export default Product;
