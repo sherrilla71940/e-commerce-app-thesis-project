@@ -15,7 +15,7 @@ export default function SellerStore() {
     const fetchProducts = async () => {
       try {
         // console.log(id);
-        // const products: ProductType[] | undefined = await getSellerProducts(id);
+        const products: ProductType[] | undefined = await getSellerProducts(id);
         // console.log("typeof products:", typeof products);
         // console.log("products", products);
         if (Array.isArray(products)) {

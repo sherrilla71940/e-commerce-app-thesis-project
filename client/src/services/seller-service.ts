@@ -30,13 +30,13 @@ export async function postProduct(body: any) {
 
 ///// Sellers Products
 export async function getSellerProducts(id: string) {
-  console.log(id);
+  // console.log(id);
   const response = await fetch(`${API_URL}/sellers/${id}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
 
-  console.log("response.status:", response.status, " response.ok", response.ok);
+  // console.log("response.status:", response.status, " response.ok", response.ok);
   if (response.ok && response.status === 200) {
     const json = await response.json();
     return json;
