@@ -13,7 +13,7 @@ export default function Menu() {
 
   const { id } = userStore();
   const {visible, setVisibility} = menuStore();
-  // console.log(visible, setVisibility)
+  console.log(visible)
 
   function closeMenu() {
   setVisibility(false)
@@ -30,7 +30,7 @@ export default function Menu() {
   }
 
   function goToStore() {
-    // setVisibility(false)
+    setVisibility(false)
     navigate(`/sellers/${id}`);
   }
 

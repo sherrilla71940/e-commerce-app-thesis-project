@@ -1,5 +1,5 @@
-import mock from '../../mock-data/mock.json'
-import { Product } from '../../models/models'
+// import mock from '../../mock-data/mock.json'
+// import { Product } from '../../models/models'
 import styles from './ItemDetails.module.css'
 import { useCartSlice } from '../../zustand/ShoppingCartSlice'
 import { useParams } from 'react-router-dom'
@@ -21,8 +21,8 @@ export default function ItemDetails() {
   const openCart = useCartSlice((state) => state.openCart)
 
   useEffect(() => {
-  setVisibility(false)
-    }, [id]);
+  // setVisibility(false)
+    }, [visible]);
   
   // URL query and fetch the DB
   // const data = JSON.parse(JSON.stringify(mock))
@@ -30,7 +30,7 @@ export default function ItemDetails() {
   
   const param = useParams()
   let product = storeItems.find(item => String(item.id) === param.id)
-  console.log(product)
+  console.log(visible)
 
   // handle size selection
   const handleSizeSelection = (e: React.SyntheticEvent) => {
