@@ -13,7 +13,7 @@
 import { Sequelize } from "sequelize-typescript";
 
 const sequelize = new Sequelize({
-  database: "thesis",
+  database: "cd_thesis",
   dialect: "postgres",
   username: "aaronsherrill",
   password: "",

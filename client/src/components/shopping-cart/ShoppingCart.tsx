@@ -16,7 +16,7 @@ export default function ShoppingCart() {
   const closeCart = useCartSlice((state) => state.closeCart);
 
   useEffect(() => {
-    const fetcAllShoppingCartProducts = async () => {
+    const fetchAllShoppingCartProducts = async () => {
       try {
         const shoppingCartProducts = await getShoppingCartProducts(id);
         // console.log('shoppingCartProducts: ', shoppingCartProducts)
@@ -29,7 +29,7 @@ export default function ShoppingCart() {
       }
     };
 
-    fetcAllShoppingCartProducts();
+    fetchAllShoppingCartProducts();
   }, []);
 
   return (

@@ -4,12 +4,13 @@ export type ProductSize = 'S' | 'M' | 'L' | 'XL';
 // export interface Product {
 //   id: number
 //   name: string
-//   color: string
-//   size: ProductSize
+//   category: string
+//   size: string
 //   price: number
-//   description: string,
+//   sellerId: string
+//   quantity: number
 //   image: string
-// }
+//   }
 
 export type User = {
   isLoggedIn: boolean

@@ -50,6 +50,7 @@ const { loggedIn } = userStore()
           <>
             <Navbar />
             <ShoppingCart />
+            <Menu/>
             <ItemDetails/>
             <div id="detail">
               {/* <Outlet /> */}

@@ -1,6 +1,6 @@
 .navbarContainerSticky {
   display: sticky;
-  height: 65px;
+  height: 100px;
   background-color: #EEEEEE;
 
   border-bottom: 1px solid #118259;
@@ -89,4 +89,9 @@
 .button{
   background-color: #118259;
   padding-bottom: 12px;
+}
+
+.img{
+  width: 100px;
+  height: 100px;
 }
