@@ -17,15 +17,12 @@ console.log(product.pictureUrl)
 
   return (
     <div>
-      <div className={styles.storeItem}
-        // className={styles.img}
-        onClick={() => navigate(`/${product.id}`)}>
+      <div className={styles.storeItem} onClick={() => navigate(`/${product.id}`)}>
         <p>{product.name}</p>
         <p>{product.category}</p>
         <p>{product.price}</p>
         <p>{product.quantity}</p>
         <img className = {styles.img} src={product.pictureUrl}></img>
-        {/* <img src={product.pictureUrl}></img> */}  
       </div>
 
     </div>

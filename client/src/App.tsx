@@ -13,7 +13,7 @@ import Menu from './components/menu/menu'
 import ProductForm from './components/product-form/product-form'
 //// State management:
 import { userStore, UserState } from './zustand/UserStore';
-import SellerStore from "./assets/seller-store/SellerStore";
+import SellerStore from "./components/seller-store/SellerStore";
 // import { useStore } from 'zustand';
 
 

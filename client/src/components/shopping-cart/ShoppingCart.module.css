@@ -21,7 +21,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   color: #118259;
 }
 
@@ -36,7 +35,9 @@
   width: inherit;
   width: 100%;
   box-sizing: border-box;
-  overflow: scroll;
+  /* overflow-x: hidden; */
+  overflow-y: auto;
+  /* overflow: scroll; */
 }
 
 .container > ul > li {

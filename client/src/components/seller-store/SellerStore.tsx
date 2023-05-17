@@ -1,10 +1,10 @@
 import styles from './SellerStore.module.css'
 import { useEffect, useState } from 'react'
-import StoreItem from '../../components/Item/Item'
+import StoreItem from '../Item/Item'
 // import { Product } from '../../models/models'
 import { ProductType } from '../../../../global-types/product'
 import { getSellerProducts } from "../../services/seller-service";
-import { userStore } from "./../../zustand/UserStore";
+import { userStore } from "../../zustand/UserStore";
 
 export default function SellerStore() {
 
@@ -25,9 +25,10 @@ export default function SellerStore() {
   
   
   return (
-    <div className={styles.storeItems} >
-      <h1>My Store:</h1>
-        {
+    <div>
+      <h1 className={styles.title}>MY STORE:</h1>
+      <div className={styles.storeItems}>
+         {
           products.map((product: ProductType) => (
             <StoreItem
               key={product.id}
@@ -36,5 +37,6 @@ export default function SellerStore() {
           ))
         }
       </div>
+    </div>
   )
 }

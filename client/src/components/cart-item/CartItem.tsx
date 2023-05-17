@@ -14,7 +14,6 @@ export default function CartItem ({cartItem}: {cartItem: ShoppingCartProductType
   const decreaseQuantity = useCartSlice((state) => state.decreaseQuantity)
   const removeFromCart = useCartSlice((state) => state.removeFromCart)
 
-  console.log('->', cartItem.productId)
   const [fetchedItem, setFetchedItem] = useState<ProductType>()
 
   useEffect(() => {
@@ -56,12 +55,18 @@ export default function CartItem ({cartItem}: {cartItem: ShoppingCartProductType
         <div className={styles.right}>
           <p
             className={styles.decrease}
-            // onClick={() => decreaseQuantity(cartItem)}
+            onClick={() => {
+              decreaseQuantity(cartItem)
+              console.log(cartItem)
+            }}
           >-</p>
           <p className={styles.size}>{cartItem?.productQuantity}</p>
           <p
             className={styles.increase}
-            // onClick={() => increaseQuantity(cartItem)}
+            onClick={() => {
+              increaseQuantity(cartItem)
+              console.log(cartItem)
+            }}
           >+</p>
         </div>
 
