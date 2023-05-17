@@ -40,6 +40,7 @@ export async function deleteProductFromShoppingCart(body: any) {
 
 export async function getShoppingCartProducts(uid: string) {
   try {
+    console.log(uid);
     const response = await fetch(
       `http://localhost:3000/shoppingcartproducts/:${uid}`,
       {
@@ -59,13 +60,16 @@ export async function getShoppingCartProducts(uid: string) {
   }
 }
 
-export async function getShoppingCartProduct(body: any) {
+export async function getShoppingCartProduct(pid: number) {
   try {
-    const response = await fetch("http://localhost:3000/shoppingcartproduct", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
+    const response = await fetch(
+      `http://localhost:3000/shoppingcartproduct/${pid}`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        // body: JSON.stringify(body),
+      }
+    );
     // console.log('RESPONSE: ', response)
     if (response.ok) {
       const data = await response.json();

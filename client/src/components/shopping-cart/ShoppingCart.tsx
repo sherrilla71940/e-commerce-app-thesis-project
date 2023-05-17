@@ -9,29 +9,56 @@ import { userStore } from "../../zustand/UserStore";
 
 export default function ShoppingCart() {
   const id = userStore((state) => state.id);
+  // let id;
+
+  // (async () => {
+  //   id = userStore((state) => state.id
+  // })()
 
   const cartItems = useCartSlice((state) => state.cartItems);
   const isOpen = useCartSlice((state) => state.isOpen);
   const addItem = useCartSlice((state) => state.addItem);
   const closeCart = useCartSlice((state) => state.closeCart);
 
-  useEffect(() => {
-    const fetchAllShoppingCartProducts = async () => {
-      try {
-        console.log(id)
-        const shoppingCartProducts = await getShoppingCartProducts(id);
-        // console.log('shoppingCartProducts: ', shoppingCartProducts)
+  if (id) {
+    useEffect(() => {
+      const fetchAllShoppingCartProducts = async () => {
+        try {
+          // id = userStore((state) => state.id);
+          console.log(id);
+          const shoppingCartProducts = await getShoppingCartProducts(id);
+          // console.log('shoppingCartProducts: ', shoppingCartProducts)
+          if (Array.isArray(shoppingCartProducts)) {
+            shoppingCartProducts.forEach((product: ShoppingCartProductType) => {
+              addItem(product);
+            });
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchAllShoppingCartProducts();
+    }, [id]);
+  }
+  // useEffect(() => {
+  //   const fetchAllShoppingCartProducts = async () => {
+  //     try {
+  //       // id = userStore((state) => state.id);
+  //       console.log(id);
+  //         const shoppingCartProducts = await getShoppingCartProducts(id);
+  //         // console.log('shoppingCartProducts: ', shoppingCartProducts)
+  //         if (Array.isArray(shoppingCartProducts)) {
+  //           shoppingCartProducts.forEach((product: ShoppingCartProductType) => {
+  //             addItem(product);
+  //           });
+  //         }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-        shoppingCartProducts.forEach((product: ShoppingCartProductType) => {
-          addItem(product);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchAllShoppingCartProducts();
-  }, [id]);
+  //   fetchAllShoppingCartProducts();
+  // }, []);
 
   return (
     <>
