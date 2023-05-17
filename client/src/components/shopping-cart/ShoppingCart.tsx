@@ -18,6 +18,7 @@ export default function ShoppingCart() {
   useEffect(() => {
     const fetchAllShoppingCartProducts = async () => {
       try {
+        console.log(id)
         const shoppingCartProducts = await getShoppingCartProducts(id);
         // console.log('shoppingCartProducts: ', shoppingCartProducts)
 
@@ -30,7 +31,7 @@ export default function ShoppingCart() {
     };
 
     fetchAllShoppingCartProducts();
-  }, []);
+  }, [id]);
 
   return (
     <>

@@ -30,7 +30,7 @@ export default function ItemDetails() {
   
   const param = useParams()
   let product = storeItems.find(item => String(item.id) === param.id)
-  console.log(visible)
+  console.log(product, "product")
 
   // handle size selection
   const handleSizeSelection = (e: React.SyntheticEvent) => {

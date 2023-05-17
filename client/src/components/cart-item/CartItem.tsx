@@ -40,7 +40,7 @@ export default function CartItem ({cartItem}: {cartItem: ShoppingCartProductType
   }, [])
 
   // console.log('CART ITEM: ', cartItem)
-
+console.log(fetchedItem?.pictureUrl)
   return (
     <div className={styles.container}>
       <img className={styles.img} src={fetchedItem?.pictureUrl} alt='small product image'/>

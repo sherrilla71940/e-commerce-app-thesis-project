@@ -41,14 +41,14 @@ export async function deleteProductFromShoppingCart(body: any) {
 export async function getShoppingCartProducts(uid: string) {
   try {
     const response = await fetch(
-      `http://localhost:3000/shoppingcartproducts/${uid}`,
+      `http://localhost:3000/shoppingcartproducts/:${uid}`,
       {
-        method: "POST",
+        method: "GET",
         headers: { "Content-Type": "application/json" },
         // body: JSON.stringify(body)
       }
     );
-    // console.log('RESPONSE: ', response)
+
     if (response.ok) {
       const data = await response.json();
       // console.log('DATA: ', data)
