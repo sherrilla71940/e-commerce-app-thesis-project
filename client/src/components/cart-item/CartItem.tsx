@@ -19,7 +19,7 @@ export default function CartItem ({cartItem}: {cartItem: ShoppingCartProductType
 
   useEffect(() => {
 
-    const fetcShoppingCartProduct = async () => {
+    const fetchShoppingCartProduct = async () => {
 
       try {
         const shoppingCartProducts = await getShoppingCartProduct({productId: cartItem.productId})
@@ -36,7 +36,7 @@ export default function CartItem ({cartItem}: {cartItem: ShoppingCartProductType
       }
     }
 
-    fetcShoppingCartProduct()
+    fetchShoppingCartProduct()
 
   }, [])
 

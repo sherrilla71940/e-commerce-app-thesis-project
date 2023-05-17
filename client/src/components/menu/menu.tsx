@@ -10,11 +10,10 @@ import { userStore } from "./../../zustand/UserStore";
 export default function Menu() {
 
   const navigate = useNavigate()
-  
-  const { id } = userStore();
 
+  const { id } = userStore();
   const {visible, setVisibility} = menuStore();
-  // console.log(visible, setVisibility)
+  console.log(visible)
 
   function closeMenu() {
   setVisibility(false)
@@ -31,6 +30,7 @@ export default function Menu() {
   }
 
   function goToStore() {
+    setVisibility(false)
     navigate(`/sellers/${id}`);
   }
 

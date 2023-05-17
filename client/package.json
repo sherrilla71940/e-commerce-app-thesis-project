@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.11.2",
+    "@cloudinary/url-gen": "^1.10.0",
     "@radix-ui/react-radio-group": "^1.1.2",
     "@radix-ui/react-tabs": "^1.0.3",
     "@types/react-router-dom": "^5.3.3",
