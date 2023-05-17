@@ -1,6 +1,12 @@
-
-import { Table, Column, Model, HasMany, ForeignKey, BelongsTo } from "sequelize-typescript";
-import User from '../models/user-model';
+import {
+  Table,
+  Column,
+  Model,
+  HasMany,
+  ForeignKey,
+  BelongsTo,
+} from "sequelize-typescript";
+import User from "../models/user-model";
 import { type ShoppingCartType } from "../../../global-types";
 import { Product, ShoppingCartProduct } from "./models";
 
@@ -17,7 +23,9 @@ class ShoppingCart extends Model<ShoppingCartType, ShoppingCartType> {
   @BelongsTo(() => User)
   user: User;
 
-  @HasMany(() => ShoppingCartProduct)
+  @HasMany(() => ShoppingCartProduct, {
+    onDelete: "CASCADE",
+  })
   shoppingCartProducts: ShoppingCartProduct[];
 }
 

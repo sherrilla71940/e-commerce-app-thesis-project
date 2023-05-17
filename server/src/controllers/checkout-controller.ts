@@ -3,112 +3,55 @@ import {
   User as UserModel,
   TransactionBasket as TransactionBasketModel,
   TransactionBasketProduct as TransactionBasketProductModel,
+  // ShoppingCartProduct as ShoppingCartProductModel,
+  ShoppingCart as ShoppingCartModel,
 } from "../models/models";
 import { Request, Response } from "express";
 import { Op } from "sequelize";
 import { ShoppingCartProductType } from "../../../global-types/index";
 
-type requestCheckoutCart = {
-  buyerId: string;
-  cart: ShoppingCartProductType[];
-};
+import {
+  type requestCheckoutCart,
+  createTransaction,
+  createTransactionProduct,
+  updateProductQuantityAfterTransaction,
+  deleteShoppingCart,
+} from "./checkout-controller-helpers";
 
-// step 1
-// note in frontend when checkout, send request to be with array of products to checkout
-async function createTransaction({
-  buyerId,
-  cart,
-}: requestCheckoutCart): Promise<number | Error> {
-  // buyerId extracted from req.body
-  try {
-    // make sure that no product has an order count that exceeds quantity in stock
-    cart.forEach(async (productObj) => {
-      const product = await ProductModel.findOne({
-        where: {
-          id: productObj.productId,
-        },
-      });
-      const productQuantity = product.quantity;
-      if (productQuantity < productObj.productQuantity) {
-        throw new Error("can't buy more of same product than what is in stock");
-      }
-    });
-
-    const transaction = await TransactionBasketModel.create({
-      buyerId: buyerId,
-    });
-    return transaction.id;
-  } catch (e: unknown) {
-    if (e instanceof Error) return e;
-  }
-}
-
-// step 2, run this function for each product together with step 3
-async function createTransactionProduct(
-  transactionId: number,
-  productId: number,
-  purchaseQuantity: number
-): Promise<TransactionBasketProductModel | Error> {
-  try {
-    const transactionProduct = await TransactionBasketProductModel.create({
-      transactionId: transactionId,
-      productId: productId,
-      quantity: purchaseQuantity,
-    });
-    return transactionProduct;
-  } catch (e: unknown) {
-    if (e instanceof Error) return e;
-  }
-}
-// step 3, run this function for each product
-async function updateProductQuantityAfterTransaction(
-  productId: number,
-  purchaseQuantity: number
-): Promise<ProductModel | Error> {
-  // once quantity is 0, make 'inStock' to false <--- should add inStock properties to all products and when viewing seller products only view products that are inStock: true
-  try {
-    const product = await ProductModel.findOne({
-      where: {
-        id: productId,
-      },
-    });
-    const preTransactionQuantity = product.quantity;
-    product.set({
-      quantity: preTransactionQuantity - purchaseQuantity,
-    });
-    const savedProduct = await product.save();
-    return savedProduct;
-  } catch (e: unknown) {
-    // console.log(e.message);
-    // console.log("error in updateProductQuantityAfterTransaction function");
-    if (e instanceof Error) return e;
-  }
-}
-
-// step 4 delete cart for user
-
-// when users checkouts, he will send an array of products to buy
-// use cascade affect in sequelize to delete all shopping cart product when shopping cart is deleted
+// when users checkouts, he will send req.body to backend that matches requestCheckoutCart type
+// set up shoppingcartmodel to use cascade affect in sequelize to delete all shopping cart product when shopping cart is deleted
 export async function checkout(req: Request, res: Response): Promise<void> {
   const cartToCheckout: requestCheckoutCart = req.body;
   try {
+    if (!cartToCheckout.cartId) throw new Error("missing cart id");
+    // create transaction if no products in cart quantity > quantity in stock
     const transactionId = await createTransaction(cartToCheckout);
+    // for each product in cart to checkout, run two helper functions
     cartToCheckout.cart.forEach(async (product) => {
+      // creates transaction product in transaction product table
       await createTransactionProduct(
         transactionId as number,
         product.productId,
         product.productQuantity
       );
+      // update quantity of product in products table
       await updateProductQuantityAfterTransaction(
         product.productId,
         product.productQuantity
       );
 
-      // should delete cart
+      // deletes shopping cart now that transaction is complete
+      await deleteShoppingCart(cartToCheckout.cartId);
+      res.status(200);
+      res.json(
+        `created transaction: ${transactionId} with products: ${cartToCheckout.cart}`
+      );
     });
-  } catch (e) {
-    console.log(e.message);
-    res.status(400);
-    res.json("ran into error in checkout");
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      console.log(e.message);
+      res.status(400);
+      res.json("ran into error in checkout");
+    }
   }
 }
