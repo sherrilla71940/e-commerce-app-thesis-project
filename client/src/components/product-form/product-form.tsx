@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from "./product-form.module.css";
-import * as Tabs from "@radix-ui/react-tabs";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "./../../zustand/UserStore";
 import { sellerStore } from "../../zustand/sellerStore";
@@ -87,55 +86,53 @@ console.log(picture_url)
 
   return (
     <div className={styles.container}>
-      <p>Product information:</p>
+      <h2>PRODUCT INFORMATION:</h2>
       <form>
         <fieldset>
-          <label className="">name</label> <br />
-          <input
+          <label className={styles.label}>name</label> <br />
+          <input className={styles.inputField}
             size={30}
             value={name}
-            className={styles.input}
             type="text"
             onChange={nameHandler}
             required
           />
         </fieldset>
         <fieldset>
-          <label className="">category</label> <br />
-          <input
+          <label className={styles.label}>category</label> <br />
+          <input className={styles.inputField}
             size={30}
             value={cat}
-            className={styles.input}
             type="text"
             onChange={categoryHandler}
             required
           />
         </fieldset>
         <fieldset>
-          <label className="">price</label> <br />
-          <input
+          <label className={styles.label}>price</label> <br />
+          <input className={styles.inputField}
             min="0"
             value={price}
-            className={styles.input}
             type="number"
             onChange={priceHandler}
             required
           />
         </fieldset>
         <fieldset>
-          <label className="">quantity</label> <br />
-          <input
+          <label className={styles.label}>quantity</label> <br />
+          <input className={styles.inputField}
             min="1"
             value={quantity}
-            className={styles.input}
             type="number"
             onChange={qtyHandler}
             required
           />
         </fieldset>
         <fieldset>
-          <label htmlFor="product picture">Upload product picture:</label>
-          <input type="file" name="product-pic" onChange={uploadImage}></input>
+          <label className={styles.label} htmlFor="product picture">Upload product picture:</label>
+          <br/>
+          <input className={styles.inputField}
+            type="file" name="product-pic" onChange={uploadImage}></input>
         </fieldset>
         <div>
           <button className={styles.button} onClick={addProduct}>
