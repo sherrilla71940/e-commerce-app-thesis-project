@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useCartSlice } from './../../zustand/ShoppingCartSlice'
 import { userStore } from './../../zustand/UserStore'
 import { menuStore } from '../../zustand/menuStore'
+import logo from './../../assets/logo.png'
 
 export default function Navbar() {
 
@@ -26,13 +27,13 @@ export default function Navbar() {
   return (
     <nav className={styles.navbarContainerSticky}>
       <div className={styles.navbarContainerBlock}>
-
-        <h1
+         <img className={styles.img} alt='store_logo' src={logo} />
+        {/* <h1
           className={styles.navbarLeft}
           onClick={() => navigate('/1')}
         >E-COMMERCE
-        </h1>
-
+        </h1> */}
+       
         <input className={styles.navbarCenter} />
         
         
