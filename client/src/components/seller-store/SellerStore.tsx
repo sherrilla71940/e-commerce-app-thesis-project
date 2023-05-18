@@ -2,43 +2,39 @@ import styles from './SellerStore.module.css'
 import { useEffect, useState } from 'react'
 import StoreItem from '../Item/Item'
 // import { Product } from '../../models/models'
-import { ProductType } from '../../../../global-types/product'
+import { ProductType } from "../../../../global-types/product";
 import { getSellerProducts } from "../../services/seller-service";
 import { userStore } from "../../zustand/UserStore";
 
 export default function SellerStore() {
-
   const [products, setProducts] = useState<ProductType[]>([]);
   console.log(products)
   const { id } = userStore();
 
-  if (id) {
-    useEffect(() => {
-      const fetchProducts = async () => {
-        try {
-          const products = await getSellerProducts(id);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        // console.log(id);
+        const products: ProductType[] | undefined = await getSellerProducts(id);
+        // console.log("typeof products:", typeof products);
+        // console.log("products", products);
+        if (Array.isArray(products)) {
           setProducts(products);
-        } catch (error) {
-          console.error('Failed to fetch products:', error);
         }
-      };
-      fetchProducts();
-    }, []);
-  }
-  
+      } catch (error) {
+        console.log("Failed to fetch products:", error);
+      }
+    };
+    fetchProducts();
+  }, [id]);
+
   return (
-    <div>
-      <h1 className={styles.title}>MY STORE:</h1>
-      <div className={styles.storeItems}>
-         {(products.length === 0)? null :
-          products.map((product: ProductType) => (
-            <StoreItem
-              key={product.id}
-              product={product}
-            />
-          ))
-        }
-      </div>
+    <div className={styles.storeItems}>
+      <h1>My Store:</h1>
+      {products.length &&
+        products.map((product: ProductType) => (
+          <StoreItem key={product.id} product={product} />
+        ))}
     </div>
-  )
+  );
 }

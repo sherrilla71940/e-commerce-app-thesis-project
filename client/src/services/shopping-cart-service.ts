@@ -56,7 +56,7 @@ export async function getShoppingCartProducts(uid: string) {
       return data;
     }
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 }
 
