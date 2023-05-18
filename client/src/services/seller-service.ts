@@ -29,14 +29,16 @@ export async function postProduct(body: any) {
 }
 
 ///// Sellers Products
-export async function getSellerProducts(id:string) {
+export async function getSellerProducts(id: string) {
+  // console.log(id);
   const response = await fetch(`${API_URL}/sellers/${id}`, {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
   });
-  if (!response.ok) {
-    throw new Error('Failed to post');
+
+  // console.log("response.status:", response.status, " response.ok", response.ok);
+  if (response.ok && response.status === 200) {
+    const json = await response.json();
+    return json;
   }
-  const json = await response.json();
-  return json
 }
