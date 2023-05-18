@@ -3,6 +3,7 @@
   align-items: center;
   color: #118259;
   width: 100%;
+  /* min-width: 100px; */
   box-sizing: border-box;
 }
 

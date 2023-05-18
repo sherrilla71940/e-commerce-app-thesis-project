@@ -48,7 +48,7 @@ export default function ShoppingCart() {
         }
       };
       fetchAllShoppingCartProducts();
-    }, []);
+    }, [id]);
   }
   // useEffect(() => {
   //   const fetchAllShoppingCartProducts = async () => {

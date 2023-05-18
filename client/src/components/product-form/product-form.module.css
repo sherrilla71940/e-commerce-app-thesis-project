@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   color: #118259;
-  background-color: #C4DDD4;
+  background-color: #EEEEEE;
   font-style: normal;
   font-weight: 500;
   border: #118259;
@@ -12,7 +12,7 @@
 .inputField{
   border-radius: 4px;
   border: #118259;
-  background-color: #EEEEEE;
+   background-color: #C4DDD4;
   color:#118259;
 }
 

@@ -13,16 +13,14 @@ export default function Menu() {
 
   const { id } = userStore();
   const {visible, setVisibility} = menuStore();
-  console.log(visible)
 
   function closeMenu() {
   setVisibility(false)
-  console.log(visible)
   }
   
   function goToSell() {
     navigate('/sell');
-    console.log(visible)
+
   }
 
   function backToLogin() {

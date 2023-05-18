@@ -44,10 +44,10 @@ export default function CartItem({
   }, []);
 
   // console.log('CART ITEM: ', cartItem)
-
+console.log(fetchedItem?.pictureUrl)
   return (
     <div className={styles.container}>
-      <div className={styles.img}></div>
+      <img className={styles.img} src={fetchedItem?.pictureUrl} alt='small product image'/>
       <div className={styles.itemInfo}>
         <div className={styles.left}>
           <p className={styles.name}>{fetchedItem?.name}</p>
@@ -58,14 +58,14 @@ export default function CartItem({
         <div className={styles.right}>
           <p
             className={styles.decrease}
-            // onClick={() => decreaseQuantity(cartItem)}
+            onClick={() => decreaseQuantity(cartItem)}
           >
             -
           </p>
           <p className={styles.size}>{cartItem?.productQuantity}</p>
           <p
             className={styles.increase}
-            // onClick={() => increaseQuantity(cartItem)}
+            onClick={() => increaseQuantity(cartItem)}
           >
             +
           </p>

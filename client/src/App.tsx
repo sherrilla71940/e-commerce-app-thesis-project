@@ -13,13 +13,14 @@ import Menu from './components/menu/menu'
 import ProductForm from './components/product-form/product-form'
 //// State management:
 import { userStore, UserState } from './zustand/UserStore';
-import SellerStore from "./assets/seller-store/SellerStore";
-import Success from "./components/after-checkout/success";
+import SellerStore from "./components/seller-store/SellerStore";
 // import { useStore } from 'zustand';
 
 //// STRIPE
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import Success from "./components/after-checkout/success";
+import Fail from "./components/after-checkout/fail";
 const stripePromise = loadStripe('pk_test_51N8hjDJKkXA9mV6ak5ut2w6TuNdUKdu9jIaUbFf8ttSFyaOAgLZD7EjFPY7i9ABX5zPEBVUNeluE8z0qiWP75qv400RR6hD0bp');
 
 
@@ -68,16 +69,18 @@ function App() {
           <Route path={'/sell'} element={
             <>
               <Navbar />
-              <Menu />
-              <ProductForm />
+              <ShoppingCart />
+              <Menu/>
+              <ProductForm/>
             </>
           } />
 
           <Route path={`/sellers/${id}`} element={
             <>
               <Navbar />
-              <Menu />
-              <SellerStore />
+              <ShoppingCart />
+              <Menu/>
+              <SellerStore/>
             </>
           } />
 
@@ -93,7 +96,7 @@ function App() {
             <>
               <Navbar />
               <Menu />
-              <Success />
+              <Fail />
             </>
           } />
 

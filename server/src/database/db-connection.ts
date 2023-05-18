@@ -16,8 +16,7 @@ const sequelize = new Sequelize({
   database: "thesis",
   dialect: "postgres",
   username: "postgres",
-  password: "",
-  logging: false,
+  // logging: false,
   // models: [__dirname + '/models'], // or [Player, Team],
 });
 
