@@ -10,7 +10,6 @@ import { useProductsSlice } from '../../zustand/ProductSlice'
 import { userStore } from '../../zustand/UserStore'
 import { ShoppingCartProductType } from '../../../../global-types/shopping-cart-product'
 
-
 export default function ItemDetails() {
   const id = userStore((state) => state.id)
 

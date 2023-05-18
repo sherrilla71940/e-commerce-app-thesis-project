@@ -1,16 +1,15 @@
 
-export async function checkout() {
+export async function checkout(price: number) {
 
-  // get the url from the backend
-  // use stripe instance to redirect to the url
+  // this function should be in the service
 
   console.log('ok')
 
   try {
     const response = await fetch('http://localhost:3000/checkout', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' }
-    // body: JSON.stringify(body)
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({price})
   })
   console.log(response)
   if (response.ok) {
@@ -24,5 +23,4 @@ export async function checkout() {
   } catch (error) {
     console.log(error)
   }
-
 }

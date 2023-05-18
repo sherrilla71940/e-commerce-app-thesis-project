@@ -13,16 +13,7 @@ import { useStripe } from '@stripe/react-stripe-js';
 export default function ShoppingCart() {
 
   const stripe = useStripe();
-
-  const handleSubmit = async () => {
-    const session = await checkout()
-    // console.log(session)
-
-    stripe?.redirectToCheckout({ sessionId: session.id})
-  }
-
   const id = userStore((state) => state.id)
-
   const cartItems = useCartSlice((state) => state.cartItems)
   const isOpen = useCartSlice((state) => state.isOpen)
   const addItem = useCartSlice((state) => state.addItem)
@@ -48,6 +39,11 @@ export default function ShoppingCart() {
 
   }, [])
 
+  const handleSubmit = async (price: number) => {
+    const session = await checkout(price)
+    stripe?.redirectToCheckout({ sessionId: session.id})
+  }
+
   return (
     <>
       {isOpen &&
@@ -71,7 +67,7 @@ export default function ShoppingCart() {
 
           <div className={styles.cartFooter}>
             <div className={styles.total}>
-              <h3>Total</h3>
+              {/* <h3>Total</h3> */}
               {/* <h3
                 className={styles.totalValue}
               >
@@ -84,7 +80,7 @@ export default function ShoppingCart() {
 
             <button
               className={styles.checkout}
-              onClick={handleSubmit}
+              onClick={() => handleSubmit(70)}
             >
               Checkout
             </button>
