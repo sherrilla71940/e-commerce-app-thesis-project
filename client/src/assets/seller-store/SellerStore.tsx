@@ -1,13 +1,14 @@
 import styles from './SellerStore.module.css'
 import { useEffect, useState } from 'react'
-import StoreItem from '../../components/store-item/StoreItem'
-import { Product } from '../../models/models'
-import { getSellerProducts } from "../../service";
+import StoreItem from '../../components/Item/Item'
+// import { Product } from '../../models/models'
+import { ProductType } from '../../../../global-types/product'
+import { getSellerProducts } from "../../services/seller-service";
 import { userStore } from "./../../zustand/UserStore";
 
 export default function SellerStore() {
 
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
 
   const { id } = userStore();
 
@@ -27,7 +28,7 @@ export default function SellerStore() {
     <div className={styles.storeItems} >
       <h1>My Store:</h1>
         {
-          products.map((product: Product) => (
+          products.map((product: ProductType) => (
             <StoreItem
               key={product.id}
               product={product}

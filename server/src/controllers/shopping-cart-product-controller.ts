@@ -1,6 +1,9 @@
 import { default as ShoppingCart } from "../models/shopping-cart-model";
 import { Request, Response } from "express";
-import { addShoppingCart, deleteShoppingCart } from "./shopping-cart-controller";
+import {
+  addShoppingCart,
+  deleteShoppingCart,
+} from "./shopping-cart-controller";
 
 import ShoppingCartProduct from "../models/shopping-cart-product-model";
 import Product from "../models/product-model";
@@ -8,33 +11,36 @@ import Product from "../models/product-model";
 async function shoppingCartFinder(userId: string) {
   const shoppingCart = await ShoppingCart.findOne({
     where: {
-      userId: userId
-    }
+      userId: userId,
+    },
   });
 
-  return shoppingCart
+  return shoppingCart;
 }
 
-
 export async function getOneShoppingCart(req: Request, res: Response) {
-  const shoppingCart = await shoppingCartFinder(req.body.userId)
-  res.json(shoppingCart)
-  return shoppingCart
+  const shoppingCart = await shoppingCartFinder(req.params.uid);
+  res.json(shoppingCart);
+  return shoppingCart;
 }
 
 export async function getAllShoppingCarts(req: Request, res: Response) {
-  const shoppingCarts = await ShoppingCart.findAll({})
-  res.json(shoppingCarts)
-  return shoppingCarts
+  const shoppingCarts = await ShoppingCart.findAll({});
+  res.json(shoppingCarts);
+  return shoppingCarts;
 }
 
-async function addToShoppingCart(product: { shoppingCartId: number, productId: number, productQuantity: number }) {
+async function addToShoppingCart(product: {
+  shoppingCartId: number;
+  productId: number;
+  productQuantity: number;
+}) {
   // console.log('adding product to shopping cart')
   try {
-    const newShoppingCartProduct = await ShoppingCartProduct.create(product)
-    return newShoppingCartProduct
+    const newShoppingCartProduct = await ShoppingCartProduct.create(product);
+    return newShoppingCartProduct;
   } catch (error) {
-    return error
+    return error;
   }
 }
 
@@ -44,20 +50,19 @@ export async function productFinder(req: Request, res: Response) {
   try {
     const product = await Product.findOne({
       where: {
-        id: req.body.productId
-      }
-    })
+        id: req.params.pid,
+      },
+    });
 
     // console.log(product)
 
     if (product.id) {
-      res.json(product)
+      res.json(product);
     }
 
-    throw new Error('Cannot find product for this shopping cart')
-
+    throw new Error("Cannot find product for this shopping cart");
   } catch (error) {
-    return error
+    return error;
   }
 }
 
@@ -68,18 +73,25 @@ export async function productFinder(req: Request, res: Response) {
 // 3. if shopping cart does exist, i.e. there already is a product in that shopping cart
 // 3.1. add product to existing shopping cart
 
+// aaron: if we plan to delete shopping cart if there are no products in cart, we should also check if cart is empty after deleting product from cart
 
-async function deleteFromShoppingCart(ids: { shoppingCartId: number, productId: number }) {
+async function deleteFromShoppingCart({
+  shoppingCartId,
+  productId,
+}: {
+  shoppingCartId: number;
+  productId: number;
+}) {
   try {
     const res = await ShoppingCartProduct.destroy({
       where: {
-        shoppingCartId: ids.shoppingCartId,
-        productId: ids.productId,
-      }
-    })
-    return res
+        shoppingCartId: shoppingCartId,
+        productId: productId,
+      },
+    });
+    return res;
   } catch (error) {
-    return error
+    return error;
   }
 }
 
@@ -139,7 +151,6 @@ async function deleteFromShoppingCart(ids: { shoppingCartId: number, productId: 
 //   }
 // }
 
-
 // export async function getAllProductsFromShoppingCart (req: Request, res: Response) {
 //   console.log('STAGE: 1')
 //   try {
@@ -161,127 +172,159 @@ async function deleteFromShoppingCart(ids: { shoppingCartId: number, productId: 
 //   }
 // }
 
-export async function addProductToShoppingCart(req: Request, res: Response): Promise<void> {
+//
+export async function addProductToShoppingCart(
+  req: Request,
+  res: Response
+): Promise<void> {
   try {
-
+    // res.json("add product endpoint reached");
     let shoppingCartId = null;
 
     const existingShoppingCart = await ShoppingCart.findOne({
       where: {
-        userId: req.body.userId // here comes userID
-      }
-    })
+        userId: req.body.userId, // here comes userID
+      },
+    });
 
-    shoppingCartId = existingShoppingCart?.id
+    shoppingCartId = existingShoppingCart?.id;
 
-    const hasShoppingCartId = shoppingCartId >= 1
+    const hasShoppingCartId = shoppingCartId >= 1;
     // console.log({hasShoppingCartId})
 
     if (!hasShoppingCartId) {
       // if shopping cart does NOT exist
 
       const newShoppingCart = await ShoppingCart.create({
-        userId: req.body.userId
-      })
+        userId: req.body.userId,
+      });
       // console.log('Shopping Cart does NOT exist', newShoppingCart.id)
       if (newShoppingCart.id) {
-        shoppingCartId = newShoppingCart.id
+        shoppingCartId = newShoppingCart.id;
       } else {
-        throw new Error('error while creating shopping cart')
+        throw new Error("error while creating shopping cart");
       }
-
     }
 
     // if shopping cart exists
     // maybe add here a check -> check if product id already exists in that shopping cart
     // if it does, do not allow repeated items
     // if it doesn't, add new item
+    const hasSameProductInCartAlready = await ShoppingCartProduct.findOne({
+      where: {
+        productId: shoppingCartId,
+      },
+    });
+
+    if (hasSameProductInCartAlready)
+      throw new Error(
+        "cannot add 2 of the same products to the same cart. You should update product quantity in a different controller"
+      );
+
     const newShoppingCartProduct = await addToShoppingCart({
       shoppingCartId, // id from shoppping cart
       productId: req.body.productId,
-      productQuantity: 1
-    })
+      productQuantity: 1,
+    });
 
     // console.log('NEW SC: ', newShoppingCartProduct)
 
     if (newShoppingCartProduct.id) {
       // console.log('Shopping Cart ID does exist', newShoppingCartProduct.id)
-      res.json(newShoppingCartProduct)
+      res.status(200);
+      res.json(newShoppingCartProduct);
     } else {
-      throw new Error('error while adding product to shopping cart')
+      throw new Error("error while adding product to shopping cart");
     }
-
   } catch (error) {
-    console.log(error)
+    res.status(400);
+    res.json("could not add product to cart");
+    console.log(error);
   }
 }
 
-export async function deleteProductFromShoppingCart(req: Request, res: Response): Promise<Response<any, Record<string, any>>> {
+export async function deleteProductFromShoppingCart(
+  req: Request,
+  res: Response
+): Promise<Response<any, Record<string, any>>> {
   try {
-
     let hasShoppingCartID = null;
 
     const shoppingCart = await ShoppingCart.findOne({
       include: [ShoppingCartProduct],
       where: {
-        userId: req.body.userId // here comes userID
-      }
-    })
+        userId: req.body.userId, // here comes userID
+      },
+    });
 
     // console.log('SHOPPING CART: ', shoppingCart.id)
 
-    hasShoppingCartID = shoppingCart?.id >= 1
+    hasShoppingCartID = shoppingCart?.id >= 1;
     // console.log(hasShoppingCartID)
 
     if (hasShoppingCartID) {
       const isDeleted = await ShoppingCartProduct.destroy({
         where: {
           shoppingCartId: shoppingCart.id,
-          productId: req.body.productId
-        }
-      })
-
+          productId: req.body.productId,
+        },
+      });
+      const cartStillHasProducts = await ShoppingCartProduct.findOne({
+        where: {
+          shoppingCartId: shoppingCart.id,
+        },
+      });
+      if (!cartStillHasProducts) {
+        await ShoppingCart.destroy({
+          where: {
+            id: shoppingCart.id,
+          },
+        });
+      }
       // console.log('isDeleted: ', isDeleted)
-      return res.json(isDeleted)
+      return res.json(isDeleted);
     }
 
-    throw new Error('Shopping Cart not found')
-
+    throw new Error("Shopping Cart not found");
   } catch (error) {
     // send a response
-    console.log(error)
-    res.send(error)
+    console.log(error);
+    res.send(error);
   }
 }
 
-export async function getAllProductsFromShoppingCart(req: Request, res: Response) {
+export async function getAllProductsFromShoppingCart(
+  req: Request,
+  res: Response
+) {
   try {
-
+    // res.json("get all products reached");
     let hasShoppingCartID = null;
 
     const shoppingCart = await ShoppingCart.findOne({
       include: [ShoppingCartProduct],
       where: {
-        userId: req.body.userId  // here comes userID
-      }
-    })
+        userId: req.params.uid, // here comes userID
+      },
+    });
 
-    hasShoppingCartID = shoppingCart?.id >= 1
+    hasShoppingCartID = shoppingCart?.id >= 1;
     // console.log(hasShoppingCartID)
 
     if (hasShoppingCartID) {
-      const { shoppingCartProducts } = shoppingCart
-      return res.json(shoppingCartProducts)
+      const { shoppingCartProducts } = shoppingCart;
+      return res.json(shoppingCartProducts);
     }
 
     // send a response
     // code runs only if shopping cart DOES exist
     // console.log('CASE')
-    res.json([])
-
+    res.json(
+      "this user does not have a cart, must add at least 1 product to cart first"
+    );
   } catch (error) {
     // send a response
-    console.log(error)
-    res.json([])
+    console.log(error);
+    res.json([]);
   }
 }

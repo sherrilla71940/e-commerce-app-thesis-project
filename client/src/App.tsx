@@ -57,7 +57,8 @@ function App() {
             <>
               <Navbar />
               <ShoppingCart />
-              <ItemDetails />
+              <Menu/>
+            <ItemDetails />
               <div id="detail">
                 {/* <Outlet /> */}
               </div>

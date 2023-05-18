@@ -7,7 +7,7 @@
       "size": "S",
       "price": 19.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "image": "https://example.com/classic_tshirt.jpg"
+      "image": "https://picsum.photos/200"
     },
     {
       "id": 2,
@@ -16,7 +16,7 @@
       "size": "M",
       "price": 19.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "image": "https://example.com/classic_tshirt.jpg"
+      "image": "https://picsum.photos/200"
     },
     {
       "id": 3,
@@ -25,7 +25,7 @@
       "size": "L",
       "price": 24.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "image": "https://example.com/vneck_tshirt.jpg"
+      "image": "https://picsum.photos/200"
     },
     {
       "id": 4,
@@ -34,7 +34,7 @@
       "size": "S",
       "price": 24.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "image": "https://example.com/vneck_tshirt.jpg"
+      "image": "https://picsum.photos/200"
     },
     {
       "id": 5,
@@ -43,7 +43,7 @@
       "size": "M",
       "price": 29.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "image": "https://example.com/graphic_tshirt.jpg"
+      "image": "https://picsum.photos/200"
     },
     {
       "id": 6,
@@ -52,7 +52,7 @@
       "size": "L",
       "price": 29.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "image": "https://example.com/graphic_tshirt.jpg"
+      "image": "https://picsum.photos/200"
     },
     {
       "id": 7,
@@ -61,7 +61,7 @@
       "size": "XL",
       "price": 34.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "image": "https://example.com/striped_tshirt.jpg"
+      "image": "https://picsum.photos/200"
     },
     {
       "id": 8,
@@ -70,7 +70,7 @@
       "size": "S",
       "price": 34.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "image": "https://example.com/striped_tshirt.jpg"
+      "image": "https://picsum.photos/200"
     },
     {
       "id": 9,
@@ -79,7 +79,7 @@
       "size": "M",
       "price": 39.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "image": "https://example.com/polo_shirt.jpg"
+      "image": "https://picsum.photos/200"
     },
     {
       "id": 10,
@@ -88,7 +88,7 @@
       "size": "L",
       "price": 39.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "image": "https://example.com/polo_shirt.jpg"
+      "image": "https://picsum.photos/200"   
     },
     {
       "id": 11,
@@ -97,7 +97,7 @@
       "size": "XL",
       "price": 44.99,
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "image": "https://example.com/henley_shirt.jpg"
+      "image": "https://picsum.photos/200"
     }
   ]
 }

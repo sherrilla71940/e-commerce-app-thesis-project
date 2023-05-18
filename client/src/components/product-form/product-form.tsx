@@ -1,43 +1,54 @@
 import { useState } from "react";
 import styles from "./product-form.module.css";
-import * as Tabs from "@radix-ui/react-tabs";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "./../../zustand/UserStore";
 import { sellerStore } from "../../zustand/sellerStore";
-import { saveUser, postProduct } from "../../service";
+import { saveUser, postProduct } from "../../services/seller-service";
+import { postImage } from "./../../cloudinary/apiService"
+
 
 const log = console.log.bind(console);
-log("ok");
 
 export default function ProductForm() {
-  // const navigate = useNavigate();
-
+  
+  const navigate = useNavigate();
+  
   const { id } = userStore();
 
-  const [name, setName] = useState("");
-  const [cat, setCat] = useState("");
-  const [price, setPrice] = useState(0);
-  const [sellerID, setSellerID] = useState(id);
-  const [quantity, setQuantity] = useState(0);
-  const [picture_url, setPic] = useState(
-    "https://picsum.photos/id/237/200/300"
-  );
-
+  const [name, setName] = useState<string>("");
+  const [cat, setCat] = useState<string>("");
+  const [price, setPrice] = useState<number>(0);
+  const [sellerID, setSellerID] = useState<string>(id);
+  const [quantity, setQuantity] = useState<number>(0);
+  const [picture_url, setPic] = useState<File>();
+    // "https://picsum.photos/id/237/200/300"
+  // );
+console.log(picture_url)
   // setPic("https://picsum.photos/id/237/200/300");
   // setSellerID(id);
 
   async function addProduct(e: React.FormEvent<HTMLButtonElement>) {
     e.preventDefault();
     try {
-      postProduct({
-        name: name,
-        category: cat,
-        price: price,
-        sellerId: sellerID,
-        quantity: quantity,
-        pictureUrl: picture_url,
-      });
-      // navigate('/')
+      
+      if (picture_url) {
+        const image = await postImage(picture_url)
+        console.log(image)
+        postProduct({
+          name: name,
+          category: cat,
+          price: price,
+          sellerId: sellerID,
+          quantity: quantity,
+          pictureUrl: image,
+        });
+        navigate(`/sellers/${id}`);
+        // alert('Product successfuly saved, go to your store to see your products!')
+      } else {
+        console.log('Image not posted')
+        alert('Error ocurred when submitting your product')
+      }
+
     } catch (err) {
       console.log(err);
       alert(
@@ -65,61 +76,63 @@ export default function ProductForm() {
     setQuantity(Number(target.value));
   }
 
-  // function sellerHandler(e: React.ChangeEvent<HTMLInputElement>) {
-  //   const target = e.target as HTMLInputElement;
-  // }
+  function uploadImage(e: React.ChangeEvent<HTMLInputElement>) {
+    const target = e.target as HTMLInputElement;
+    if (target.files) {
+      setPic(target.files[0])  
+    }
+    
+  }
 
   return (
     <div className={styles.container}>
-      <p>Product information:</p>
+      <h2>PRODUCT INFORMATION:</h2>
       <form>
         <fieldset>
-          <label className="">name</label> <br />
-          <input
+          <label className={styles.label}>name</label> <br />
+          <input className={styles.inputField}
             size={30}
             value={name}
-            className={styles.input}
             type="text"
             onChange={nameHandler}
             required
           />
         </fieldset>
         <fieldset>
-          <label className="">category</label> <br />
-          <input
+          <label className={styles.label}>category</label> <br />
+          <input className={styles.inputField}
             size={30}
             value={cat}
-            className={styles.input}
             type="text"
             onChange={categoryHandler}
             required
           />
         </fieldset>
         <fieldset>
-          <label className="">price</label> <br />
-          <input
+          <label className={styles.label}>price</label> <br />
+          <input className={styles.inputField}
             min="0"
             value={price}
-            className={styles.input}
             type="number"
             onChange={priceHandler}
             required
           />
         </fieldset>
         <fieldset>
-          <label className="">quantity</label> <br />
-          <input
+          <label className={styles.label}>quantity</label> <br />
+          <input className={styles.inputField}
             min="1"
             value={quantity}
-            className={styles.input}
             type="number"
             onChange={qtyHandler}
             required
           />
         </fieldset>
         <fieldset>
-          <label htmlFor="product picture">Upload product picture:</label>
-          <input type="file" name="product-pic"></input>
+          <label className={styles.label} htmlFor="product picture">Upload product picture:</label>
+          <br/>
+          <input className={styles.inputField}
+            type="file" name="product-pic" onChange={uploadImage}></input>
         </fieldset>
         <div>
           <button className={styles.button} onClick={addProduct}>

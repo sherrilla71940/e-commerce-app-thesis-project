@@ -5,6 +5,8 @@ import productsRouter from "./products";
 import shoppingCartsRouter from "./shoppingcarts";
 import transactionsRouter from "./transactions";
 import stripeRouter from "./stripecheckout"
+import checkoutRouter from "./checkout";
+// import checkoutRouter from './checkout';
 
 const router = express.Router();
 
@@ -14,5 +16,6 @@ export default function configuredRouterGenerator(): express.Router {
   shoppingCartsRouter(router);
   transactionsRouter(router);
   stripeRouter(router);
+  checkoutRouter(router);
   return router;
 }

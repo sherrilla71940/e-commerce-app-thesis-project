@@ -3,4 +3,6 @@ export type TransactionBasketProductType = {
   transactionId: number;
   productId: number;
   quantity: number;
+  date?: Date;
+  // added and made optional by Aaron since sequelize will auto-create createdAt
 };
