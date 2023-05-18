@@ -2,20 +2,24 @@
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Mastering_Wrapping_of_Flex_Items */
 /* https://stackoverflow.com/questions/52417889/setting-minimum-and-maximum-number-of-columns-using-css-grid */
 
+.title {
+  background-color: #EEEEEE;
+  color: #118259;
+  padding-left: 100px;
+  padding-bottom: 10px;
+}
+
 .storeItems {
   box-sizing: border-box;
   width: 100vw;
-  height: calc(100vh - 65px);
-
-  padding: 50px 75px 0 75px;
-
+  /* height: calc(100vh - 65px); */
+  padding: 100px;
   background-color: #EEEEEE;
-  color: #7daf9d;
-  overflow: scroll;
-
+  color: #118259;
+  overflow-x: hidden;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 350px));
   grid-template-rows: repeat(auto-fill, minmax(350px, 350px));
   gap: 20px;
-
+  scroll-behavior: auto ;
 }

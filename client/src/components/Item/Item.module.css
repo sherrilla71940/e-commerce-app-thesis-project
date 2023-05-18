@@ -18,9 +18,15 @@
 .img {
   display: block;
 
-  width: 100%;
+  width: 300px;
   height: 300px;
 
   border-radius: 4px;
   background-color: #C4DDD4;
+}
+
+p{
+  /* margin-top: 100px; */
+  padding-bottom: 5px;
+  font-size: larger;
 }

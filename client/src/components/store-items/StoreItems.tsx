@@ -1,7 +1,7 @@
 // import mock from '../../mock-data/mock.json'
 // import { Product } from '../../models/models'
 import styles from './StoreItems.module.css'
-import StoreItem from '../../components/Item/Item'
+import Item from '../../components/Item/Item'
 import { useEffect } from 'react'
 import { useProductsSlice } from '../../zustand/ProductSlice'
 import { getStoreProducts } from '../../services/store-products-service'
@@ -40,7 +40,7 @@ export default function StoreItems() {
     <div className={styles.storeItems} >
         {
           storeItems.map((product: ProductType) => (
-            <StoreItem
+            <Item
               key={product.id}
               product={product}
             />

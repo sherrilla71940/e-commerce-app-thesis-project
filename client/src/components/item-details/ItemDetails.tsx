@@ -30,7 +30,7 @@ export default function ItemDetails() {
   
   const param = useParams()
   let product = storeItems.find(item => String(item.id) === param.id)
-  console.log(visible)
+  console.log(product, "product")
 
   // handle size selection
   const handleSizeSelection = (e: React.SyntheticEvent) => {
@@ -47,7 +47,7 @@ export default function ItemDetails() {
       // })
     }
   }
-
+ 
   return (
     <div className={styles.container}>
 
@@ -55,11 +55,11 @@ export default function ItemDetails() {
       <div className={styles.left}>
         {/* <img className={styles.mainImage} src={product?.image} alt='item_picture'></img> */}
         <img className={styles.mainImage} src={product?.pictureUrl} alt='item_picture'></img>
-        <div className={styles.sideImages}>
+        {/* <div className={styles.sideImages}> */}
           {/* <div className={styles.sideImage}></div>
           <div className={styles.sideImage}></div>
           <div className={styles.sideImage}></div> */}
-        </div>
+        {/* </div> */}
       </div>
 
 
@@ -67,7 +67,7 @@ export default function ItemDetails() {
       <div className={styles.right}>
         <h1 className={styles.name} onClick={handleSizeSelection}>{product?.name}</h1>
         <h4 className={styles.price} onClick={handleSizeSelection}>{product?.category}</h4>
-        <h4 className={styles.price}>{product?.price}</h4>
+        <h4 className={styles.price}>$ {product?.price} USD</h4>
         
         <div className={styles.sizes}>
           <div className={styles.size} onClick={handleSizeSelection}>S</div>
