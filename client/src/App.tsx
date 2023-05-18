@@ -16,47 +16,55 @@ import { userStore, UserState } from './zustand/UserStore';
 import SellerStore from "./components/seller-store/SellerStore";
 // import { useStore } from 'zustand';
 
+//// STRIPE
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import Success from "./components/after-checkout/success";
+import Fail from "./components/after-checkout/fail";
+const stripePromise = loadStripe('pk_test_51N8hjDJKkXA9mV6ak5ut2w6TuNdUKdu9jIaUbFf8ttSFyaOAgLZD7EjFPY7i9ABX5zPEBVUNeluE8z0qiWP75qv400RR6hD0bp');
+
 
 function App() {
 
- const { id } = userStore();
-  
-const { loggedIn } = userStore()
-// console.log(loggedIn)
+  const { id } = userStore();
+
+  const { loggedIn } = userStore()
+  // console.log(loggedIn)
 
   return (
+    <Elements stripe={stripePromise}>
       <Router>
         <Routes>
-        <Route path='/login' element={
-          <>
-          <Navbar/>
-          <Login />
-          </>
+          <Route path='/login' element={
+            <>
+              <Navbar />
+              <Login />
+            </>
           } />
 
-        <Route path={'/'} element={
-          <>
-            <Navbar />
-            <ShoppingCart />
-            <Menu/>
-            <StoreItems/>
-            <div id="detail">
-              {/* <Outlet /> */}
-            </div>
-          </>
-          }/>
+          <Route path={'/'} element={
+            <>
+              <Navbar />
+              <ShoppingCart />
+              <Menu />
+              <StoreItems />
+              <div id="detail">
+                {/* <Outlet /> */}
+              </div>
+            </>
+          } />
 
-         <Route path={'/:id'} element={
-          <>
-            <Navbar />
-            <ShoppingCart />
-            <Menu/>
-            <ItemDetails/>
-            <div id="detail">
-              {/* <Outlet /> */}
-            </div>
-          </>
-          }/>
+          <Route path={'/:id'} element={
+            <>
+              <Navbar />
+              <ShoppingCart />
+              <Menu/>
+            <ItemDetails />
+              <div id="detail">
+                {/* <Outlet /> */}
+              </div>
+            </>
+          } />
 
           <Route path={'/sell'} element={
             <>
@@ -65,8 +73,8 @@ const { loggedIn } = userStore()
               <Menu/>
               <ProductForm/>
             </>
-            } />
-          
+          } />
+
           <Route path={`/sellers/${id}`} element={
             <>
               <Navbar />
@@ -74,11 +82,27 @@ const { loggedIn } = userStore()
               <Menu/>
               <SellerStore/>
             </>
-            } />
-        
+          } />
+
+          <Route path={`/checkoutsuccess`} element={
+            <>
+              <Navbar />
+              <Menu />
+              <Success />
+            </>
+          } />
+
+          <Route path={`/checkoutfail`} element={
+            <>
+              <Navbar />
+              <Menu />
+              <Fail />
+            </>
+          } />
+
         </Routes>
       </Router>
-
+    </Elements>
   );
 }
 

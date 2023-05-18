@@ -11,7 +11,6 @@ import { userStore } from '../../zustand/UserStore'
 import { menuStore } from '../../zustand/menuStore'
 import { ShoppingCartProductType } from '../../../../global-types/shopping-cart-product'
 
-
 export default function ItemDetails() {
 
   const { id } = userStore()
@@ -69,12 +68,12 @@ export default function ItemDetails() {
         <h4 className={styles.price} onClick={handleSizeSelection}>{product?.category}</h4>
         <h4 className={styles.price}>$ {product?.price} USD</h4>
         
-        <div className={styles.sizes}>
+        {/* <div className={styles.sizes}>
           <div className={styles.size} onClick={handleSizeSelection}>S</div>
           <div className={styles.size} onClick={handleSizeSelection}>M</div>
           <div className={styles.size} onClick={handleSizeSelection}>L</div>
           <div className={styles.size} onClick={handleSizeSelection}>XL</div>
-        </div>
+        </div> */}
 
         <div
           className={styles.addToCart}

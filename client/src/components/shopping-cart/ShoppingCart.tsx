@@ -7,8 +7,12 @@ import { useEffect } from "react";
 import { ShoppingCartProductType } from "../../../../global-types/shopping-cart-product";
 import { userStore } from "../../zustand/UserStore";
 
+import { useStripe } from '@stripe/react-stripe-js';
+
+
 export default function ShoppingCart() {
-  const id = userStore((state) => state.id);
+
+  // let id;
   // let id;
 
   // (async () => {
@@ -19,6 +23,12 @@ export default function ShoppingCart() {
   const isOpen = useCartSlice((state) => state.isOpen);
   const addItem = useCartSlice((state) => state.addItem);
   const closeCart = useCartSlice((state) => state.closeCart);
+  const stripe = useStripe();
+  const id = userStore((state) => state.id)
+
+
+
+
 
   if (id) {
     useEffect(() => {
@@ -60,6 +70,11 @@ export default function ShoppingCart() {
   //   fetchAllShoppingCartProducts();
   // }, []);
 
+  const handleSubmit = async (price: number) => {
+    const session = await checkout(price)
+    stripe?.redirectToCheckout({ sessionId: session.id})
+  }
+
   return (
     <>
       {isOpen && (
@@ -81,7 +96,7 @@ export default function ShoppingCart() {
 
           <div className={styles.cartFooter}>
             <div className={styles.total}>
-              <h3>Total</h3>
+              {/* <h3>Total</h3> */}
               {/* <h3
                 className={styles.totalValue}
               >
@@ -92,7 +107,10 @@ export default function ShoppingCart() {
               </h3> */}
             </div>
 
-            <button className={styles.checkout} onClick={checkout}>
+            <button
+              className={styles.checkout}
+              onClick={() => handleSubmit(70)}
+            >
               Checkout
             </button>
           </div>

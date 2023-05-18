@@ -1,5 +1,6 @@
 // testing git workflow
 
+export const stripe = require('stripe')('sk_test_51N8hjDJKkXA9mV6apEXVLA7cSwFX08ThCvmgeiduWpUZSFfAfQhR9Qnr2cfHh2SLJHunxIUoSS31fEBR5d6hlsnW00DqapAgUi');
 import express from "express";
 // import router from "./routers";
 import configuredRouterGenerator from "./routers";
