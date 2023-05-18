@@ -12,14 +12,14 @@
 .storeItems {
   box-sizing: border-box;
   width: 100vw;
-  height: calc(100vh - 65px);
-  padding-left: 100px;
+  /* height: calc(100vh - 65px); */
+  padding: 100px;
   background-color: #EEEEEE;
   color: #118259;
-  overflow: scroll;
+  overflow-x: hidden;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 350px));
   grid-template-rows: repeat(auto-fill, minmax(350px, 350px));
   gap: 20px;
-
+  scroll-behavior: auto ;
 }
