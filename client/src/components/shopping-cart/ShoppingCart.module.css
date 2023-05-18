@@ -7,7 +7,7 @@
 
   right: 0;
   width: 30vw;
-  max-width: 600px;
+  min-width: 150px;
   height: 600px;
   /* height: calc(100vh - 65px); */
 

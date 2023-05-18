@@ -34,9 +34,9 @@ export async function getSellerProducts(id:string) {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   });
-  if (!response.ok) {
-    throw new Error('Failed to post');
-  }
+  // if (!response.ok) {
+  //   throw new Error('Failed to fetch');
+  // }
   const json = await response.json();
   return json
 }
