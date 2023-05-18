@@ -328,3 +328,25 @@ export async function getAllProductsFromShoppingCart(
     res.json([]);
   }
 }
+
+export async function deleteEntireShoppingCart(req: Request, res: Response) {
+  try {
+    const shoppingCart = await ShoppingCart.destroy({
+      where: {
+        id: req.params.id, // here comes userID
+      },
+    });
+    if (!shoppingCart) {
+      res.status(404);
+      res.json("did not find cart");
+    } else {
+      res.status(200);
+      res.json("deleted cart");
+    }
+  } catch (error) {
+    // send a response
+    console.log(error);
+    res.status(400);
+    res.json("ran into error");
+  }
+}

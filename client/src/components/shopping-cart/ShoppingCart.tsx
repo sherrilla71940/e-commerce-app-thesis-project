@@ -8,6 +8,7 @@ import { ShoppingCartProductType } from "../../../../global-types/shopping-cart-
 import { userStore } from "../../zustand/UserStore";
 
 import { renderProductsStore } from "../../zustand/should-refetch-slice";
+import { useNavigate } from "react-router-dom";
 
 export default function ShoppingCart() {
   const { shouldReRender, setRerender } = renderProductsStore();
@@ -18,6 +19,7 @@ export default function ShoppingCart() {
   // (async () => {
   //   id = userStore((state) => state.id
   // })()
+  const navigate = useNavigate();
 
   const cartItems = useCartSlice((state) => state.cartItems);
   const isOpen = useCartSlice((state) => state.isOpen);
@@ -102,6 +104,7 @@ export default function ShoppingCart() {
 
       // set state to rerender
       setRerender(!shouldReRender);
+      navigate("/");
       return data;
     }
   }

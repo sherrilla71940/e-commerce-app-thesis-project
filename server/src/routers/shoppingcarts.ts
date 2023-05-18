@@ -10,6 +10,7 @@ import {
   getOneShoppingCart,
   getAllShoppingCarts,
   productFinder,
+  deleteEntireShoppingCart,
 } from "../controllers/shopping-cart-product-controller";
 //import controllers
 
@@ -17,6 +18,8 @@ export default function shoppingCartsRouter(router: express.Router) {
   router.put("shoppingcarts/:id", (req, res) => {
     res.json("update a shopping cart by id here");
   });
+
+  router.delete("/shoppingcarts/:id", deleteEntireShoppingCart);
 
   // get all shopping carts
   router.get("/getallshoppingcarts", getAllShoppingCarts);
