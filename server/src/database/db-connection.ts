@@ -13,10 +13,12 @@
 import { Sequelize } from "sequelize-typescript";
 
 const sequelize = new Sequelize({
-  database: "thesis",
+  database: "postgres",
   dialect: "postgres",
-  username: "aaronsherrill",
-  password: "",
+  username: "postgres",
+  password: "sz240f",
+  // username: "aaronsherrill",
+  // password: "",
   logging: false,
   // models: [__dirname + '/models'], // or [Player, Team],
 });

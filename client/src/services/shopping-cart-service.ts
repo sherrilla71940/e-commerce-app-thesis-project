@@ -42,14 +42,14 @@ export async function getShoppingCartProducts(uid: string) {
   try {
     console.log(uid);
     const response = await fetch(
-      `http://localhost:3000/shoppingcartproducts/${uid}`,
+      `http://localhost:3000/shoppingcartproducts/:${uid}`,
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         // body: JSON.stringify(body)
       }
     );
-    // console.log('RESPONSE: ', response)
+
     if (response.ok) {
       const data = await response.json();
       // console.log('DATA: ', data)

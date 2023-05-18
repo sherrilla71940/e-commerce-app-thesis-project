@@ -10,22 +10,22 @@ type Props = {
   // product: Product
 }
 
-export default function StoreItem({product}: Props) {
+export default function Item({product}: Props) {
 
 console.log(product.pictureUrl)
   const navigate = useNavigate()
 
   return (
     <div>
-      <div className={styles.storeItem}
-        // className={styles.img}
-        onClick={() => navigate(`/${product.id}`)}>
+      <div className={styles.storeItem} onClick={() => navigate(`/${product.id}`)}>
         <p>{product.name}</p>
-        <p>{product.category}</p>
-        <p>{product.price}</p>
-        <p>{product.quantity}</p>
-        <img className = {styles.img} src={product.pictureUrl}></img>
-        {/* <img src={product.pictureUrl}></img> */}  
+        
+        <p>$ {product.price} USD</p>
+        <p>{product.quantity}
+          {(product.quantity === 1) ? ' product in stock' : ' products in stock'}
+        </p>
+        <p>Category: {product.category}</p>
+        <img className={styles.img} src={product.pictureUrl}></img>
       </div>
 
     </div>
