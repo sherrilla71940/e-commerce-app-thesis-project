@@ -61,6 +61,7 @@ const { loggedIn } = userStore()
           <Route path={'/sell'} element={
             <>
               <Navbar />
+              <ShoppingCart />
               <Menu/>
               <ProductForm/>
             </>
@@ -69,6 +70,7 @@ const { loggedIn } = userStore()
           <Route path={`/sellers/${id}`} element={
             <>
               <Navbar />
+              <ShoppingCart />
               <Menu/>
               <SellerStore/>
             </>
