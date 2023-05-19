@@ -26,14 +26,14 @@ export default function ShoppingCart() {
   const addItem = useCartSlice((state) => state.addItem);
   const closeCart = useCartSlice((state) => state.closeCart);
 
-  console.log("outside of effect and if", shouldReRender);
-  if (id) {
-    useEffect(() => {
+  // console.log("outside of effect and if", shouldReRender);
+  useEffect(() => {
+    if (id) {
       console.log("in use effect ", shouldReRender);
       const fetchAllShoppingCartProducts = async () => {
         try {
           // id = userStore((state) => state.id);
-          console.log(id);
+          // console.log(id);
           const shoppingCartProducts = await getShoppingCartProducts(id);
           // console.log('shoppingCartProducts: ', shoppingCartProducts)
           if (Array.isArray(shoppingCartProducts)) {
@@ -47,8 +47,8 @@ export default function ShoppingCart() {
         }
       };
       fetchAllShoppingCartProducts();
-    }, [id]);
-  }
+    }
+  }, [id]);
   // useEffect(() => {
   //   const fetchAllShoppingCartProducts = async () => {
   //     try {
@@ -84,8 +84,8 @@ export default function ShoppingCart() {
 
   async function checkout() {
     const cartId = await getShoppingCartId();
-    console.log(cartId);
-    console.log(id);
+    // console.log(cartId);
+    // console.log(id);
     if (typeof cartId === "number") {
       let payload = {
         cartId: cartId,
@@ -104,6 +104,7 @@ export default function ShoppingCart() {
 
       // set state to rerender
       setRerender(!shouldReRender);
+
       navigate("/");
       return data;
     }

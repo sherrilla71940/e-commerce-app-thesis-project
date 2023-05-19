@@ -22,6 +22,7 @@ export default function StoreItems() {
         storeProducts.forEach((product: ProductType) => {
           addProduct(product);
         });
+        console.log("24: ", storeItems);
       } catch (error) {
         console.log(error);
       }

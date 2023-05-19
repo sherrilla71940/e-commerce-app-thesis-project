@@ -10,20 +10,66 @@ type ProductsAction = {
   addProduct: (newProduct: ProductType) => void;
 };
 
+// export const useProductsSlice = create<ProductsState & ProductsAction>()(
+//   (set) => ({
+//     storeItems: [],
+
+//     addProduct: (newProduct: ProductType) => {
+//       set((state) => {
+
+// let foundIndex = state.storeItems.findIndex(prod => prod.id === newProduct.id);
+
+//   if (foundIndex !== -1) {
+//     const updatedItems = [...state.storeItems];
+//     updatedItems[foundIndex] = newProduct;
+//     return {storeItems: updatedItems}
+//   } else {
+//     return {storeItems: [...state.storeItems, {...newProduct}]}
+//   }
+// }
+// )}});
 export const useProductsSlice = create<ProductsState & ProductsAction>()(
   (set) => ({
     storeItems: [],
 
-    addProduct: (newProduct: ProductType) =>
+    addProduct: (newProduct: ProductType) => {
       set((state) => {
-        // if there is no such item in the cart yet
-        if (
-          state.storeItems.find((item) => item.id === newProduct.id) == null
-        ) {
-          return { storeItems: [...state.storeItems, { ...newProduct }] };
+        let foundIndex = state.storeItems.findIndex(
+          (prod) => prod.id === newProduct.id
+        );
+
+        if (foundIndex !== -1) {
+          const updatedItems = [...state.storeItems];
+          updatedItems[foundIndex] = newProduct;
+          return { storeItems: updatedItems };
         } else {
-          return { storeItems: [...state.storeItems] };
+          return { storeItems: [...state.storeItems, { ...newProduct }] };
         }
-      }),
+      }); // Missing closing parenthesis here
+    },
   })
 );
+
+// export const useProductsSlice = create<ProductsState & ProductsAction>()(
+//   (set) => ({
+//     storeItems: [],
+
+//     addProduct: (newProduct: ProductType) => {
+//       set((state) => {
+//         const existingProductIndex = state.storeItems.findIndex(
+//           (product) => product.id === newProduct.id
+//         );
+
+//         if (existingProductIndex !== -1) {
+//           // Product already exists, update it
+//           const updatedItems = [...state.storeItems];
+//           updatedItems[existingProductIndex] = newProduct;
+//           return { storeItems: updatedItems };
+//         } else {
+//           // Product doesn't exist, add it
+//           return { storeItems: [...state.storeItems, newProduct] };
+//         }
+//       });
+//     },
+//   })
+// );
