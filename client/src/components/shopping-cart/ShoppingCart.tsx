@@ -31,33 +31,33 @@ export default function ShoppingCart() {
 
   // console.log("outside of effect and if", shouldReRender);
   useEffect(() => {
-    // if (id) {
-    // console.log("in use effect ", shouldReRender);
-    console.log(id);
-    const fetchAllShoppingCartProducts = async () => {
-      try {
-        // id = userStore((state) => state.id);
-        // console.log(id);
-        const shoppingCartProducts = await getShoppingCartProducts(id);
-        // console.log('shoppingCartProducts: ', shoppingCartProducts)
-        if (Array.isArray(shoppingCartProducts)) {
-          shoppingCartProducts.forEach((product: ShoppingCartProductType) => {
-            addItem(product);
-          });
-          console.log(cartItems);
-          console.log(shoppingCartProducts);
-          // set false might trigger useeffect again
+    if (id) {
+      // console.log("in use effect ", shouldReRender);
+      console.log(id);
+      const fetchAllShoppingCartProducts = async () => {
+        try {
+          // id = userStore((state) => state.id);
+          // console.log(id);
+          const shoppingCartProducts = await getShoppingCartProducts(id);
+          // console.log('shoppingCartProducts: ', shoppingCartProducts)
+          if (Array.isArray(shoppingCartProducts)) {
+            shoppingCartProducts.forEach((product: ShoppingCartProductType) => {
+              addItem(product);
+            });
+            console.log(cartItems);
+            console.log(shoppingCartProducts);
+            // set false might trigger useeffect again
+          }
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    console.log("fetching");
-    fetchAllShoppingCartProducts();
-    console.log(cartItems);
-    console.log(id);
-    // }
-  });
+      };
+      console.log("fetching");
+      fetchAllShoppingCartProducts();
+      console.log(cartItems);
+      console.log(id);
+    }
+  }, [id]);
   // useEffect(() => {
   //   const fetchAllShoppingCartProducts = async () => {
   //     try {
