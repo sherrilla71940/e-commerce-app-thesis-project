@@ -9,6 +9,7 @@ import { userStore } from "../../zustand/UserStore";
 
 import { renderProductsStore } from "../../zustand/should-refetch-slice";
 import { useNavigate } from "react-router-dom";
+import { empty } from "uuidv4";
 
 export default function ShoppingCart() {
   const { shouldReRender, setRerender } = renderProductsStore();
@@ -25,6 +26,7 @@ export default function ShoppingCart() {
   const isOpen = useCartSlice((state) => state.isOpen);
   const addItem = useCartSlice((state) => state.addItem);
   const closeCart = useCartSlice((state) => state.closeCart);
+  const emptyCart = useCartSlice((state) => state.emptyCart);
 
   // console.log("outside of effect and if", shouldReRender);
   useEffect(() => {
@@ -48,7 +50,7 @@ export default function ShoppingCart() {
       };
       fetchAllShoppingCartProducts();
     }
-  }, [id]);
+  }, [id, shouldReRender]);
   // useEffect(() => {
   //   const fetchAllShoppingCartProducts = async () => {
   //     try {
@@ -104,7 +106,8 @@ export default function ShoppingCart() {
 
       // set state to rerender
       setRerender(!shouldReRender);
-
+      emptyCart();
+      closeCart();
       navigate("/");
       return data;
     }
