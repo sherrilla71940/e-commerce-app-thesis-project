@@ -54,11 +54,11 @@ export default async function checkOutCart(
 
       // deletes shopping cart now that transaction is complete
       await deleteShoppingCart(cartToCheckout.cartId);
-      res.status(200);
-      res.json(
-        `created transaction: ${transactionId} with products: ${cartToCheckoutProducts}`
-      );
     });
+    res.status(200);
+    res.json(
+      `created transaction: ${transactionId} with products: ${cartToCheckoutProducts}`
+    );
   } catch (e: unknown) {
     if (e instanceof Error) {
       console.log(e.message);
