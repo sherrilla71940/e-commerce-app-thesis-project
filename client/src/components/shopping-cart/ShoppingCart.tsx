@@ -32,6 +32,7 @@ export default function ShoppingCart() {
   useEffect(() => {
     if (id) {
       console.log("in use effect ", shouldReRender);
+      console.log(id);
       const fetchAllShoppingCartProducts = async () => {
         try {
           // id = userStore((state) => state.id);
@@ -93,23 +94,23 @@ export default function ShoppingCart() {
         cartId: cartId,
         buyerId: id,
       };
+      console.log(payload);
       // console.log(payload);
       const response = await fetch("http://localhost:3000/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      console.log(response);
-      const data = await response.json();
-      console.log("data", data);
-      console.log(payload);
+      // console.log(response);
+      // const data = await response.json();
+      // console.log("data", data);
+      // console.log(payload);
 
       // set state to rerender
       setRerender(!shouldReRender);
       emptyCart();
       closeCart();
       navigate("/");
-      return data;
     }
   }
 
