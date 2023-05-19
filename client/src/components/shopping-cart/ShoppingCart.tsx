@@ -10,6 +10,7 @@ import { userStore } from "../../zustand/UserStore";
 import { renderProductsStore } from "../../zustand/should-refetch-slice";
 import { useNavigate } from "react-router-dom";
 import { empty } from "uuidv4";
+import StoreItems from "../store-items/StoreItems";
 
 export default function ShoppingCart() {
   const { shouldReRender, setRerender } = renderProductsStore();
@@ -30,28 +31,33 @@ export default function ShoppingCart() {
 
   // console.log("outside of effect and if", shouldReRender);
   useEffect(() => {
-    if (id) {
-      console.log("in use effect ", shouldReRender);
-      console.log(id);
-      const fetchAllShoppingCartProducts = async () => {
-        try {
-          // id = userStore((state) => state.id);
-          // console.log(id);
-          const shoppingCartProducts = await getShoppingCartProducts(id);
-          // console.log('shoppingCartProducts: ', shoppingCartProducts)
-          if (Array.isArray(shoppingCartProducts)) {
-            shoppingCartProducts.forEach((product: ShoppingCartProductType) => {
-              addItem(product);
-            });
-            // set false might trigger useeffect again
-          }
-        } catch (error) {
-          console.log(error);
+    // if (id) {
+    // console.log("in use effect ", shouldReRender);
+    console.log(id);
+    const fetchAllShoppingCartProducts = async () => {
+      try {
+        // id = userStore((state) => state.id);
+        // console.log(id);
+        const shoppingCartProducts = await getShoppingCartProducts(id);
+        // console.log('shoppingCartProducts: ', shoppingCartProducts)
+        if (Array.isArray(shoppingCartProducts)) {
+          shoppingCartProducts.forEach((product: ShoppingCartProductType) => {
+            addItem(product);
+          });
+          console.log(cartItems);
+          console.log(shoppingCartProducts);
+          // set false might trigger useeffect again
         }
-      };
-      fetchAllShoppingCartProducts();
-    }
-  }, [id, shouldReRender]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    console.log("fetching");
+    fetchAllShoppingCartProducts();
+    console.log(cartItems);
+    console.log(id);
+    // }
+  });
   // useEffect(() => {
   //   const fetchAllShoppingCartProducts = async () => {
   //     try {
