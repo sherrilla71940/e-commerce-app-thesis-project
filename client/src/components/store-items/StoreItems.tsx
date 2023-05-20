@@ -13,11 +13,12 @@ export default function StoreItems() {
   const storeItems = useProductsSlice((state) => state.storeItems);
   const addProduct = useProductsSlice((state) => state.addProduct);
 
+  // when adding multiple products to cart, checkout does not update quantity on each product on products page
+
   useEffect(() => {
     const fetcAllStoreProducts = async () => {
       try {
         const storeProducts = await getStoreProducts();
-        // console.log('storeProducts: ', storeProducts)
 
         storeProducts.forEach((product: ProductType) => {
           addProduct(product);
@@ -31,10 +32,6 @@ export default function StoreItems() {
     fetcAllStoreProducts();
     console.log(shouldReRender);
   }, [shouldReRender]);
-
-  // console.log(mock)
-  // const data = JSON.parse(JSON.stringify(mock))
-  // const products: Product[] = data.products;
 
   return (
     <div className={styles.storeItems}>
