@@ -1,0 +1,114 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+
+  box-sizing: border-box;
+
+  padding: 50px;
+
+  width: 80vw;
+  max-width: 1200px;
+  height: 60vh;
+
+  color: #118259;
+  background-color: #EEEEEE;
+
+}
+
+.left,
+.right {
+  display: flex;
+  flex-direction: column;
+  /* width: 50%;
+  height: 100%; */
+  width: 400px;
+  height: 400px;
+  box-sizing: border-box;
+}
+
+.mainImage {
+  padding: 30px;
+  width: 400px;
+  /* width: 100%; */
+  height: 400px;
+  /* background-color: #C4DDD4; */
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* .sideImages {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+
+  margin-top: 20px;
+
+  box-sizing: border-box;
+
+  height: calc(25% - 20px);
+} */
+
+/* .sideImage {
+  display: inline-block;
+  width: 100%;
+
+  box-sizing: border-box;
+
+  border-radius: 4px;
+  background-color: #C4DDD4;
+} */
+
+.name, .price {
+  margin-top: 15px;
+}
+
+.sizes,
+.addToCart {
+  margin-top: 15px;
+}
+
+.sizes {
+  display: flex;
+  /* justify-content: center; */
+
+  justify-content: space-between;
+}
+
+.sizes > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  height: 70px;
+  width: 20%;
+
+  background-color: #C4DDD4;
+  border-radius: 4px;
+
+  cursor: pointer;
+}
+
+/* not yet implemented 👇 */
+.selected {
+  border: 1px solid #118259;
+  transition: border-color 0.25s;
+}
+
+.addToCart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 70px;
+  /* margin-top: 20px; */
+
+  border-radius: 4px;
+
+  color: black;
+  background-color: #C4DDD4;
+
+  cursor: pointer;
+}

@@ -6,7 +6,11 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
-    "rootDir": "src"
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "rootDirs": ["src", "../global-types"]
+    // "strictPropertyInitialization": false,
+    // "strict": true
   },
   "lib": ["es2015"]
 }
