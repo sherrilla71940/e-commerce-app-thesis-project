@@ -23,7 +23,8 @@ import styles from "./product-form.module.css";
 // }
 type props = {
   children: ReactNode;
-  setPic: Dispatch<SetStateAction<File | undefined>>;
+  // setPic: Dispatch<SetStateAction<File | undefined>>;
+  setPic: Dispatch<SetStateAction<string | undefined>>;
 };
 
 export default function UploadWidget(props: props) {
@@ -46,10 +47,11 @@ export default function UploadWidget(props: props) {
   }, []);
 
   console.log(cloudinaryRef.current);
-  const handleUploadClick = () => {
+  const handleUploadClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     // if (widgetRef.current) {
     //   widgetRef.current.open();
     // }
+    e.preventDefault();
     widgetRef.current.open((error: any, result: any) => {
       if (!error && result && result.event === "success") {
         const imageUrl = result.info.secure_url;

@@ -19,7 +19,8 @@ export default function ProductForm() {
   const [price, setPrice] = useState<number>(0);
   const [sellerID, setSellerID] = useState<string>(id);
   const [quantity, setQuantity] = useState<number>(0);
-  const [picture_url, setPic] = useState<any>();
+  // const [picture_url, setPic] = useState<File>();
+  const [picture_url, setPic] = useState<string>();
   // "https://picsum.photos/id/237/200/300"
   // );
   console.log(picture_url);
@@ -74,12 +75,12 @@ export default function ProductForm() {
     setQuantity(Number(target.value));
   }
 
-  function uploadImage(e: React.ChangeEvent<HTMLInputElement>) {
-    const target = e.target as HTMLInputElement;
-    if (target.files) {
-      setPic(target.files[0]);
-    }
-  }
+  // function uploadImage(e: React.ChangeEvent<HTMLInputElement>) {
+  //   const target = e.target as HTMLInputElement;
+  //   if (target.files) {
+  //     setPic(target.files[0]);
+  //   }
+  // }
 
   return (
     <div className={styles.container}>
