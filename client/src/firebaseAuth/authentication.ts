@@ -5,6 +5,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { create } from "zustand";
@@ -24,6 +25,9 @@ const firebaseConfig = {
   measurementId: "G-LB9S05C7R8",
 };
 
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+
 // Initialize Firebase
 // const firebaseApp = initializeApp(firebaseConfig);
 // const auth = getAuth(firebaseApp);
@@ -31,29 +35,11 @@ const firebaseConfig = {
 // const analytics = getAnalytics(firebaseApp);
 
 export async function loginUser(email: string, password: string) {
-  const firebaseApp = initializeApp(firebaseConfig);
-  const auth = getAuth(firebaseApp);
+  // const firebaseApp = initializeApp(firebaseConfig);
+  // const auth = getAuth(firebaseApp);
   // const auth = getAuth();
   try {
     const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const user = userCredential.user;
-    return { id: user.uid, password };
-  } catch (e) {
-    console.log(e);
-    return;
-  }
-}
-
-export async function registerUser(email: string, password: string) {
-  const auth = getAuth();
-  try {
-    const firebaseApp = initializeApp(firebaseConfig);
-    const auth = getAuth(firebaseApp);
-    const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
@@ -63,6 +49,35 @@ export async function registerUser(email: string, password: string) {
   } catch (e) {
     console.log(e);
     return { id: "", loggedIn: false };
+  }
+}
+
+export async function registerUser(email: string, password: string) {
+  // const auth = getAuth();
+  try {
+    // const firebaseApp = initializeApp(firebaseConfig);
+    // const auth = getAuth(firebaseApp);
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+    return { id: user.uid, email };
+  } catch (e) {
+    console.log(e);
+    return;
+  }
+}
+
+export async function signOutUser() {
+  try {
+    // const firebaseApp = initializeApp(firebaseConfig);
+    // const auth = getAuth(firebaseApp);
+    await signOut(auth);
+    console.log("signed out!");
+  } catch (e) {
+    console.log("ran into error while attempting sign-out");
   }
 }
 // detect auth state
