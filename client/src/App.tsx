@@ -1,5 +1,5 @@
 import "./App.css";
-import UploadWidget from "./components/upload-widget";
+import UploadWidget from "./components/product-form/upload-widget";
 
 //// METHODS:
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -25,7 +25,7 @@ function App() {
 
   return (
     <>
-      <UploadWidget />
+      {/* <UploadWidget /> */}
       <Router>
         <Routes>
           <Route

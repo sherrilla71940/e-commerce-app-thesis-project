@@ -13,15 +13,20 @@
 //   return <div>upload widget</div>;
 // }
 
-import { useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, SetStateAction, Dispatch } from "react";
+import styles from "./product-form.module.css";
 
 // declare global {
 //   interface Window {
 //     cloudinary?: any; // Replace 'any' with the appropriate type for window.cloudinary
 //   }
 // }
+type props = {
+  children: ReactNode;
+  setPic: Dispatch<SetStateAction<File | undefined>>;
+};
 
-export default function UploadWidget() {
+export default function UploadWidget(props: props) {
   // const cloudinaryRef = useRef<Window["cloudinary"] | undefined>();
   const cloudinaryRef = useRef<any>();
   const widgetRef = useRef<any>();
@@ -42,11 +47,21 @@ export default function UploadWidget() {
 
   console.log(cloudinaryRef.current);
   const handleUploadClick = () => {
-    if (widgetRef.current) {
-      widgetRef.current.open();
-    }
+    // if (widgetRef.current) {
+    //   widgetRef.current.open();
+    // }
+    widgetRef.current.open((error: any, result: any) => {
+      if (!error && result && result.event === "success") {
+        const imageUrl = result.info.secure_url;
+        props.setPic(imageUrl);
+      }
+    });
   };
 
   console.log(cloudinaryRef.current);
-  return <button onClick={handleUploadClick}>Upload</button>;
+  return (
+    <button className={styles.inputField} onClick={handleUploadClick}>
+      {props.children}
+    </button>
+  );
 }
