@@ -31,9 +31,7 @@ There are several areas that require attention for future development. Here are 
 
 The first thing you will need to do is `npm i` in the root, client, and server directories.
 
-Next you would need to create a .env file in your server directory and add a port number to run your backend server.
-
-![Setting up port number in .env](image.png)
+Next you would need to create a .env file in your server directory and add a port number to run your backend server, like so: `PORT=3000`.
 
 ## Start the app
 
