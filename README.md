@@ -12,6 +12,7 @@ There are several areas that require attention for future development. Here are 
 - **Persistent User Sessions:** Currently, when a page is refreshed, users are logged out due to the absence of browser storage. Implementing Session Storage or Local Storage along with Zustand (state management library) will allow user sessions to persist upon
 - **Real Transactions with Stripe:** At present, the checkout process does not involve real transactions. To enable users to make actual payments and receive payments, integration with a payment gateway like Stripe is required. This will enhance the app's functionality and make it a fully functional e-commerce platform.
 - **Improved Logout Functionality:** The app lacks a proper logout feature, and refreshing the page currently logs users out unintentionally. Implementing a dedicated logout mechanism will allow users to securely log out when desired.
+- **UI Improvement** Not much time was spent on the UI design and responsivemeness, but this shouldn't take long.
 
 ## A quick glimpse into the app's UI
 
