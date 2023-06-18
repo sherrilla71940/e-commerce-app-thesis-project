@@ -6,7 +6,7 @@ import sequelize from "./database/db-connection";
 
 (async function bootstrap() {
   // await db.sequelize.sync();
-  app.listen(3000, async () => {
+  app.listen(port, async () => {
     try {
       await sequelize.authenticate();
       // to sync models must import models first above

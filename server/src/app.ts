@@ -4,9 +4,11 @@ import express from "express";
 // import router from "./routers";
 import configuredRouterGenerator from "./routers";
 import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
 // import db from './database/db'
 export const app = express();
-export const port = 3000;
+export const port = process.env.PORT;
 
 const corsOptions = {
   origin: "*",
