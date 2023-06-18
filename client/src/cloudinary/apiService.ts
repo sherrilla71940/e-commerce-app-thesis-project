@@ -1,7 +1,7 @@
 import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 
-const name = "dppebzxdz";
+const name = "dsdwcynvc";
 /// Cloudinary
 // const cloud = new Cloudinary({
 //   cloud: {

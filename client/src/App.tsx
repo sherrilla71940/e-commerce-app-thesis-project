@@ -1,5 +1,5 @@
 import "./App.css";
-import UploadWidget from "./components/product-form/upload-widget";
+// import UploadWidget from "./components/product-form/upload-widget";
 
 //// METHODS:
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
