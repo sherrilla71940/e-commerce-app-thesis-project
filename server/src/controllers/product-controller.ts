@@ -29,7 +29,7 @@ export async function getAllProducts(
   req: Request,
   res: Response
 ): Promise<void> {
-  console.log('REACHED THE CONTROLLER')
+  console.log("REACHED THE CONTROLLER");
   try {
     const allProducts = await ProductModel.findAll({});
     if (allProducts.length) {
@@ -53,7 +53,8 @@ export async function deleteAllProducts(
   res: Response
 ): Promise<void> {
   try {
-    await ProductModel.destroy({ truncate: true });
+    // await ProductModel.destroy({ truncate: true });
+    await ProductModel.destroy({ where: {} });
     res.status(200);
     res.json("all products from products table deleted");
   } catch (e: unknown) {
