@@ -19,6 +19,8 @@ There are several areas that require attention for future development. Here are 
 
 ![Login Page](/app%20screenshots/Screenshot%202023-06-18%20at%206.46.53%20PM.png)
 
+![Product Details Page](<app screenshots/Screenshot 2023-06-18 at 7.42.22 PM.png>)
+
 ![Shopping Cart](/app%20screenshots/Screenshot%202023-06-18%20at%206.47.10%20PM.png)
 
 ![Nav Bar](/app%20screenshots/Screenshot%202023-06-18%20at%206.47.37%20PM.png)
