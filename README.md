@@ -29,7 +29,8 @@ There are several areas that require attention for future development. Here are 
 ![Nav Bar](/app%20screenshots/Screenshot%202023-06-18%20at%206.47.37%20PM.png)
 ![List Product Page](/app%20screenshots/Screenshot%202023-06-18%20at%206.47.56%20PM.png)
 ![User Store](/app%20screenshots/Screenshot%202023-06-18%20at%206.48.08%20PM.png)
->>>>>>> b576dbf (add readme)
+
+> > > > > > > b576dbf (add readme)
 
 ## Set up
 
