@@ -16,10 +16,15 @@ There are several areas that require attention for future development. Here are 
 ## A quick glimpse into the app's UI
 
 ![Home Page](/app%20screenshots/Screenshot%202023-06-18%20at%206.46.13%20PM.png)
+
 ![Login Page](/app%20screenshots/Screenshot%202023-06-18%20at%206.46.53%20PM.png)
+
 ![Shopping Cart](/app%20screenshots/Screenshot%202023-06-18%20at%206.47.10%20PM.png)
+
 ![Nav Bar](/app%20screenshots/Screenshot%202023-06-18%20at%206.47.37%20PM.png)
+
 ![List Product Page](/app%20screenshots/Screenshot%202023-06-18%20at%206.47.56%20PM.png)
+
 ![User Store](/app%20screenshots/Screenshot%202023-06-18%20at%206.48.08%20PM.png)
 
 ## Set up
